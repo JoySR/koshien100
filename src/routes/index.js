@@ -8,9 +8,9 @@ const createRoutes = store => {
   return withRouter(() => {
     return (
       <Switch>
-        <Route path='/' component={Home} />
         <Route path='/login' component={Login} />
         <Route path='/dashboard' component={Dashboard} />
+        <Route component={Home} />
       </Switch>
     )
   })

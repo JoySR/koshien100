@@ -72,7 +72,7 @@ export default class TimeTable extends Component {
   renderTimeTable = () => {
     return MATCH_DAYS.map(day => {
       return (
-        <li>
+        <li key={day.date}>
           <span className="date">{day.date}</span>
           <span className="day">{day.weekday}</span>
         </li>

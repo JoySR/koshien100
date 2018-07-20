@@ -1,0 +1,40 @@
+header {
+  height: 60px;
+  line-height: 60px;
+  border-bottom: 2px solid #eee;
+  box-shadow: 0 0 5px #eee;
+}
+
+.header-wrapper {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+header h1 {
+  float: left;
+  margin-left: 5px;
+  font-size: 24px;
+}
+
+.nav {
+  float: right;
+}
+.nav li {
+  display: inline-block;
+  padding: 0 20px;
+}
+
+header a {
+  font-size: 18px;
+  color: #333;
+}
+
+header li.active,
+header li:hover {
+  background: #1e40a0;
+}
+
+header li.active a,
+header li:hover a {
+  color: #fff;
+}

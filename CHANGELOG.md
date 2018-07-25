@@ -1,3 +1,6 @@
+- ** 2018-07-24 **
+  - Move client files into `client` folder, Add `server` folder
+
 - ** 2018-07-20 **
   - Extract project to a single repo
 

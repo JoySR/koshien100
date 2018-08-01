@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import DashboardComponent from '../components/DashboardComponent';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, props) => {
+  const {
+    area: {newAreaId, list: areas}
+  } = state
   return {
-  }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
+    newAreaId,
+    areas,
   }
 }
 

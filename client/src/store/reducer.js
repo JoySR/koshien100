@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import userReducer from '../reducer/userReducer';
+import areaReducer from '../reducer/areaReducer';
 
 export const makeRootReducer = (asyncReducers) => {
 
   return combineReducers({
-    user: userReducer,
+    area: areaReducer,
     ...asyncReducers
   });
 }

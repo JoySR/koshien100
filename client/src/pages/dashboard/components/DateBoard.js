@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {addDate, fetchDates, removeDate, updateDate} from '../../../actions/dateAction'
-import {dateToDateId, dateToTimestamp, timestampToDate} from '../../../lib/dateConverter'
+import {dateToDateId, dateToTimestamp, timestampToDate} from '../../../lib/converter'
 
 const DATE_STATUS = ['normal', 'bracket_selection', 'rest', 'postponed']
 

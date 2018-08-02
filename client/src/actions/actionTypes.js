@@ -10,6 +10,11 @@ export const FETCH_PREFECTURE = createRequestTypes('FETCH_PREFECTURE');
 export const UPDATE_PREFECTURE = createRequestTypes('UPDATE_PREFECTURE');
 export const REMOVE_PREFECTURE = createRequestTypes('REMOVE_PREFECTURE');
 
+export const ADD_SCHOOL = createRequestTypes('ADD_SCHOOL');
+export const FETCH_SCHOOLS = createRequestTypes('FETCH_SCHOOLS');
+export const UPDATE_SCHOOL = createRequestTypes('UPDATE_SCHOOL');
+export const REMOVE_SCHOOL = createRequestTypes('REMOVE_SCHOOL');
+
 export const ADD_DATE = createRequestTypes('ADD_DATE');
 export const FETCH_DATES = createRequestTypes('FETCH_DATES');
 export const UPDATE_DATE = createRequestTypes('UPDATE_DATE');

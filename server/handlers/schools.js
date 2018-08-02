@@ -3,6 +3,20 @@ import {checkLoginStatus, normalizeUpdateData} from '../common/utility'
 import {schoolKeys} from '../config/constants'
 
 const Schools = {
+  getSchools: (request, response, next) => {
+    Database.GetSchools().then(res => {
+      if (res) {
+        response.send(200, {
+          success: true,
+          message: 'GetSchools is OK.',
+          schools: res,
+        })
+      }
+    }).catch(err => {
+      response.send(500, err);
+    })
+  },
+
   getSchool: (request, response, next) => {
     if (request.body) {
       const id = request.body.id;

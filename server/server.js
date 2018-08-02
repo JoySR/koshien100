@@ -44,7 +44,7 @@ route('POST', '/game', Games.addGame);
 route('PUT', '/game', Games.editGame);
 route('DELETE', '/game', Games.removeGame);
 
-route('GET', '/school', Schools.getSchool);
+route('GET', '/schools', Schools.getSchools);
 route('POST', '/school', Schools.addSchool);
 route('PUT', '/school', Schools.editSchool);
 route('DELETE', '/school', Schools.removeSchool);

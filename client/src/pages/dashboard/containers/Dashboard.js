@@ -6,12 +6,14 @@ const mapStateToProps = (state, props) => {
     area: {newAreaId, list: areas},
     prefecture: {list: prefectures},
     date: {list: dates},
+    school: {list: schools},
   } = state
   return {
     newAreaId,
     areas,
     prefectures,
     dates,
+    schools,
   }
 }
 

@@ -16,3 +16,12 @@ export const dateToDateId = (date) => {
   // TODO: test
   return date.split('-').join('');
 }
+
+export const encodeGameIds = (gameIds) => {
+  if (!gameIds) return '';
+  return gameIds.join(';');
+}
+
+export const decodeGameIds = (str) => {
+  return str.split(';');
+}

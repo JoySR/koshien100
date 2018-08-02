@@ -39,7 +39,7 @@ class DashboardComponent extends Component {
 
   renderMainContent = () => {
     const {currentContent} = this.state;
-    const {areas, prefectures, dates} = this.props;
+    const {areas, prefectures, dates, schools} = this.props;
     switch (currentContent) {
       case 'Dashboard':
       default:
@@ -49,7 +49,7 @@ class DashboardComponent extends Component {
       case 'Dates':
         return <DateBoard onAsync={this.onAsync} dates={dates} />;
       case 'Schools':
-        return <SchoolBoard onAsync={this.onAsync}/>;
+        return <SchoolBoard onAsync={this.onAsync} prefectures={prefectures} schools={schools}/>;
       case 'Prefectures':
         return <PrefectureBoard prefectures={prefectures} areas={areas} onAsync={this.onAsync}/>;
       case 'Areas':

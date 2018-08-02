@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import areaReducer from '../reducer/areaReducer';
 import prefectureReducer from '../reducer/prefectureReducer';
 import dateReducer from '../reducer/dateReducer';
+import schoolReducer from '../reducer/schoolReducer'
 
 export const makeRootReducer = (asyncReducers) => {
 
@@ -9,6 +10,7 @@ export const makeRootReducer = (asyncReducers) => {
     area: areaReducer,
     prefecture: prefectureReducer,
     date: dateReducer,
+    school: schoolReducer,
     ...asyncReducers
   });
 }

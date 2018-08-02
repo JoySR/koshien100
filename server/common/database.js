@@ -326,8 +326,21 @@ const Database = {
     });
   },
 
+  GetSchools: () => {
+    const sql = 'SELECT * FROM `schools`';
+    return new Promise((resolve, reject) => {
+      pool.query(
+        sql,
+        (err, rows, fields) => {
+          if (err) reject(err);
+          else resolve(rows);
+        }
+      );
+    });
+  },
+
   GetSchool: id => {
-    const sql = 'SELECT * FROM `schools` WHERE `school_id` = ' + pool.escape(id);
+    const sql = 'SELECT * FROM `schools` WHERE `id` = ' + pool.escape(id);
     return new Promise((resolve, reject) => {
       pool.query(
         sql,
@@ -340,7 +353,7 @@ const Database = {
   },
 
   AddSchool: school => {
-    const sql = 'INSERT INTO schools (school_id, prefecture_id, name, short_name, is_continual, last_count, total_count, win_count, lose_count, best_result, games ) VALUES (?)';
+    const sql = 'INSERT INTO schools (school_id, prefecture_id, name, short_name, is_continual, last_count, total_count, win_count, lose_count, best_result, games) VALUES (?)';
     return new Promise((resolve, reject) => {
       pool.query(
         sql,
@@ -368,7 +381,7 @@ const Database = {
   },
 
   RemoveSchool: id => {
-    const sql = 'DELETE FROM `schools` WHERE `school_id` = ' + pool.escape(id);
+    const sql = 'DELETE FROM `schools` WHERE `id` = ' + pool.escape(id);
     return new Promise((resolve, reject) => {
       pool.query(
         sql,

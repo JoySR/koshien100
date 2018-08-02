@@ -246,6 +246,19 @@ const Database = {
     });
   },
 
+  GetPrefectures: () => {
+    const sql = 'SELECT * FROM `prefectures`';
+    return new Promise((resolve, reject) => {
+      pool.query(
+        sql,
+        (err, rows, fields) => {
+          if (err) reject(err);
+          else resolve(rows);
+        }
+      );
+    });
+  },
+
   GetPrefecture: id => {
     const sql = 'SELECT * FROM `prefectures` WHERE `prefecture_id` = ' + pool.escape(id);
     return new Promise((resolve, reject) => {
@@ -260,7 +273,7 @@ const Database = {
   },
 
   AddPrefecture: prefecture => {
-    const sql = 'INSERT INTO prefectures (prefecture_id, name, code, area_id) VALUES (?)';
+    const sql = 'INSERT INTO prefectures (prefecture_id, name, area_id, code) VALUES (?)';
     return new Promise((resolve, reject) => {
       pool.query(
         sql,

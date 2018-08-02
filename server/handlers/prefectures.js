@@ -3,6 +3,20 @@ import {checkLoginStatus, normalizeUpdateData} from '../common/utility'
 import {prefectureKeys} from '../config/constants'
 
 const Prefectures = {
+  getPrefectures: (request, response, next) => {
+    Database.GetPrefectures().then(res => {
+      if (res) {
+        response.send(200, {
+          success: true,
+          message: 'GetPrefectures is OK.',
+          prefectures: res,
+        })
+      }
+    }).catch(err => {
+      response.send(500, err);
+    })
+  },
+
   getPrefecture: (request, response, next) => {
     if (request.body) {
       const id = request.body.id;
@@ -11,7 +25,7 @@ const Prefectures = {
           response.send(200, {
             success: true,
             message: 'GetPrefecture is OK.',
-            date: res,
+            prefecture: res,
           })
         }
       }).catch(err => {

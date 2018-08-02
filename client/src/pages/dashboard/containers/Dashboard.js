@@ -3,19 +3,18 @@ import DashboardComponent from '../components/DashboardComponent';
 
 const mapStateToProps = (state, props) => {
   const {
-    area: {newAreaId, list: areas}
+    area: {newAreaId, list: areas},
+    prefecture: {list: prefectures},
   } = state
   return {
     newAreaId,
     areas,
+    prefectures
   }
 }
 
-
-
 const Dashboard = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(DashboardComponent);
 
 export default Dashboard;

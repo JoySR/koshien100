@@ -34,7 +34,7 @@ export const addAreaFailure = (error) => {
 
 export function fetchArea() {
   return api({
-    endPoint: '/area',
+    endPoint: '/areas',
     method: 'GET',
     request: fetchAreaRequest,
     success: fetchAreaSuccess,

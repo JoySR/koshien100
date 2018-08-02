@@ -29,12 +29,12 @@ route('POST', '/date', Dates.addDate);
 route('PUT', '/date', Dates.editDate);
 route('DELETE', '/date', Dates.removeDate);
 
-route('GET', '/area', Areas.getAreas);
+route('GET', '/areas', Areas.getAreas);
 route('POST', '/area', Areas.addArea);
 route('PUT', '/area', Areas.editArea);
 route('DELETE', '/area', Areas.removeArea);
 
-route('GET', '/prefecture', Prefectures.getPrefecture);
+route('GET', '/prefectures', Prefectures.getPrefectures);
 route('POST', '/prefecture', Prefectures.addPrefecture);
 route('PUT', '/prefecture', Prefectures.editPrefecture);
 route('DELETE', '/prefecture', Prefectures.removePrefecture);

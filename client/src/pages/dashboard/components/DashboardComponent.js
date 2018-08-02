@@ -39,7 +39,7 @@ class DashboardComponent extends Component {
 
   renderMainContent = () => {
     const {currentContent} = this.state;
-    const {areas} = this.props;
+    const {areas, prefectures} = this.props;
 
     switch (currentContent) {
       case 'Dashboard':
@@ -52,15 +52,13 @@ class DashboardComponent extends Component {
       case 'Schools':
         return <SchoolBoard onAsync={this.onAsync}/>;
       case 'Prefectures':
-        return <PrefectureBoard onAsync={this.onAsync}/>;
+        return <PrefectureBoard prefectures={prefectures} areas={areas} onAsync={this.onAsync}/>;
       case 'Areas':
         return <AreaBoard onAsync={this.onAsync} areas={areas} />
     }
   }
 
   render() {
-    const {newAreaId} = this.props;
-
     return (
       <div>
       <nav className="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">

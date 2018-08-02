@@ -71,6 +71,19 @@ const Database = {
     });
   },
 
+  GetDates: () => {
+    const sql = 'SELECT * FROM `dates`';
+    return new Promise((resolve, reject) => {
+      pool.query(
+        sql,
+        (err, rows, fields) => {
+          if (err) reject(err);
+          else resolve(rows);
+        }
+      );
+    });
+  },
+
   GetDate: id => {
     const sql = 'SELECT * FROM `dates` WHERE `id` = ' + pool.escape(id);
     return new Promise((resolve, reject) => {
@@ -85,7 +98,7 @@ const Database = {
   },
 
   AddDate: date => {
-    const sql = 'INSERT INTO dates (date_id, game_date, is_bracket_selection_day, is_rest_day, is_postponed_day) VALUES (?)';
+    const sql = 'INSERT INTO dates (date_id, game_date, status) VALUES (?)';
     return new Promise((resolve, reject) => {
       pool.query(
         sql,
@@ -99,7 +112,7 @@ const Database = {
   },
 
   UpdateDate: (id, date) => {
-    const sql = 'UPDATE dates set date_id = ? , game_date = ? , is_bracket_selection_day = ? , is_rest_day = ? , is_postponed_day = ?  WHERE id = ' + pool.escape(id);
+    const sql = 'UPDATE dates set date_id = ? , game_date = ? , status = ? WHERE id = ' + pool.escape(id);
     return new Promise((resolve, reject) => {
       pool.query(
         sql,

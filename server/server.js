@@ -24,7 +24,7 @@ route('POST', '/register', Users.register);
 route('POST', '/login', Users.login);
 route('POST', '/logout', Users.logout);
 
-route('GET', '/date', Dates.getDate);
+route('GET', '/dates', Dates.getDates);
 route('POST', '/date', Dates.addDate);
 route('PUT', '/date', Dates.editDate);
 route('DELETE', '/date', Dates.removeDate);

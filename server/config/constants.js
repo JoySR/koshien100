@@ -1,9 +1,7 @@
 export const dateKeys = [
   'date_id',
   'game_date',
-  'is_bracket_selection_day',
-  'is_rest_day',
-  'is_postponed_day'
+  'status'
 ];
 
 export const areaKeys = [

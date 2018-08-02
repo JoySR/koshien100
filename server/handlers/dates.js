@@ -3,21 +3,18 @@ import {checkLoginStatus, normalizeUpdateData} from '../common/utility'
 import {dateKeys} from '../config/constants'
 
 const Dates = {
-  getDate: (request, response, next) => {
-    if (request.body) {
-      const id = request.body.id;
-      Database.GetDate(id).then(res => {
-        if (res) {
-          response.send(200, {
-            success: true,
-            message: 'GetDate is OK.',
-            date: res,
-          })
-        }
-      }).catch(err => {
-        response.send(500, err);
-      })
-    }
+  getDates: (request, response, next) => {
+    Database.GetDates().then(res => {
+      if (res) {
+        response.send(200, {
+          success: true,
+          message: 'GetDates is OK.',
+          dates: res,
+        })
+      }
+    }).catch(err => {
+      response.send(500, err);
+    })
   },
 
   addDate: (request, response, next) => {

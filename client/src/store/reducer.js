@@ -3,6 +3,7 @@ import areaReducer from '../reducer/areaReducer';
 import prefectureReducer from '../reducer/prefectureReducer';
 import dateReducer from '../reducer/dateReducer';
 import schoolReducer from '../reducer/schoolReducer'
+import gameReducer from '../reducer/gameReducer'
 
 export const makeRootReducer = (asyncReducers) => {
 
@@ -11,6 +12,7 @@ export const makeRootReducer = (asyncReducers) => {
     prefecture: prefectureReducer,
     date: dateReducer,
     school: schoolReducer,
+    game: gameReducer,
     ...asyncReducers
   });
 }

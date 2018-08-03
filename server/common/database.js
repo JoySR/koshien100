@@ -205,6 +205,19 @@ const Database = {
     });
   },
 
+  GetGames: () => {
+    const sql = 'SELECT * FROM `games`';
+    return new Promise((resolve, reject) => {
+      pool.query(
+        sql,
+        (err, rows, fields) => {
+          if (err) reject(err);
+          else resolve(rows);
+        }
+      );
+    });
+  },
+
   GetGame: id => {
     const sql = 'SELECT * FROM `games` WHERE `game_id` = ' + pool.escape(id);
     return new Promise((resolve, reject) => {

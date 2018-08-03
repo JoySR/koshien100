@@ -39,13 +39,13 @@ class DashboardComponent extends Component {
 
   renderMainContent = () => {
     const {currentContent} = this.state;
-    const {areas, prefectures, dates, schools} = this.props;
+    const {areas, prefectures, dates, schools, games} = this.props;
     switch (currentContent) {
       case 'Dashboard':
       default:
         return <MainBoard />
       case 'Games':
-        return <GameBoard onAsync={this.onAsync}/>;
+        return <GameBoard onAsync={this.onAsync} games={games} schools={schools} prefectures={prefectures} dates={dates} />;
       case 'Dates':
         return <DateBoard onAsync={this.onAsync} dates={dates} />;
       case 'Schools':

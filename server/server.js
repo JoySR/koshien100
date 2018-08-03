@@ -39,7 +39,7 @@ route('POST', '/prefecture', Prefectures.addPrefecture);
 route('PUT', '/prefecture', Prefectures.editPrefecture);
 route('DELETE', '/prefecture', Prefectures.removePrefecture);
 
-route('GET', '/game', Games.getGame);
+route('GET', '/games', Games.getGames);
 route('POST', '/game', Games.addGame);
 route('PUT', '/game', Games.editGame);
 route('DELETE', '/game', Games.removeGame);

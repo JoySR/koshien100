@@ -15,6 +15,11 @@ export const FETCH_SCHOOLS = createRequestTypes('FETCH_SCHOOLS');
 export const UPDATE_SCHOOL = createRequestTypes('UPDATE_SCHOOL');
 export const REMOVE_SCHOOL = createRequestTypes('REMOVE_SCHOOL');
 
+export const ADD_GAME = createRequestTypes('ADD_GAME');
+export const FETCH_GAMES = createRequestTypes('FETCH_GAMES');
+export const UPDATE_GAME = createRequestTypes('UPDATE_GAME');
+export const REMOVE_GAME = createRequestTypes('REMOVE_GAME');
+
 export const ADD_DATE = createRequestTypes('ADD_DATE');
 export const FETCH_DATES = createRequestTypes('FETCH_DATES');
 export const UPDATE_DATE = createRequestTypes('UPDATE_DATE');

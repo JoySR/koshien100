@@ -3,6 +3,20 @@ import {checkLoginStatus, normalizeUpdateData} from '../common/utility'
 import {gameKeys} from '../config/constants'
 
 const Games = {
+  getGames: (request, response, next) => {
+    Database.GetGames().then(res => {
+      if (res) {
+        response.send(200, {
+          success: true,
+          message: 'GetGames is OK.',
+          games: res,
+        })
+      }
+    }).catch(err => {
+      response.send(500, err);
+    })
+  },
+
   getGame: (request, response, next) => {
     if (request.body) {
       const id = request.body.id;
@@ -11,7 +25,7 @@ const Games = {
           response.send(200, {
             success: true,
             message: 'GetGame is OK.',
-            date: res,
+            game: res,
           })
         }
       }).catch(err => {

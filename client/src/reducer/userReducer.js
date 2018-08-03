@@ -1,19 +1,26 @@
-import * as userAction from '../actions/userAction'
+import {REGISTER, LOG_IN, LOG_OUT} from '../actions/actionTypes'
+import {getToken} from '../lib/token'
 
-/**
- * Defines the userReducer initialState
- */
-const userInitialState = {userId: ""};
+const token = getToken();
+
+const userInitialState = {token};
 
 const userReducer = (state=userInitialState, action) => {
   switch (action.type) {
-    // save userID
-    case userAction.SET_USER_ID:
-      return { ...state,
-        userId: action.payload,
+    case REGISTER:
+      return {
+        ...state,
+      };
+    case LOG_IN:
+      return {
+        ...state,
+        token: action.payload.token,
       }
-
-    // default
+    case LOG_OUT:
+      return {
+        ...state,
+        token: '',
+      }
     default:
       return state;
   }

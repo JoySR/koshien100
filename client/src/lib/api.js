@@ -1,8 +1,9 @@
 import {API_URL} from '../common/constant'
+import {getToken} from './token'
 
 const api = ({endPoint, method = 'POST', data, request, success, failure}) => {
   const body = {
-    token: 'iqag5eqn3e8xn7g3', // FIXME: mock
+    token: getToken(),
     ...data
   }
 

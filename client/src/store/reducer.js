@@ -4,6 +4,7 @@ import prefectureReducer from '../reducer/prefectureReducer';
 import dateReducer from '../reducer/dateReducer';
 import schoolReducer from '../reducer/schoolReducer'
 import gameReducer from '../reducer/gameReducer'
+import userReducer from '../reducer/userReducer'
 
 export const makeRootReducer = (asyncReducers) => {
 
@@ -13,6 +14,7 @@ export const makeRootReducer = (asyncReducers) => {
     date: dateReducer,
     school: schoolReducer,
     game: gameReducer,
+    user: userReducer,
     ...asyncReducers
   });
 }

@@ -5,6 +5,8 @@ import GameBoard from './GameBoard'
 import PrefectureBoard from './PrefectureBoard'
 import SchoolBoard from './SchoolBoard'
 import MainBoard from './MainBoard'
+import {logout} from '../../../actions/userAction'
+import {getToken} from '../../../lib/token'
 
 const SIDEBAR_ITEMS = ['Dashboard', 'Games', 'Dates', 'Schools', 'Prefectures', 'Areas'];
 
@@ -17,12 +19,28 @@ class DashboardComponent extends Component {
     };
   }
 
+  componentWillMount() {
+    const token = getToken();
+    if (!token) {
+      this.props.history.push('/login');
+    }
+  }
+
   onAsync = (func) => {
     return new Promise((resolve, reject) => {
       this.props.dispatch(func)
         .then((res) => resolve(res))
         .catch((err) => reject(err));
     });
+  }
+
+  logout = () => {
+    const token = getToken();
+    this.onAsync(logout({
+      token,
+    })).then(() => {
+      this.props.history.push('/home');
+    })
   }
 
   renderSidebar = () => {
@@ -64,7 +82,7 @@ class DashboardComponent extends Component {
         <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Dashboard</a>
           <ul className="navbar-nav px-3">
             <li className="nav-item text-nowrap">
-              <a className="nav-link" href="#">Log out</a>
+              <a className="nav-link" onClick={this.logout}>Log out</a>
             </li>
           </ul>
       </nav>

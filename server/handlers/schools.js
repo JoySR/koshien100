@@ -18,8 +18,8 @@ const Schools = {
   },
 
   getSchool: (request, response, next) => {
-    if (request.body) {
-      const id = request.body.id;
+    if (request.query) {
+      const id = request.query.id;
       Database.GetSchool(id).then(res => {
         if (res) {
           response.send(200, {

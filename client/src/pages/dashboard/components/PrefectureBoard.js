@@ -32,7 +32,7 @@ export default class PrefectureBoard extends Component {
 
   onSubmit = () => {
     const {id, prefectureId, areaId, prefectureName, prefectureCode, isEditing} = this.state;
-    const {onAsync} = this.props;
+    const {onAsync, areas} = this.props;
     const func = isEditing ? updatePrefecture({
       prefecture: {
         id,
@@ -52,7 +52,7 @@ export default class PrefectureBoard extends Component {
     onAsync(func).then(() => {
       this.setState({
         prefectureId: '',
-        areaId: '',
+        areaId: areas.length ? areas[0].id : '',
         prefectureName: '',
         prefectureCode: '',
         isEditing: false,
@@ -106,7 +106,7 @@ export default class PrefectureBoard extends Component {
   }
 
   render() {
-    const {prefectureId, prefectureName, prefectureCode, isEditing} = this.state;
+    const {prefectureId, areaId, prefectureName, prefectureCode, isEditing} = this.state;
     const {areas = []} = this.props;
     return (
       <main role="main" className="PrefectureBoard col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -124,7 +124,7 @@ export default class PrefectureBoard extends Component {
             </li>
             <li>
               <label>Area Name: </label>
-              <select onChange={(event) => this.onChange('areaId', event)}>
+              <select value={areaId} onChange={(event) => this.onChange('areaId', event)}>
                 {areas.map(area => {
                   return (
                     <option value={area.id} key={area.id}>{area.name}</option>

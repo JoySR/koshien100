@@ -4,17 +4,26 @@ import { createLogger } from 'redux-logger';
 import makeRootReducer from './reducer'
 
 const logger = createLogger();
-const middleware = [thunk, logger]
+const middlewares = [thunk]
+
+// 使用 redux-devtools-extension，fallback 到 redux-logger
+// eslint-disable-next-line no-underscore-dangle
+if (typeof window !== 'undefined' && !window.__REDUX_DEVTOOLS_EXTENSION__) {
+  middlewares.push(logger)
+}
 
 const createStore = (initialState = {}) => {
   const enhancers = []
-  let composeEnhancers = compose
+
+  // eslint-disable-next-line no-underscore-dangle
+  const composeEnhancers =
+    global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
   const store = createReduxStore(
     makeRootReducer(),
     initialState,
     composeEnhancers(
-      applyMiddleware(...middleware),
+      applyMiddleware(...middlewares),
       ...enhancers
     )
   )

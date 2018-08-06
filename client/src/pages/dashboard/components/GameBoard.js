@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {addGame, fetchGames, removeGame, updateGame} from '../../../actions/gameAction'
 import {fetchDates} from '../../../actions/dateAction'
 import {fetchSchools} from '../../../actions/schoolAction'
-import {timestampToDate} from '../../../lib/converter'
+import {decodeScores, scoresToTotalScore, timestampToDate} from '../../../lib/converter'
 
 export default class GameBoard extends Component {
   constructor(props) {
@@ -16,14 +16,14 @@ export default class GameBoard extends Component {
       isFirstHome: 1,
       firstId: 0,
       thirdId: 0,
-      firstScores: 0,
-      thirdScores: 0,
+      firstScores: '',
+      thirdScores: '',
     }
   }
   componentDidMount() {
     const {onAsync} = this.props;
-    onAsync(fetchGames())
-    onAsync(fetchSchools())
+    onAsync(fetchGames());
+    onAsync(fetchSchools());
     onAsync(fetchDates()).then(() => {
       const {dates = []} = this.props;
       this.setState({
@@ -88,8 +88,8 @@ export default class GameBoard extends Component {
         isFirstHome: 0,
         firstId: 0,
         thirdId: 0,
-        firstScores: 0,
-        thirdScores: 0,
+        firstScores: '',
+        thirdScores: '',
         isEditing: false,
       });
       onAsync(fetchGames())
@@ -159,10 +159,10 @@ export default class GameBoard extends Component {
           <td>{round}</td>
           <td>{time}</td>
           <td>{is_first_home}</td>
-          <td>{schools.filter(school => {return school.id === first_id}).length ? dates.filter(school => {return school.id === first_id})[0].name : ''}</td>
-          <td>{schools.filter(school => {return school.id === third_id}).length ? dates.filter(school => {return school.id === third_id})[0].name : ''}</td>
-          <td>{first_scores}</td>
-          <td>{third_scores}</td>
+          <td>{schools.filter(school => {return school.school_id === first_id}).length ? schools.filter(school => {return school.school_id === first_id})[0].name : ''}</td>
+          <td>{scoresToTotalScore(first_scores)}</td>
+          <td>{scoresToTotalScore(third_scores)}</td>
+          <td>{schools.filter(school => {return school.school_id === third_id}).length ? schools.filter(school => {return school.school_id === third_id})[0].name : ''}</td>
           <td>
             <span onClick={() => this.onEdit(game)}>Edit</span>
             <span onClick={() => this.onDelete(id)}>Delete</span>
@@ -233,11 +233,11 @@ export default class GameBoard extends Component {
             </li>
             <li>
               <label>First Scores: </label>
-              <input value={firstScores} onChange={(event) => this.onChange('firstScores', event)} />
+              <input style={{width: 400}} value={firstScores} onChange={(event) => this.onChange('firstScores', event)} />
             </li>
             <li>
               <label>Third Scores: </label>
-              <input value={thirdScores} onChange={(event) => this.onChange('thirdScores', event)} />
+              <input style={{width: 400}} value={thirdScores} onChange={(event) => this.onChange('thirdScores', event)} />
             </li>
           </ul>
           <button onClick={() => this.onSubmit('game')}>OK</button>
@@ -255,9 +255,9 @@ export default class GameBoard extends Component {
                 <th>Time</th>
                 <th>Is First Home</th>
                 <th>First</th>
-                <th>Third</th>
                 <th>First Scores</th>
                 <th>Third Scores</th>
+                <th>Third</th>
                 <th>Options</th>
               </tr>
               </thead>

@@ -19,10 +19,16 @@
   transition: background .20s ease;
 }
 
+.time-table li.active,
 .time-table li.today {
   background: #1e40a0;
 }
 
+.time-table li.bracket_selection {
+  background: #7ed3e4;
+}
+
+.time-table li.postponed,
 .time-table li.rest {
   background: #ccc;
   cursor: default;

@@ -13,16 +13,25 @@ class HomeComponent extends Component {
     this.state = {};
   }
 
+  onAsync = (func) => {
+    return new Promise((resolve, reject) => {
+      this.props.dispatch(func)
+        .then((res) => resolve(res))
+        .catch((err) => reject(err));
+    });
+  }
+
   render() {
+    const {dates, currentDateId, dispatch, games, schools, prefectures} = this.props;
     return (
       <div className="container">
         <Header />
         <div className="main">
-          <TimeTable />
-          <MatchDay />
-          <Map />
+          <TimeTable dispatch={dispatch} onAsync={this.onAsync} dates={dates} />
+          <MatchDay games={games} schools={schools} prefectures={prefectures} onAsync={this.onAsync} currentDateId={currentDateId} />
+          {/*<Map />*/}
         </div>
-        <Footer />
+        {/*<Footer />*/}
       </div>
     )
   }

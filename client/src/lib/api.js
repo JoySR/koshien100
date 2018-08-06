@@ -40,4 +40,12 @@ const handleErrors = (response) => {
   return response;
 }
 
+export const onAsync = dispatch => func => {
+  return new Promise((resolve, reject) => {
+    dispatch(func)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+}
+
 export default api;

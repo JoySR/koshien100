@@ -17,8 +17,8 @@ export default class SchoolBoard extends Component {
       totalCount: 0,
       winCount: 0,
       loseCount: 0,
-      best: 0,
-      games: [],
+      best: 1,
+      games: '',
     }
   }
   componentDidMount() {
@@ -54,7 +54,7 @@ export default class SchoolBoard extends Component {
       games,
       isEditing
     } = this.state;
-    const {onAsync} = this.props;
+    const {onAsync, prefectures} = this.props;
     const func = isEditing ? updateSchool({
       school: {
         id,
@@ -88,7 +88,7 @@ export default class SchoolBoard extends Component {
     onAsync(func).then(() => {
       this.setState({
         schoolId: '',
-        prefectureId: '',
+        prefectureId: prefectures[0].id,
         name: '',
         shortName: '',
         isContinual: 0,
@@ -96,8 +96,8 @@ export default class SchoolBoard extends Component {
         totalCount: 0,
         winCount: 0,
         loseCount: 0,
-        best: 0,
-        games: [],
+        best: 1,
+        games: '',
         isEditing: false,
       });
       onAsync(fetchSchools())
@@ -259,11 +259,18 @@ export default class SchoolBoard extends Component {
             </li>
             <li>
               <label>Best Result: </label>
-              <input value={best} onChange={(event) => this.onChange('best', event)} />
+              <select value={best} onChange={(event) => this.onChange('best', event)}>
+                <option value={1}>一回戦</option>
+                <option value={2}>二回戦</option>
+                <option value={3}>三回戦</option>
+                <option value={4}>準々決勝</option>
+                <option value={5}>準決勝</option>
+                <option value={6}>決勝</option>
+              </select>
             </li>
             <li>
               <label>Games: </label>
-              <input value={games} onChange={(event) => this.onChange('games', event)} />
+              <textarea value={games} onChange={(event) => this.onChange('games', event)} />
             </li>
           </ul>
           <button onClick={() => this.onSubmit('school')}>OK</button>

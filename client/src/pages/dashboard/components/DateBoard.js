@@ -43,7 +43,7 @@ export default class DateBoard extends Component {
     onAsync(func).then(() => {
       this.setState({
         gameDate: '',
-        dateStatus: '',
+        dateStatus: DATE_STATUS[0],
         isEditing: false,
       });
       onAsync(fetchDates())
@@ -51,11 +51,11 @@ export default class DateBoard extends Component {
   }
 
   onEdit = (date) => {
-    const {id, date_id, game_date, status} = date;
+    const {id, game_date, status} = date;
     this.setState({
       isEditing: true,
       id,
-      gameDate: game_date,
+      gameDate: timestampToDate(game_date),
       dateStatus: status
     });
   }

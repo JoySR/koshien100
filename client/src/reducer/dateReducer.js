@@ -1,4 +1,4 @@
-import {ADD_DATE, FETCH_DATES} from '../actions/actionTypes'
+import {ADD_DATE, FETCH_DATES, SET_CURRENT_DATE} from '../actions/actionTypes'
 
 const dateInitialState = {};
 
@@ -13,6 +13,11 @@ const dateReducer = (state=dateInitialState, action) => {
       return {
         ...state,
         list: action.payload.dates
+      }
+    case SET_CURRENT_DATE:
+      return {
+        ...state,
+        currentDateId: `${action.payload.dateId}`
       }
     default:
       return state;

@@ -1,4 +1,4 @@
-import {ADD_DATE, FETCH_DATES, REMOVE_DATE, UPDATE_DATE} from './actionTypes'
+import {ADD_DATE, FETCH_DATES, REMOVE_DATE, UPDATE_DATE, SET_CURRENT_DATE} from './actionTypes'
 import api from '../lib/api'
 
 export function addDate(date) {
@@ -121,5 +121,12 @@ export const removeDateFailure = (error) => {
   return {
     type: REMOVE_DATE.FAILURE,
     payload: { error }
+  }
+}
+
+export const setCurrentDate = (dateId) => {
+  return {
+    type: SET_CURRENT_DATE,
+    payload: { dateId }
   }
 }

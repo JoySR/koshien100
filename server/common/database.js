@@ -219,7 +219,7 @@ const Database = {
   },
 
   GetGame: id => {
-    const sql = 'SELECT * FROM `games` WHERE `game_id` = ' + pool.escape(id);
+    const sql = 'SELECT * FROM `games` WHERE `id` = ' + pool.escape(id);
     return new Promise((resolve, reject) => {
       pool.query(
         sql,
@@ -260,7 +260,7 @@ const Database = {
   },
 
   RemoveGame: id => {
-    const sql = 'DELETE FROM `games` WHERE `game_id` = ' + pool.escape(id);
+    const sql = 'DELETE FROM `games` WHERE `id` = ' + pool.escape(id);
     return new Promise((resolve, reject) => {
       pool.query(
         sql,

@@ -1,80 +1,50 @@
 import React, {Component} from 'react';
+import cx from 'classnames';
 import './TimeTable.css';
-
-const MATCH_DAYS = [
-  {
-    date: '05',
-    weekday: '日',
-  },
-  {
-    date: '06',
-    weekday: '月',
-  },
-  {
-    date: '07',
-    weekday: '火',
-  },
-  {
-    date: '08',
-    weekday: '水',
-  },
-  {
-    date: '09',
-    weekday: '木',
-  },
-  {
-    date: '10',
-    weekday: '金',
-  },
-  {
-    date: '11',
-    weekday: '土',
-  },
-  {
-    date: '12',
-    weekday: '日',
-  },
-  {
-    date: '13',
-    weekday: '月',
-  },
-  {
-    date: '14',
-    weekday: '火',
-  },
-  {
-    date: '15',
-    weekday: '水',
-  },
-  {
-    date: '16',
-    weekday: '木',
-  },
-  {
-    date: '17',
-    weekday: '金',
-  },
-  {
-    date: '18',
-    weekday: '土',
-  },
-  {
-    date: '19',
-    weekday: '日',
-  },
-  {
-    date: '20',
-    weekday: '月',
-  }
-];
+import {fetchDates, setCurrentDate} from '../../../actions/dateAction'
+import {timestampToDate, timestampTpWeekDay} from '../../../lib/converter'
 
 export default class TimeTable extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentDate: this.getTodaysDate().split('-').join(''),
+    }
+  }
+
+  componentDidMount() {
+    const {dispatch} = this.props
+    this.props.onAsync(fetchDates());
+    dispatch(setCurrentDate(this.state.currentDate));
+  }
+
+  getTodaysDate = () => {
+    const timestamp = new Date().getTime();
+    return timestampToDate(timestamp);
+  }
+
+  setDate = (date_id) => {
+    const {dispatch} = this.props
+
+    this.setState({
+      currentDate: date_id,
+    });
+
+   dispatch(setCurrentDate(date_id));
+  }
+
   renderTimeTable = () => {
-    return MATCH_DAYS.map(day => {
+    const {dates = []} = this.props;
+    const {currentDate} = this.state;
+
+    return dates.map(day => {
       return (
-        <li key={day.date}>
-          <span className="date">{day.date}</span>
-          <span className="day">{day.weekday}</span>
+        <li className={cx(day.status, {
+          active: +day.date_id === +currentDate,
+        })} key={day.id} onClick={() => this.setDate(day.date_id)}>
+          <span className="date">{timestampToDate(day.game_date).slice(-2)}</span>
+          <span className="day">{timestampTpWeekDay(day.game_date)}</span>
         </li>
       )
     })

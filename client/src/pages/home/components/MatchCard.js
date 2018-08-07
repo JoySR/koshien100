@@ -55,6 +55,7 @@ export default class MatchCard extends Component {
       isFirstHome,
       round,
       time,
+      videoId,
     } = matchData;
 
     const first = schools.length > 0 && schools.filter(school => {
@@ -120,7 +121,7 @@ export default class MatchCard extends Component {
         {shouldShowDetail ? <ScoreTable scoreTable={scoreTable}/> : null}
         {shouldShowDetail ? <div className="after-game hide">
           <a className="news" href={`https://vk.sportsbull.jp/koshien/text_sokuhou/${gameId}.html`}><i className="fa fa-link" />速報</a>
-          <a className="video"><i className="fa fa-video-camera" />ビデオ</a>
+          <a className="video" href={`https://vk.sportsbull.jp/koshien/articles/${videoId}.html`}><i className="fa fa-video-camera" />ビデオ</a>
         </div> : null}
         <div className="show-more" onClick={this.toggleShowDetail}>
           詳細

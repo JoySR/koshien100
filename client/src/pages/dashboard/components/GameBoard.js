@@ -18,6 +18,7 @@ export default class GameBoard extends Component {
       thirdId: 0,
       firstScores: '',
       thirdScores: '',
+      videoId: '',
     }
   }
   componentDidMount() {
@@ -50,6 +51,7 @@ export default class GameBoard extends Component {
       thirdId,
       firstScores,
       thirdScores,
+      videoId,
       isEditing
     } = this.state;
     const {onAsync} = this.props;
@@ -65,6 +67,7 @@ export default class GameBoard extends Component {
         third_id: thirdId,
         first_scores: firstScores,
         third_scores: thirdScores,
+        video_id: videoId,
       }
     }) : addGame({
       game: {
@@ -77,6 +80,7 @@ export default class GameBoard extends Component {
         third_id: thirdId,
         first_scores: firstScores,
         third_scores: thirdScores,
+        video_id: videoId,
       }
     })
     onAsync(func).then(() => {
@@ -91,6 +95,7 @@ export default class GameBoard extends Component {
         firstScores: '',
         thirdScores: '',
         isEditing: false,
+        videoId: '',
       });
       onAsync(fetchGames())
     })
@@ -108,6 +113,7 @@ export default class GameBoard extends Component {
       third_id,
       first_scores,
       third_scores,
+      video_id,
     } = game;
     this.setState({
       isEditing: true,
@@ -121,6 +127,7 @@ export default class GameBoard extends Component {
       thirdId: third_id,
       firstScores: first_scores,
       thirdScores: third_scores,
+      videoId: video_id,
     });
   }
 
@@ -150,6 +157,7 @@ export default class GameBoard extends Component {
         third_id,
         first_scores,
         third_scores,
+        video_id,
       } = game;
       return (
         <tr key={id}>
@@ -163,6 +171,7 @@ export default class GameBoard extends Component {
           <td>{scoresToTotalScore(first_scores)}</td>
           <td>{scoresToTotalScore(third_scores)}</td>
           <td>{schools.filter(school => {return school.school_id === third_id}).length ? schools.filter(school => {return school.school_id === third_id})[0].name : ''}</td>
+          <td>{video_id}</td>
           <td>
             <span onClick={() => this.onEdit(game)}>Edit</span>
             <span onClick={() => this.onDelete(id)}>Delete</span>
@@ -183,6 +192,7 @@ export default class GameBoard extends Component {
       thirdId,
       firstScores,
       thirdScores,
+      videoId,
       isEditing
     } = this.state;
 
@@ -239,6 +249,10 @@ export default class GameBoard extends Component {
               <label>Third Scores: </label>
               <input style={{width: 400}} value={thirdScores} onChange={(event) => this.onChange('thirdScores', event)} />
             </li>
+            <li>
+              <label>Video Id: </label>
+              <input value={videoId} onChange={(event) => this.onChange('videoId', event)} />
+            </li>
           </ul>
           <button onClick={() => this.onSubmit('game')}>OK</button>
         </div>
@@ -258,6 +272,7 @@ export default class GameBoard extends Component {
                 <th>First Scores</th>
                 <th>Third Scores</th>
                 <th>Third</th>
+                <th>Video Id</th>
                 <th>Options</th>
               </tr>
               </thead>

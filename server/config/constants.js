@@ -19,7 +19,8 @@ export const gameKeys = [
   'first_id',
   'third_id',
   'first_scores',
-  'third_scores'
+  'third_scores',
+  'video_id'
 ];
 
 export const prefectureKeys = [

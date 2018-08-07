@@ -232,7 +232,7 @@ const Database = {
   },
 
   AddGame: game => {
-    const sql = 'INSERT INTO games (game_id, date_id, round, time, is_first_home, first_id, third_id, first_scores, third_scores) VALUES (?)';
+    const sql = 'INSERT INTO games (game_id, date_id, round, time, is_first_home, first_id, third_id, first_scores, third_scores, video_id) VALUES (?)';
     return new Promise((resolve, reject) => {
       pool.query(
         sql,
@@ -246,7 +246,7 @@ const Database = {
   },
 
   UpdateGame: (id, game) => {
-    const sql = 'UPDATE games set game_id = ? , date_id = ? , round = ? , time = ? , is_first_home = ? , first_id = ? , third_id = ? , first_scores = ? , third_scores = ?  WHERE id = ' + pool.escape(id);
+    const sql = 'UPDATE games set game_id = ? , date_id = ? , round = ? , time = ? , is_first_home = ? , first_id = ? , third_id = ? , first_scores = ? , third_scores = ?, video_id = ? WHERE id = ' + pool.escape(id);
     return new Promise((resolve, reject) => {
       pool.query(
         sql,

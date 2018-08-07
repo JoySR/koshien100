@@ -40,7 +40,7 @@ export const decodeScores = str => {
 
 export const scoresToTotalScore = (scores) => {
   return decodeScores(scores).reduce((sum, score) => {
-    const tmpScore = (score === '-' || score === 'X') ? 0 : +score;
+    const tmpScore = (score === '' || score === '-' || score === 'X') ? 0 : parseInt(score);
     return +tmpScore + +sum
   }, 0)
 }

@@ -13,7 +13,7 @@ export default class GameBoard extends Component {
       dateId: '',
       round: '',
       time: '',
-      isFirstHome: 1,
+      isFirstHome: 0,
       firstId: 0,
       thirdId: 0,
       firstScores: '',
@@ -227,10 +227,10 @@ export default class GameBoard extends Component {
               <input value={time} onChange={(event) => this.onChange('time', event)} />
             </li>
             <li>
-              <label>Is FirstHome: </label>
+              <label>Is First Home: </label>
               <select value={isFirstHome} onChange={(event) => this.onChange('isFirstHome', event)}>
-                <option value={1}>First is Home</option>
                 <option value={0}>First is Visit</option>
+                <option value={1}>First is Home</option>
               </select>
             </li>
             <li>

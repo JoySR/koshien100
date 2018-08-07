@@ -9,24 +9,24 @@ export default class ScoreTable extends Component {
 
   render() {
     const {scoreTable: {first, third, isFirstHome}} = this.props;
-    const home = isFirstHome ? first : third;
     const visit = isFirstHome ? third : first;
+    const home = isFirstHome ? first : third;
 
-    const {name: homeName, scores: homeScores, finalScore: homeFinalScore} = home;
     const {name: visitName, scores: visitScores, finalScore: visitFinalScore} = visit;
+    const {name: homeName, scores: homeScores, finalScore: homeFinalScore} = home;
 
     return (
       <table className="scoreboard">
         <tbody>
-        <tr className="home">
-          <td className="name">{homeName}</td>
-          {this.renderScores(homeScores)}
-          <td className="final">{homeFinalScore}</td>
-        </tr>
         <tr className="visit">
           <td className="name">{visitName}</td>
           {this.renderScores(visitScores)}
           <td className="final">{visitFinalScore}</td>
+        </tr>
+        <tr className="home">
+          <td className="name">{homeName}</td>
+          {this.renderScores(homeScores)}
+          <td className="final">{homeFinalScore}</td>
         </tr>
         </tbody>
       </table>

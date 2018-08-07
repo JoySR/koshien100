@@ -27,7 +27,7 @@ export default class SchoolBoard extends Component {
     onAsync(fetchPrefecture()).then(() => {
       const {prefectures = []} = this.props;
       this.setState({
-        prefectureId: prefectures.length > 0 ? prefectures[0].id : '',
+        prefectureId: prefectures.length > 0 ? prefectures[0].prefecture_id : '',
       });
     })
   }
@@ -88,7 +88,7 @@ export default class SchoolBoard extends Component {
     onAsync(func).then(() => {
       this.setState({
         schoolId: '',
-        prefectureId: prefectures[0].id,
+        prefectureId: prefectures[0].prefecture_id,
         name: '',
         shortName: '',
         isContinual: 0,
@@ -169,7 +169,7 @@ export default class SchoolBoard extends Component {
         <tr key={id}>
           <td>{id}</td>
           <td>{school_id}</td>
-          <td>{prefectures.filter(prefecture => {return prefecture.id === prefecture_id}).length ? prefectures.filter(prefecture => {return prefecture.id === prefecture_id})[0].name : ''}</td>
+          <td>{prefectures.filter(prefecture => {return prefecture.prefecture_id === prefecture_id}).length ? prefectures.filter(prefecture => {return prefecture.prefecture_id === prefecture_id})[0].name : ''}</td>
           <td>{name}</td>
           <td>{short_name}</td>
           <td>{is_continual}</td>
@@ -221,7 +221,7 @@ export default class SchoolBoard extends Component {
               <select value={prefectureId} onChange={(event) => this.onChange('prefectureId', event)}>
                 {prefectures.map(prefecture => {
                   return (
-                    <option value={prefecture.id} key={prefecture.id}>{prefecture.name}</option>
+                    <option value={prefecture.prefecture_id} key={prefecture.id}>{prefecture.name}</option>
                   )
                 })}
               </select>

@@ -93,8 +93,8 @@ export default class PrefectureBoard extends Component {
         <tr key={id}>
           <td>{id}</td>
           <td>{prefecture_id}</td>
-          <td>{areas.filter(area => {return area.id === area_id})[0].name}</td>
           <td>{name}</td>
+          <td>{areas.length && areas.filter(area => {return area.area_id === area_id})[0].name}</td>
           <td>{code}</td>
           <td>
             <span onClick={() => this.onEdit(prefecture)}>Edit</span>
@@ -127,7 +127,7 @@ export default class PrefectureBoard extends Component {
               <select value={areaId} onChange={(event) => this.onChange('areaId', event)}>
                 {areas.map(area => {
                   return (
-                    <option value={area.id} key={area.id}>{area.name}</option>
+                    <option value={area.area_id} key={area.id}>{area.name}</option>
                   )
                 })}
               </select>

@@ -26,28 +26,35 @@ const Users = {
       const username = request.body.username;
       Database.Login(username).then(res => {
         if (res) {
-          const password = res[0].password;
-          if (password !== request.body.password) {
+          if (res[0]) {
+            const password = res[0].password;
+            if (password !== request.body.password) {
+              response.send(500, {
+                success: false,
+                message: 'Password is false.'
+              });
+            } else {
+              const token = randomToken(16);
+              Database.CreateSession([username, token]).then(res => {
+                if (res) {
+                  response.send(200, {
+                    success: true,
+                    message: 'Login OK.',
+                    token,
+                  });
+                }
+              });
+            }
+          } else {
             response.send(500, {
               success: false,
-              message: 'Password is false.'
-            });
-          } else {
-            const token = randomToken(16);
-            Database.CreateSession([username, token]).then(res => {
-              if (res) {
-                response.send(200, {
-                  success: true,
-                  message: 'Login OK.',
-                  token,
-                });
-              }
+              message: 'User not exist'
             });
           }
         } else {
           response.send(500, {
             success: false,
-            message: 'User not existed'
+            message: 'There is some problem with server, please try again later.'
           });
         }
       }).catch(err => {

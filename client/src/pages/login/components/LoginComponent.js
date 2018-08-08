@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import md5 from 'js-md5';
 import {login} from '../../../actions/userAction'
-import {onAsync} from '../../../lib/api'
 
 class LoginComponent extends Component {
 
@@ -11,9 +10,17 @@ class LoginComponent extends Component {
     })
   }
 
+  onAsync = (func) => {
+    return new Promise((resolve, reject) => {
+      this.props.dispatch(func)
+        .then((res) => resolve(res))
+        .catch((err) => reject(err));
+    });
+  }
+
   onSubmit = () => {
     const {username, password} = this.state;
-    onAsync(login({
+    this.onAsync(login({
       username,
       password: md5(password),
     })).then(() => {

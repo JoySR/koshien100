@@ -2,10 +2,12 @@ import {API_URL} from '../common/constant'
 import {getToken} from './token'
 
 const api = ({endPoint, method = 'POST', data, request, success, failure}) => {
-  const body = {
-    token: getToken(),
-    ...data
-  }
+  const body = endPoint === '/register' ?
+    {...data} :
+    {
+      token: getToken(),
+      ...data
+    }
 
   const tmpData = {
     method,

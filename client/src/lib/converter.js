@@ -45,10 +45,8 @@ export const scoresToTotalScore = (scores) => {
   }, 0)
 }
 
-export const gameIdToDate = gameId => {
-  // 2018080561
-  const year = gameId.slice(0, 4);
-  const month = gameId.slice(4, 6);
-  const day = gameId.slice(6, 8);
-  return `${year}-${month}-${day}`;
+export const gameIdToDateId = gameId => {
+  const dateId = gameId.slice(0, 8);
+  return +dateId;
+
 }

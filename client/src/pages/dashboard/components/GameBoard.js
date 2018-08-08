@@ -5,7 +5,7 @@ import {fetchSchools} from '../../../actions/schoolAction'
 import {
   scoresToTotalScore,
   timestampToDate,
-  gameIdToDate,
+  gameIdToDateId,
   dateToTimestamp
 } from '../../../lib/converter'
 
@@ -15,6 +15,7 @@ export default class GameBoard extends Component {
 
     this.state = {
       gameId: '',
+      dateId: '',
       round: '',
       time: '',
       isFirstHome: 0,
@@ -29,12 +30,7 @@ export default class GameBoard extends Component {
     const {onAsync} = this.props;
     onAsync(fetchGames());
     onAsync(fetchSchools());
-    onAsync(fetchDates()).then(() => {
-      const {dates = []} = this.props;
-      this.setState({
-        dateId: dates.length > 0 ? dates[0].id : '',
-      });
-    })
+    onAsync(fetchDates());
   }
 
   onChange = (item, event) => {
@@ -47,6 +43,7 @@ export default class GameBoard extends Component {
     const {
       id,
       gameId,
+      dateId,
       round,
       time,
       isFirstHome,
@@ -62,7 +59,7 @@ export default class GameBoard extends Component {
       game: {
         id,
         game_id: gameId,
-        date_id: dateToTimestamp(gameIdToDate(gameId)),
+        date_id: dateId,
         round: round,
         time: time,
         is_first_home: isFirstHome,
@@ -75,7 +72,7 @@ export default class GameBoard extends Component {
     }) : addGame({
       game: {
         game_id: gameId,
-        date_id: dateToTimestamp(gameIdToDate(gameId)),
+        date_id: gameIdToDateId(gameId),
         round: round,
         time: time,
         is_first_home: isFirstHome,
@@ -108,6 +105,7 @@ export default class GameBoard extends Component {
     const {
       id,
       game_id,
+      date_id,
       round,
       time,
       is_first_home,
@@ -121,6 +119,7 @@ export default class GameBoard extends Component {
       isEditing: true,
       id,
       gameId: game_id,
+      dateId: date_id,
       round,
       time: time,
       isFirstHome: is_first_home,
@@ -164,7 +163,7 @@ export default class GameBoard extends Component {
         <tr key={id}>
           <td>{id}</td>
           <td>{game_id}</td>
-          <td>{dates.filter(date => {return date.id === date_id}).length ? timestampToDate(dates.filter(date => {return date.id === date_id})[0].game_date) : ''}</td>
+          <td>{dates.filter(date => {return date.date_id === date_id}).length ? timestampToDate(dates.filter(date => {return date.date_id === date_id})[0].game_date) : ''}</td>
           <td>{round}</td>
           <td>{time}</td>
           <td>{is_first_home}</td>

@@ -89,7 +89,7 @@ export default class MatchCard extends Component {
     }
 
     return (
-      <div className="match-card">
+      <div className="match-card" id={gameId}>
         <div className="school-school">
           <div className="info clearfix">
             <div className="round-wrap">

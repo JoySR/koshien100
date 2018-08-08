@@ -40,7 +40,15 @@ export const decodeScores = str => {
 
 export const scoresToTotalScore = (scores) => {
   return decodeScores(scores).reduce((sum, score) => {
-    const tmpScore = (score === '' || score === '-' || score === 'X') ? 0 : parseInt(score);
+    const tmpScore = (score === '' || score === '-' || score === 'X') ? 0 : parseInt(score, 10);
     return +tmpScore + +sum
   }, 0)
+}
+
+export const gameIdToDate = gameId => {
+  // 2018080561
+  const year = gameId.slice(0, 4);
+  const month = gameId.slice(4, 6);
+  const day = gameId.slice(6, 8);
+  return `${year}-${month}-${day}`;
 }

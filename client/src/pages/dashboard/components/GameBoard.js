@@ -2,7 +2,12 @@ import React, {Component} from 'react';
 import {addGame, fetchGames, removeGame, updateGame} from '../../../actions/gameAction'
 import {fetchDates} from '../../../actions/dateAction'
 import {fetchSchools} from '../../../actions/schoolAction'
-import {decodeScores, scoresToTotalScore, timestampToDate} from '../../../lib/converter'
+import {
+  scoresToTotalScore,
+  timestampToDate,
+  gameIdToDate,
+  dateToTimestamp
+} from '../../../lib/converter'
 
 export default class GameBoard extends Component {
   constructor(props) {
@@ -10,7 +15,6 @@ export default class GameBoard extends Component {
 
     this.state = {
       gameId: '',
-      dateId: '',
       round: '',
       time: '',
       isFirstHome: 0,
@@ -43,7 +47,6 @@ export default class GameBoard extends Component {
     const {
       id,
       gameId,
-      dateId,
       round,
       time,
       isFirstHome,
@@ -59,7 +62,7 @@ export default class GameBoard extends Component {
       game: {
         id,
         game_id: gameId,
-        date_id: dateId,
+        date_id: dateToTimestamp(gameIdToDate(gameId)),
         round: round,
         time: time,
         is_first_home: isFirstHome,
@@ -72,7 +75,7 @@ export default class GameBoard extends Component {
     }) : addGame({
       game: {
         game_id: gameId,
-        date_id: dateId,
+        date_id: dateToTimestamp(gameIdToDate(gameId)),
         round: round,
         time: time,
         is_first_home: isFirstHome,
@@ -105,7 +108,6 @@ export default class GameBoard extends Component {
     const {
       id,
       game_id,
-      date_id,
       round,
       time,
       is_first_home,
@@ -119,7 +121,6 @@ export default class GameBoard extends Component {
       isEditing: true,
       id,
       gameId: game_id,
-      dateId: date_id,
       round,
       time: time,
       isFirstHome: is_first_home,
@@ -184,7 +185,6 @@ export default class GameBoard extends Component {
   render() {
     const {
       gameId,
-      dateId,
       round,
       time,
       isFirstHome,
@@ -196,8 +196,6 @@ export default class GameBoard extends Component {
       isEditing
     } = this.state;
 
-    const {dates = []} = this.props;
-
     return (
       <main role="main" className="GameBoard col-md-9 ml-sm-auto col-lg-10 px-4">
         <h2>Games</h2>
@@ -207,16 +205,6 @@ export default class GameBoard extends Component {
             <li>
               <label>Game Id: </label>
               <input value={gameId} onChange={(event) => this.onChange('gameId', event)} />
-            </li>
-            <li>
-              <label>Date: </label>
-              <select value={dateId} onChange={(event) => this.onChange('dateId', event)}>
-                {dates.map(date => {
-                  return (
-                    <option value={date.id} key={date.id}>{timestampToDate(date.game_date)}</option>
-                  )
-                })}
-              </select>
             </li>
             <li>
               <label>Round: </label>

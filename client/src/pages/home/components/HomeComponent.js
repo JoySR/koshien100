@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import Footer from './Footer';
+// import Footer from './Footer';
 import TimeTable from './TimeTable';
 import MatchDay from './MatchDay';
-import Map from './Map';
+// import Map from './Map';
 import './Home.css';
 
 class HomeComponent extends Component {

@@ -48,5 +48,29 @@ export const scoresToTotalScore = (scores) => {
 export const gameIdToDateId = gameId => {
   const dateId = gameId.slice(0, 8);
   return +dateId;
+}
+
+export const schoolInGamesToGamesInSchool = (schoolId, games = []) => {
+  if (games.length === 0) return [];
+  return games.filter(game => {
+    return game.first_id === schoolId || game.third_id === schoolId;
+  });
+}
+
+export const dateIdToMonthDay = dateId => {
+  // FIXME: Which are String(s)? Which are Number(s)?
+  const month = dateId.toString().slice(4, 6);
+  const day = dateId.toString().slice(6);
+  return `${month}/${day}`;
+}
+
+export const dataIdToDataValue = ({id, dataList = [], fromKey, toKey = 'name'}) => {
+  if (dataList.length === 0) return '';
+  const result = dataList.filter(data => {
+    return data[fromKey] === id;
+  });
+
+  if (!result || !result[0] || !result[0][toKey]) return '';
+  return result[0][toKey];
 
 }

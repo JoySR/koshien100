@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import AreaBoard from './AreaBoard'
 import DateBoard from './DateBoard'
 import GameBoard from './GameBoard'
@@ -81,7 +82,8 @@ class DashboardComponent extends Component {
       <nav className="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">
         <a className="navbar-brand col-sm-3 col-md-2 mr-0">Dashboard</a>
           <ul className="navbar-nav px-3">
-            <li className="nav-item text-nowrap">
+            <li className="nav-item text-nowrap d-flex">
+              <Link className="nav-link pr-3" to='/'>Home</Link>
               <a className="nav-link" onClick={this.logout}>Log out</a>
             </li>
           </ul>

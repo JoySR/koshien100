@@ -38,7 +38,8 @@ export const decodeScores = str => {
   return str.split(',');
 }
 
-export const scoresToTotalScore = (scores) => {
+export const scoresToTotalScore = (scores = []) => {
+  if (scores.length === 0) {return '-';}
   return decodeScores(scores).reduce((sum, score) => {
     const tmpScore = (score === '' || score === '-' || score === 'X') ? 0 : parseInt(score, 10);
     return +tmpScore + +sum
@@ -72,5 +73,4 @@ export const dataIdToDataValue = ({id, dataList = [], fromKey, toKey = 'name'}) 
 
   if (!result || !result[0] || !result[0][toKey]) return '';
   return result[0][toKey];
-
 }

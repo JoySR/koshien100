@@ -69,9 +69,11 @@ export default class SchoolCard extends Component {
 
     // FIXME: 初出場？
 
-    const prefecture = school && prefectures.length && prefectures.filter(prefecture => {
-      return prefecture.prefecture_id === prefecture_id;
-    })[0].name;
+    const prefecture = school && dataIdToDataValue({
+      id: prefecture_id,
+      fromKey: 'prefecture_id',
+      dataList: prefectures,
+    })
 
     return (
       <div id="card-bg">

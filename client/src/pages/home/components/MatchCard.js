@@ -4,7 +4,7 @@ import {rounds} from '../constants';
 import ScoreTable from './ScoreTable';
 
 import './MatchCard.css'
-import {decodeScores, scoresToTotalScore} from '../../../lib/converter'
+import {dataIdToDataValue, decodeScores, scoresToTotalScore} from '../../../lib/converter'
 
 export default class MatchCard extends Component {
   constructor(props) {
@@ -69,13 +69,17 @@ export default class MatchCard extends Component {
       return school.school_id === thirdId;
     })[0];
 
-    const firstPrefecture = prefectures.length && prefectures.filter(prefecture => {
-      return prefecture.prefecture_id === first.prefecture_id;
-    })[0].name;
+    const firstPrefecture = first && dataIdToDataValue({
+      id: first.prefecture_id,
+      fromKey: 'prefecture_id',
+      dataList: prefectures,
+    });
 
-    const thirdPrefecture = prefectures.length && prefectures.filter(prefecture => {
-      return prefecture.prefecture_id === third.prefecture_id;
-    })[0].name;
+    const thirdPrefecture = third && dataIdToDataValue({
+      id: third.prefecture_id,
+      fromKey: 'prefecture_id',
+      dataList: prefectures,
+    })
 
     const thirdName = third && third.name;
 
@@ -83,8 +87,16 @@ export default class MatchCard extends Component {
     const thirdFinalScore = scoresToTotalScore(thirdScores);
 
     const scoreTable = {
-      first: {name: firstName, scores: decodeScores(firstScores), finalScore: firstFinalScore},
-      third: {name: thirdName, scores: decodeScores(thirdScores), finalScore: thirdFinalScore},
+      first: {
+        name: firstName,
+        scores: decodeScores(firstScores),
+        finalScore: firstFinalScore
+      },
+      third: {
+        name: thirdName,
+        scores: decodeScores(thirdScores),
+        finalScore: thirdFinalScore
+      },
       isFirstHome,
     }
 
@@ -106,30 +118,44 @@ export default class MatchCard extends Component {
               </span>
             </div>
           </div>
-          <p className="first" onClick={() => {onShowSchool(firstId)}}>
-            <span className="prefecture">({firstPrefecture})</span>
-            <span className="name">{firstName}</span>
-            <span className="final-score">{firstFinalScore}</span>
-          </p>
-          <span className="vs">-</span>
-          <p className="third" onClick={() => {onShowSchool(thirdId)}}>
-            <span className="final-score">{thirdFinalScore}</span>
-            <span className="name">{thirdName}</span>
-            <span className="prefecture">({thirdPrefecture})</span>
-          </p>
+          {first ? (
+            <div className="scores">
+              <p className="first" onClick={() => {onShowSchool(firstId)}}>
+                <span className="prefecture">({firstPrefecture})</span>
+                <span className="name">{firstName}</span>
+                <span className="final-score">{firstFinalScore}</span>
+              </p>
+              <span className="vs">-</span>
+              {third ? (<p className="third" onClick={() => {onShowSchool(thirdId)}}>
+                <span className="final-score">{thirdFinalScore}</span>
+                <span className="name">{thirdName}</span>
+                <span className="prefecture">({thirdPrefecture})</span>
+              </p>) : (
+                <p className="third">
+                  <span>相手カード未定</span>
+                </p>
+              )}
+            </div>
+          ) : (
+            <div className="scores">
+              <span className="vs">対戦カード未定</span>
+            </div>
+          )}
         </div>
         {shouldShowDetail ? <ScoreTable scoreTable={scoreTable}/> : null}
         {shouldShowDetail ? <div className="after-game hide">
           <a className="news" href={`https://vk.sportsbull.jp/koshien/text_sokuhou/${gameId}.html`}><i className="fa fa-link" />速報</a>
           <a className="video" href={`https://vk.sportsbull.jp/koshien/articles/${videoId}.html`}><i className="fa fa-video-camera" />ビデオ</a>
         </div> : null}
-        <div className="show-more" onClick={this.toggleShowDetail}>
-          詳細
-          {shouldShowDetail ?
-            <span className="triangle-to-top" /> :
-            <span className="triangle-to-bottom" />
-          }
-        </div>
+        {firstFinalScore !== '-' ? (
+          <div className="show-more" onClick={this.toggleShowDetail}>
+            詳細
+            {shouldShowDetail ?
+              <span className="triangle-to-top" /> :
+              <span className="triangle-to-bottom" />
+            }
+          </div>
+        ) : null}
       </div>
     );
   }

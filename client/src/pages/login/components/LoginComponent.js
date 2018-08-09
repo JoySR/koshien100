@@ -40,7 +40,7 @@ class LoginComponent extends Component {
             </li>
             <li>
               <label>Password: </label>
-              <input onChange={(event) => this.onChange('password', event)} />
+              <input type="password" onChange={(event) => this.onChange('password', event)} />
             </li>
           </ul>
           <button onClick={() => this.onSubmit('user')}>OK</button>

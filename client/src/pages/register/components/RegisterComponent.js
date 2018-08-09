@@ -44,11 +44,11 @@ class RegisterComponent extends Component {
             </li>
             <li>
               <label>Password: </label>
-              <input onChange={(event) => this.onChange('password', event)} />
+              <input type="password" onChange={(event) => this.onChange('password', event)} />
             </li>
             <li>
               <label>Password(Confirm): </label>
-              <input onChange={(event) => this.onChange('password2', event)} />
+              <input type="password" onChange={(event) => this.onChange('password2', event)} />
             </li>
           </ul>
           <button onClick={() => this.onSubmit('user')}>OK</button>

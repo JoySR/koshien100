@@ -1,0 +1,318 @@
+.map {
+  width: 760px;
+  height: 500px;
+  margin: 30px auto;
+  background: #fffef5;
+  position: relative;
+
+
+  .prefecture-block {
+    position: absolute;
+    background-color: #baeef8;
+    color: #1e409f;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: .2em;
+    border: 1px solid #fff;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      background: #bae4f8;
+    }
+
+    &.nhokkaido,
+    &.shokkaido,
+    &.aomori,
+    &.fukushima,
+    &.niigata,
+    &.gunma,
+    &.nsaitama,
+    &.ssaitama,
+    &.toyama,
+    &.nagano,
+    &.yamanashi,
+    &.nkanagawa,
+    &.skanagawa,
+    &.ishikawa,
+    &.gifu,
+    &.shizuoka,
+    &.fukui,
+    &.kyoto,
+    &.mie,
+    &.nosaka,
+    &.sosaka,
+    &.wakayama,
+    &.tottori,
+    &.okayama,
+    &.shimane,
+    &.hiroshima,
+    &.kagawa,
+    &.tokushima,
+    &.ehime,
+    &.kochi,
+    &.nfukuoka,
+    &.sfukuoka,
+    &.miyazaki,
+    &.okinawa {
+      width: 72px;
+      height: 36px;
+      line-height: 36px;
+    }
+
+    &.iwate,
+    &.akita,
+    &.miyagi,
+    &.yamagata,
+    &.ibaraki,
+    &.tochigi,
+    &.echiba,
+    &.wchiba,
+    &.etokyo,
+    &.wtokyo,
+    &.eaichi,
+    &.waichi,
+    &.shiga,
+    &.nara,
+    &.ehyogo,
+    &.whyogo,
+    &.yamaguchi,
+    &.saga,
+    &.nagasaki,
+    &.oita,
+    &.kumamoto,
+    &.kagoshima {
+      width: 36px;
+      height: 72px;
+      line-height: 36px;
+      -webkit-writing-mode: vertical-rl;
+      -ms-writing-mode: tb-rl;
+      writing-mode: vertical-rl;
+    }
+
+    &.nhokkaido {
+      top: 0;
+      right: 0;
+    }
+    &.shokkaido {
+      top: 36px;
+      right: 0;
+    }
+    &.aomori {
+      top: 92px; /* 36+36+20 */
+      right: 0;
+    }
+    &.iwate {
+      top: 128px; /* 92+36 */
+      right: 2px; /* TODO: I do not know why... */
+    }
+    &.akita {
+      top: 128px;
+      right: 38px; /* 2+36 */
+    }
+    &.miyagi {
+      top: 200px; /* 128+72 */
+      right: 2px;
+    }
+    &.yamagata {
+      top: 200px;
+      right: 38px;
+    }
+    &.fukushima {
+      top: 272px; /* 200+72 */
+      right: 0;
+    }
+    &.ibaraki {
+      top: 308px; /* 272+36 */
+      right: 2px;
+    }
+    &.tochigi {
+      top: 308px;
+      right: 38px;
+    }
+    &.echiba {
+      top: 380px; /* 308+72 */
+      right: 2px;
+    }
+    &.wchiba {
+      top: 380px;
+      right: 38px;
+    }
+    &.niigata {
+      top: 236px; /* yamagata 200 + 36 */
+      right: 72px; /* 38+36 -2 why?(TODO) */
+    }
+    &.gunma {
+      top: 272px;
+      right: 72px;
+    }
+    &.nsaitama {
+      top: 308px;
+      right: 72px;
+    }
+    &.ssaitama {
+      top: 344px;
+      right: 72px;
+    }
+    &.etokyo {
+      top: 380px;
+      right: 74px; /* 72+2 TODO */
+    }
+    &.wtokyo {
+      top: 380px;
+      right: 110px;
+    }
+    &.toyama {
+      top: 272px; /* = gunma */
+      right: 144px;
+    }
+    &.nagano {
+      top: 308px; /* 272+36 */
+      right: 144px;
+    }
+    &.yamanashi {
+      top: 344px; /* 308+36 */
+      right: 144px;
+    }
+    &.nkanagawa {
+      top: 380px; /* 344+36 */
+      right: 144px;
+    }
+    &.skanagawa {
+      top: 416px; /* 380+36 */
+      right: 144px;
+    }
+    &.ishikawa {
+      top: 272px;
+      right: 216px; /* 144+72 */
+    }
+    &.gifu {
+      top: 308px;
+      right: 216px;
+    }
+    &.eaichi {
+      top: 344px;
+      right: 218px; /* TODO */
+    }
+    &.waichi {
+      top: 344px;
+      right: 254px;
+    }
+    &.shizuoka {
+      top: 416px;
+      right: 216px;
+    }
+    &.fukui {
+      top: 272px;
+      right: 288px;
+    }
+    &.kyoto {
+      top: 308px;
+      right: 288px;
+    }
+    &.shiga {
+      top: 344px;
+      right: 290px;
+    }
+    &.nara {
+      top: 344px;
+      right: 326px;
+    }
+    &.mie {
+      top: 416px;
+      right: 288px;
+    }
+    &.ehyogo {
+      top: 272px;
+      right: 362px;
+    }
+    &.whyogo {
+      top: 272px;
+      right: 398px;
+    }
+    &.nosaka {
+      top: 344px;
+      right: 360px;
+    }
+    &.sosaka {
+      top: 380px;
+      right: 360px;
+    }
+    &.wakayama {
+      top: 416px;
+      right: 360px;
+    }
+    &.tottori {
+      top: 272px;
+      right: 432px;
+    }
+    &.okayama {
+      top: 308px;
+      right: 432px;
+    }
+    &.shimane {
+      top: 272px;
+      right: 504px;
+    }
+    &.hiroshima {
+      top: 308px;
+      right: 504px;
+    }
+    &.yamaguchi {
+      top: 272px;
+      right: 578px;
+    }
+    &.kagawa {
+      top: 364px; /* okayama + 36 + 20 */
+      right: 452px; /* okayama + 20 */
+    }
+    &.tokushima {
+      top: 400px;
+      right: 452px;
+    }
+    &.ehime {
+      top: 364px;
+      right: 524px;
+    }
+    &.kochi {
+      top: 400px;
+      right: 524px;
+    }
+    &.nfukuoka {
+      top: 272px;
+      right: 612px;
+    }
+    &.sfukuoka {
+      top: 308px;
+      right: 612px;
+    }
+    &.saga {
+      top: 272px;
+      right: 686px;
+    }
+    &.nagasaki {
+      top: 272px;
+      right: 722px;
+    }
+    &.oita {
+      top: 344px;
+      right: 614px;
+    }
+    &.kumamoto {
+      top: 344px;
+      right: 650px;
+    }
+    &.miyazaki {
+      top: 416px;
+      right: 612px;
+    }
+    &.kagoshima {
+      top: 380px;
+      right: 686px;
+    }
+    &.okinawa {
+      left: 0;
+      bottom: 0;
+    }
+  }
+}

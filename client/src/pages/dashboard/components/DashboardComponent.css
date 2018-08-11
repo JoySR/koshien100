@@ -1,0 +1,33 @@
+.Dashboard-header {
+  height: 60px;
+  line-height: 60px;
+}
+
+.Dashboard-container {
+  h2 {
+    margin-bottom: 30px;
+  }
+
+  .sidebar {
+    ul {
+      margin-top: 30px;
+    }
+
+    li {
+      text-align: left;
+    }
+  }
+}
+
+.Dashboard-Modal {
+  li {
+    display: flex;
+    margin: 10px 0;
+
+    label {
+      width: 200px;
+      text-align: right;
+      margin-right: 20px;
+    }
+  }
+}

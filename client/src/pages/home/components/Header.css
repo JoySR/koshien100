@@ -1,11 +1,11 @@
 header {
-  height: 60px;
-  line-height: 60px;
-  border-bottom: 2px solid #eee;
+  border-bottom: 1px solid #eee;
   box-shadow: 0 0 5px #eee;
 }
 
 .header-wrapper {
+  height: 60px;
+  line-height: 60px;
   display: flex;
   justify-content: space-between;
   max-width: 920px;

@@ -24,7 +24,7 @@ class HomeComponent extends Component {
   render() {
     const {dates, currentDateId, dispatch, games, schools, prefectures} = this.props;
     return (
-      <div className="container">
+      <div className="body-container">
         <Header />
         <div className="main">
           <TimeTable dispatch={dispatch} onAsync={this.onAsync} dates={dates} />

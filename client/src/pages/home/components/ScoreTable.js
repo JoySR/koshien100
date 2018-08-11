@@ -4,6 +4,11 @@ export default class ScoreTable extends Component {
   renderScores = (scores) => {
     const scoreList = scores.length >= 9 ? scores.concat([]) : scores.concat(['-', '-', '-', '-', '-', '-', '-', '-', '-']).slice(0, 9);
 
+    // before game start is the first score ''
+    if (scoreList[0] === '') {
+      scoreList[0] = '-';
+    }
+
     return scoreList.map((score, index) => <td key={index}>{score}</td>);
   }
 

@@ -54,7 +54,7 @@ export default class MatchDay extends Component {
     return (
       <div className="match-day">
         {currentGames.map((game) => {
-          return  <MatchCard onShowSchool={this.onShowSchool} game={game} key={game.id} schools={schools} prefectures={prefectures} />
+          return  <MatchCard onShowSchool={this.onShowSchool} game={game} key={game.id} schools={schools} prefectures={prefectures} currentDateId={currentDateId} />
         })}
         <SchoolCard onCloseCard={this.onCloseCard} prefectures={prefectures} school={currentSchool} games={games} schools={schools} />
       </div>

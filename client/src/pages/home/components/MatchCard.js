@@ -2,9 +2,15 @@ import React, {Component} from 'react';
 import {camelizeKeys} from 'humps';
 import {rounds} from '../constants';
 import ScoreTable from './ScoreTable';
+import {
+  dataIdToDataValue,
+  dateToDateId,
+  decodeScores,
+  scoresToTotalScore,
+  timestampToDate
+} from '../../../lib/converter'
 
 import './MatchCard.css'
-import {dataIdToDataValue, decodeScores, scoresToTotalScore} from '../../../lib/converter'
 
 export default class MatchCard extends Component {
   constructor(props) {
@@ -12,20 +18,24 @@ export default class MatchCard extends Component {
 
     this.state = {
       shouldShowDetail: false,
+      isCurrentSelectionToday: true,
     }
   }
 
   componentDidMount(){
-    const {game} = this.props;
+    const {game, currentDateId} = this.props;
     const gameTime = +game.time.split(':')[0];
     const currentDate = new Date();
     const currentTime = currentDate.getUTCHours() + 9;
 
     const diff = currentTime - gameTime;
 
-    if (diff >= -1 && diff <= 4) {
+    const isCurrentSelectionToday = currentDateId === dateToDateId(timestampToDate(currentDate.getTime()));
+
+    if (diff >= -1 && diff <= 4 && isCurrentSelectionToday) {
       this.setState({
         shouldShowDetail: true,
+        isCurrentSelectionToday,
       })
     }
 
@@ -41,11 +51,8 @@ export default class MatchCard extends Component {
 
   render() {
     const {game, schools = [], prefectures = [], onShowSchool} = this.props;
-
     const matchData = camelizeKeys(game);
-
-    const {shouldShowDetail} = this.state
-
+    const {shouldShowDetail, isCurrentSelectionToday} = this.state
     const {
       gameId,
       firstId,
@@ -61,7 +68,6 @@ export default class MatchCard extends Component {
     const first = schools.length > 0 && schools.filter(school => {
       return school.school_id === firstId;
     })[0];
-
 
     const firstName = first && first.name;
 
@@ -147,7 +153,7 @@ export default class MatchCard extends Component {
           <a className="news" href={`https://vk.sportsbull.jp/koshien/text_sokuhou/${gameId}.html`}><i className="fa fa-link" />速報</a>
           <a className="video" href={`https://vk.sportsbull.jp/koshien/articles/${videoId}.html`}><i className="fa fa-video-camera" />ビデオ</a>
         </div> : null}
-        {firstFinalScore !== '-' ? (
+        {(isCurrentSelectionToday || firstFinalScore !== '-') ? (
           <div className="show-more" onClick={this.toggleShowDetail}>
             詳細
             {shouldShowDetail ?

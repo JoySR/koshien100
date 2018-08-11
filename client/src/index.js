@@ -5,8 +5,6 @@ import { Provider } from 'react-redux';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-import 'bootstrap/dist/css/bootstrap.css';
-
 const store = createStore({}).store;
 
 const MOUNT_NODE = document.getElementById('root');

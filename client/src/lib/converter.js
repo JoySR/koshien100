@@ -73,3 +73,16 @@ export const dataIdToDataValue = ({
   if (!result || !result[0] || !result[0][toKey]) return '';
   return result[0][toKey];
 };
+
+export const locationSearchToQuery = search => {
+  if (!search) return;
+  const queries = {};
+  search
+    .slice(1)
+    .split('&')
+    .forEach(query => {
+      const [key, value] = query.split('=');
+      queries[key] = value;
+    });
+  return queries;
+};

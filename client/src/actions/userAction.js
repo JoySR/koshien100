@@ -1,6 +1,6 @@
-import {REGISTER, LOG_IN, LOG_OUT} from './actionTypes'
-import api from '../lib/api'
-import {removeToken, saveToken} from '../lib/token'
+import {REGISTER, LOG_IN, LOG_OUT} from './actionTypes';
+import api from '../lib/api';
+import {removeToken, saveToken} from '../lib/token';
 
 export function register(user) {
   return api({
@@ -16,22 +16,22 @@ export function register(user) {
 export const registerRequest = () => {
   return {
     type: REGISTER.REQUEST,
-  }
-}
+  };
+};
 
-export const registerSuccess = (result) => {
+export const registerSuccess = result => {
   return {
     type: REGISTER.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const registerFailure = (error) => {
+export const registerFailure = error => {
   return {
     type: REGISTER.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function login(user) {
   return api({
@@ -41,30 +41,30 @@ export function login(user) {
     request: loginRequest,
     success: loginSuccess,
     failure: loginFailure,
-  })
+  });
 }
 
 export const loginRequest = () => {
   return {
     type: LOG_IN.REQUEST,
-  }
-}
+  };
+};
 
-export const loginSuccess = (result) => {
+export const loginSuccess = result => {
   const token = result.token;
   saveToken(token);
   return {
     type: LOG_IN.SUCCESS,
-    payload: { token }
-  }
-}
+    payload: {token},
+  };
+};
 
-export const loginFailure = (error) => {
+export const loginFailure = error => {
   return {
     type: LOG_IN.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function logout(user) {
   return api({
@@ -74,26 +74,26 @@ export function logout(user) {
     request: logoutRequest,
     success: logoutSuccess,
     failure: logoutFailure,
-  })
+  });
 }
 
 export const logoutRequest = () => {
   return {
     type: LOG_OUT.REQUEST,
-  }
-}
+  };
+};
 
-export const logoutSuccess = (result) => {
+export const logoutSuccess = result => {
   removeToken();
   return {
     type: LOG_OUT.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const logoutFailure = (error) => {
+export const logoutFailure = error => {
   return {
     type: LOG_OUT.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};

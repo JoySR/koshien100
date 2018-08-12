@@ -5,6 +5,7 @@
   - add Footer.
 - **fix**:
   - bootstrap style override custom style.
+  - `npm run build` won't process postcss.
 
 ### 2018-08-11
 

@@ -1,21 +1,24 @@
 ### 2018-08-12
 
 - **feat**:
-  - add prettier.
-  - add Footer.
+  - add prettier,
+  - add Footer,
+  - add button for adding data.
 - **fix**:
-  - bootstrap style override custom style.
+  - bootstrap style override custom style,
   - `npm run build` won't process postcss.
+- **improve**:
+  - use fa icons for editing/remove data.
 
 ### 2018-08-11
 
 - **feat**:
-  1. add support for nested style,
-  2. use react-bootstrap components,
-  3. add Map to homepage.
+  - add support for nested style,
+  - use react-bootstrap components,
+  - add Map to homepage.
 - **fix**:
-  1. MatchCard details [(#24)](https://github.com/JoySR/koshien100/pull/24),
-  2. first side score of not started games.
+  - MatchCard details [(#24)](https://github.com/JoySR/koshien100/pull/24),
+  - first side score of not started games.
 - **improve**:
   - update favicon.ico.
 
@@ -38,17 +41,17 @@
 - **fix**:
   - login error.
 - **improve**:
-  1. extract date from gameId,
-  2. add home link to dashboard.
+  - extract date from gameId,
+  - add home link to dashboard.
 
 ### 2018-08-07
 
 - **feat**:
   - video id.
 - **fix**:
-  1. `school` data cannot get `prefecture_id` correctly; `prefecture` data cannot get `area_id` correctly.
-  2. score like '1X' cannot be computed or rendered.
-  3. home team and visit team order.
+  - `school` data cannot get `prefecture_id` correctly; `prefecture` data cannot get `area_id` correctly.
+  - score like '1X' cannot be computed or rendered.
+  - home team and visit team order.
 
 ### 2018-08-06
 
@@ -73,8 +76,8 @@
 ### 2018-08-01
 
 - **feat**:
-  1. Server side.
-  2. CRUD - area.
+  - Server side.
+  - CRUD - area.
 
 ### 2018-07-24
 

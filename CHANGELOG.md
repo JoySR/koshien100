@@ -1,3 +1,8 @@
+### 2018-08-13
+
+- **improve**:
+  - Move login and register to Modals in HomeComponent.
+
 ### 2018-08-12
 
 - **feat**:

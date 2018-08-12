@@ -1,10 +1,9 @@
 .map {
   width: 760px;
   height: 500px;
-  margin: 30px auto;
+  margin: 50px auto;
   background: #fffef5;
   position: relative;
-
 
   .prefecture-block {
     position: absolute;
@@ -12,13 +11,62 @@
     color: #1e409f;
     font-size: 12px;
     font-weight: bold;
-    letter-spacing: .2em;
+    letter-spacing: 0.2em;
     border: 1px solid #fff;
     text-align: center;
     cursor: pointer;
 
     &:hover {
       background: #bae4f8;
+    }
+
+    &.notes {
+      width: 72px;
+      height: 36px;
+      line-height: 36px;
+
+      &.today {
+        left: 0;
+        top: 20px;
+        letter-spacing: inherit;
+      }
+
+      &.haitai {
+        left: 82px;
+        top: 20px;
+      }
+
+      &.yusho {
+        left: 162px;
+        top: 20px;
+      }
+    }
+
+    &.today {
+      background: #ffeebf;
+
+      &:hover {
+        background: #ffe399;
+      }
+    }
+
+    &.haitai {
+      background: #d8d8d8;
+      color: #000;
+      font-weight: normal;
+
+      &:hover {
+        background: #c1c1c1;
+      }
+    }
+
+    &.yusho {
+      color: #fff;
+      background: #ff9257;
+
+      &:hover {
+        background: #ff7d4f;
+      }
     }
 
     &.nhokkaido,
@@ -85,8 +133,6 @@
       width: 36px;
       height: 72px;
       line-height: 36px;
-      -webkit-writing-mode: vertical-rl;
-      -ms-writing-mode: tb-rl;
       writing-mode: vertical-rl;
     }
 

@@ -6,6 +6,10 @@
 .Dashboard-container {
   h2 {
     margin-bottom: 30px;
+
+    button {
+      margin-left: 10px;
+    }
   }
 
   .sidebar {

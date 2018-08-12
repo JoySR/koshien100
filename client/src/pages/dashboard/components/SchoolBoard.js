@@ -30,6 +30,7 @@ export default class SchoolBoard extends Component {
       winCount: 0,
       loseCount: 0,
       best: 1,
+      shouldShowModal: false,
     };
   }
   componentDidMount() {
@@ -117,6 +118,7 @@ export default class SchoolBoard extends Component {
       best_result,
     } = school;
     this.setState({
+      shouldShowModal: true,
       isEditing: true,
       id,
       schoolId: school_id,
@@ -159,6 +161,7 @@ export default class SchoolBoard extends Component {
       loseCount: 0,
       best: 1,
       isEditing: false,
+      shouldShowModal: false,
     });
   };
 
@@ -221,6 +224,7 @@ export default class SchoolBoard extends Component {
       winCount,
       loseCount,
       best,
+      shouldShowModal,
       isEditing,
     } = this.state;
 
@@ -231,7 +235,18 @@ export default class SchoolBoard extends Component {
         role="main"
         className="SchoolBoard col-md-9 ml-sm-auto col-lg-10 px-4"
       >
-        <h2>Schools</h2>
+        <h2>
+          Schools
+          <Button
+            color="primary"
+            size="sm"
+            onClick={() => {
+              this.setState({shouldShowModal: true});
+            }}
+          >
+            Add School
+          </Button>
+        </h2>
         <div className="School-List">
           <Table className="table table-striped table-sm" responsive={true}>
             <thead>
@@ -255,7 +270,7 @@ export default class SchoolBoard extends Component {
         </div>
         <Modal
           className="Dashboard-Modal SchoolBoard-Modal"
-          isOpen={schoolId !== ''}
+          isOpen={shouldShowModal}
           autoFocus={true}
           centered={true}
         >

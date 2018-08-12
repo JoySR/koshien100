@@ -28,6 +28,7 @@ export default class DateBoard extends Component {
     this.state = {
       gameDate: '',
       dateStatus: DATE_STATUS[0],
+      shouldShowModal: false,
     };
   }
   componentDidMount() {
@@ -68,6 +69,7 @@ export default class DateBoard extends Component {
   onEdit = date => {
     const {id, game_date, status} = date;
     this.setState({
+      shouldShowModal: true,
       isEditing: true,
       id,
       gameDate: timestampToDate(game_date),
@@ -93,6 +95,7 @@ export default class DateBoard extends Component {
       gameDate: '',
       dateStatus: DATE_STATUS[0],
       isEditing: false,
+      shouldShowModal: false,
     });
   };
 
@@ -117,13 +120,24 @@ export default class DateBoard extends Component {
   };
 
   render() {
-    const {gameDate, dateStatus, isEditing} = this.state;
+    const {gameDate, dateStatus, shouldShowModal, isEditing} = this.state;
     return (
       <main
         role="main"
         className="DateBoard col-md-9 ml-sm-auto col-lg-10 px-4"
       >
-        <h2>Dates</h2>
+        <h2>
+          Dates
+          <Button
+            color="primary"
+            size="sm"
+            onClick={() => {
+              this.setState({shouldShowModal: true});
+            }}
+          >
+            Add Date
+          </Button>
+        </h2>
         <div className="Date-List">
           <Table className="table table-striped table-sm" responsive={true}>
             <thead>
@@ -140,7 +154,7 @@ export default class DateBoard extends Component {
         </div>
         <Modal
           className="Dashboard-Modal DateBoard-Modal"
-          isOpen={gameDate !== ''}
+          isOpen={shouldShowModal}
           autoFocus={true}
           centered={true}
         >
@@ -148,7 +162,12 @@ export default class DateBoard extends Component {
           <ModalBody>
             <ul>
               <li>
-                <label>Date: </label>
+                <label>
+                  <span style={{fontSize: 12, color: '#999', marginRight: 3}}>
+                    ( Format: 2018-08-02 )
+                  </span>
+                  Date:
+                </label>
                 <input
                   value={gameDate}
                   onChange={event => this.onChange('gameDate', event)}

@@ -36,6 +36,7 @@ export default class GameBoard extends Component {
       firstScores: '',
       thirdScores: '',
       videoId: '',
+      shouldShowModal: false,
     };
   }
   componentDidMount() {
@@ -118,6 +119,7 @@ export default class GameBoard extends Component {
       video_id,
     } = game;
     this.setState({
+      shouldShowModal: true,
       isEditing: true,
       id,
       gameId: game_id,
@@ -159,6 +161,7 @@ export default class GameBoard extends Component {
       thirdScores: '',
       isEditing: false,
       videoId: '',
+      shouldShowModal: false,
     });
   };
 
@@ -235,6 +238,7 @@ export default class GameBoard extends Component {
       firstScores,
       thirdScores,
       videoId,
+      shouldShowModal,
       isEditing,
     } = this.state;
 
@@ -243,7 +247,18 @@ export default class GameBoard extends Component {
         role="main"
         className="GameBoard col-md-9 ml-sm-auto col-lg-10 px-4"
       >
-        <h2>Games</h2>
+        <h2>
+          Games
+          <Button
+            color="primary"
+            size="sm"
+            onClick={() => {
+              this.setState({shouldShowModal: true});
+            }}
+          >
+            Add Game
+          </Button>
+        </h2>
         <div className="Game-List">
           <Table className="table table-striped table-sm" responsive={true}>
             <thead>
@@ -265,7 +280,7 @@ export default class GameBoard extends Component {
         </div>
         <Modal
           className="Dashboard-Modal GameBoard-Modal"
-          isOpen={gameId !== ''}
+          isOpen={shouldShowModal}
           autoFocus={true}
           centered={true}
           size="lg"

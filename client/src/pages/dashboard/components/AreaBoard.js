@@ -22,6 +22,7 @@ export default class AreaBoard extends Component {
       areaId: '',
       areaName: '',
       areaCode: '',
+      shouldShowModal: false,
     };
   }
   componentDidMount() {
@@ -62,6 +63,7 @@ export default class AreaBoard extends Component {
   onEdit = area => {
     const {id, area_id, name, code} = area;
     this.setState({
+      shouldShowModal: true,
       isEditing: true,
       id,
       areaId: area_id,
@@ -89,6 +91,7 @@ export default class AreaBoard extends Component {
       areaName: '',
       areaCode: '',
       isEditing: false,
+      shouldShowModal: false,
     });
   };
 
@@ -113,14 +116,25 @@ export default class AreaBoard extends Component {
   };
 
   render() {
-    const {areaId, areaName, areaCode, isEditing} = this.state;
+    const {areaId, areaName, areaCode, shouldShowModal, isEditing} = this.state;
 
     return (
       <main
         role="main"
         className="AreaBoard col-md-9 ml-sm-auto col-lg-10 px-4"
       >
-        <h2>Areas</h2>
+        <h2>
+          Areas
+          <Button
+            color="primary"
+            size="sm"
+            onClick={() => {
+              this.setState({shouldShowModal: true});
+            }}
+          >
+            Add Area
+          </Button>
+        </h2>
         <div className="Area-List">
           <Table className="table table-striped table-sm" responsive={true}>
             <thead>
@@ -136,7 +150,7 @@ export default class AreaBoard extends Component {
           </Table>
           <Modal
             className="Dashboard-Modal AreaBoard-Modal"
-            isOpen={areaId !== ''}
+            isOpen={shouldShowModal}
             autoFocus={true}
             centered={true}
           >

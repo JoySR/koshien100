@@ -24,6 +24,7 @@ export default class PrefectureBoard extends Component {
       areaId: '',
       prefectureName: '',
       prefectureCode: '',
+      shouldShowModal: false,
     };
   }
   componentDidMount() {
@@ -80,6 +81,7 @@ export default class PrefectureBoard extends Component {
   onEdit = prefecture => {
     const {id, prefecture_id, area_id, name, code} = prefecture;
     this.setState({
+      shouldShowModal: true,
       isEditing: true,
       id,
       prefectureId: prefecture_id,
@@ -110,6 +112,7 @@ export default class PrefectureBoard extends Component {
       prefectureName: '',
       prefectureCode: '',
       isEditing: false,
+      shouldShowModal: false,
     });
   };
 
@@ -145,6 +148,7 @@ export default class PrefectureBoard extends Component {
       areaId,
       prefectureName,
       prefectureCode,
+      shouldShowModal,
       isEditing,
     } = this.state;
     const {areas = []} = this.props;
@@ -153,7 +157,18 @@ export default class PrefectureBoard extends Component {
         role="main"
         className="PrefectureBoard col-md-9 ml-sm-auto col-lg-10 px-4"
       >
-        <h2>Prefectures</h2>
+        <h2>
+          Prefectures
+          <Button
+            color="primary"
+            size="sm"
+            onClick={() => {
+              this.setState({shouldShowModal: true});
+            }}
+          >
+            Add Prefecture
+          </Button>
+        </h2>
         <div className="Prefecture-List">
           <Table className="table table-striped table-sm" responsive={true}>
             <thead>
@@ -171,7 +186,7 @@ export default class PrefectureBoard extends Component {
         </div>
         <Modal
           className="Dashboard-Modal PrefectureBoard-Modal"
-          isOpen={prefectureId !== ''}
+          isOpen={shouldShowModal}
           autoFocus={true}
           centered={true}
         >

@@ -235,20 +235,20 @@ export default class SchoolBoard extends Component {
         <div className="School-List">
           <Table className="table table-striped table-sm" responsive={true}>
             <thead>
-            <tr>
-              <th>ID</th>
-              <th>School Id</th>
-              <th>Prefecture Name</th>
-              <th>School Name</th>
-              <th>Short Name</th>
-              <th>Continual?</th>
-              <th>Last Count</th>
-              <th>Total Count</th>
-              <th>Win Count</th>
-              <th>Lose Count</th>
-              <th>Best Result</th>
-              <th>Options</th>
-            </tr>
+              <tr>
+                <th>ID</th>
+                <th>School Id</th>
+                <th>Prefecture Name</th>
+                <th>School Name</th>
+                <th>Short Name</th>
+                <th>Continual?</th>
+                <th>Last Count</th>
+                <th>Total Count</th>
+                <th>Win Count</th>
+                <th>Lose Count</th>
+                <th>Best Result</th>
+                <th>Options</th>
+              </tr>
             </thead>
             <tbody>{this.renderSchools()}</tbody>
           </Table>

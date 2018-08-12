@@ -127,13 +127,13 @@ export default class DateBoard extends Component {
         <div className="Date-List">
           <Table className="table table-striped table-sm" responsive={true}>
             <thead>
-            <tr>
-              <th>ID</th>
-              <th>Date Id</th>
-              <th>Day</th>
-              <th>Date Status</th>
-              <th>Options</th>
-            </tr>
+              <tr>
+                <th>ID</th>
+                <th>Date Id</th>
+                <th>Day</th>
+                <th>Date Status</th>
+                <th>Options</th>
+              </tr>
             </thead>
             <tbody>{this.renderDates()}</tbody>
           </Table>

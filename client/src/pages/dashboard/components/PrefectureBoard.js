@@ -157,14 +157,14 @@ export default class PrefectureBoard extends Component {
         <div className="Prefecture-List">
           <Table className="table table-striped table-sm" responsive={true}>
             <thead>
-            <tr>
-              <th>ID</th>
-              <th>Prefecture Id</th>
-              <th>Prefecture Name</th>
-              <th>Area Name</th>
-              <th>Prefecture Code</th>
-              <th>Options</th>
-            </tr>
+              <tr>
+                <th>ID</th>
+                <th>Prefecture Id</th>
+                <th>Prefecture Name</th>
+                <th>Area Name</th>
+                <th>Prefecture Code</th>
+                <th>Options</th>
+              </tr>
             </thead>
             <tbody>{this.renderPrefectures()}</tbody>
           </Table>
@@ -175,7 +175,9 @@ export default class PrefectureBoard extends Component {
           autoFocus={true}
           centered={true}
         >
-          <ModalHeader>{isEditing ? 'Edit Prefecture' : 'Add Prefecture'}</ModalHeader>
+          <ModalHeader>
+            {isEditing ? 'Edit Prefecture' : 'Add Prefecture'}
+          </ModalHeader>
           <ModalBody>
             <ul>
               <li>

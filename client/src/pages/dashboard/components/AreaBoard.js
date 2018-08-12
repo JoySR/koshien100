@@ -124,13 +124,13 @@ export default class AreaBoard extends Component {
         <div className="Area-List">
           <Table className="table table-striped table-sm" responsive={true}>
             <thead>
-            <tr>
-              <th>ID</th>
-              <th>Area Id</th>
-              <th>Area Name</th>
-              <th>Area Code</th>
-              <th>Options</th>
-            </tr>
+              <tr>
+                <th>ID</th>
+                <th>Area Id</th>
+                <th>Area Name</th>
+                <th>Area Code</th>
+                <th>Options</th>
+              </tr>
             </thead>
             <tbody>{this.renderAreas()}</tbody>
           </Table>

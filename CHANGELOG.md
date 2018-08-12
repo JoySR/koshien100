@@ -2,6 +2,7 @@
 
 - **feat**:
   - add prettier.
+  - add Footer.
 - **fix**:
   - bootstrap style override custom style.
 

@@ -1,5 +1,5 @@
-import {ADD_GAME, FETCH_GAMES, REMOVE_GAME, UPDATE_GAME} from './actionTypes'
-import api from '../lib/api'
+import {ADD_GAME, FETCH_GAMES, REMOVE_GAME, UPDATE_GAME} from './actionTypes';
+import api from '../lib/api';
 
 export function addGame(game) {
   return api({
@@ -9,28 +9,28 @@ export function addGame(game) {
     request: addGameRequest,
     success: addGameSuccess,
     failure: addGameFailure,
-  })
+  });
 }
 
 export const addGameRequest = () => {
   return {
     type: ADD_GAME.REQUEST,
-  }
-}
+  };
+};
 
-export const addGameSuccess = (result) => {
+export const addGameSuccess = result => {
   return {
     type: ADD_GAME.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const addGameFailure = (error) => {
+export const addGameFailure = error => {
   return {
     type: ADD_GAME.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function fetchGames() {
   return api({
@@ -39,28 +39,28 @@ export function fetchGames() {
     request: fetchGamesRequest,
     success: fetchGamesSuccess,
     failure: fetchGamesFailure,
-  })
+  });
 }
 
 export const fetchGamesRequest = () => {
   return {
     type: FETCH_GAMES.REQUEST,
-  }
-}
+  };
+};
 
-export const fetchGamesSuccess = (result) => {
+export const fetchGamesSuccess = result => {
   return {
     type: FETCH_GAMES.SUCCESS,
-    payload: { games: result.games }
-  }
-}
+    payload: {games: result.games},
+  };
+};
 
-export const fetchGamesFailure = (error) => {
+export const fetchGamesFailure = error => {
   return {
     type: FETCH_GAMES.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function updateGame(game) {
   return api({
@@ -70,28 +70,28 @@ export function updateGame(game) {
     request: updateGameRequest,
     success: updateGameSuccess,
     failure: updateGameFailure,
-  })
+  });
 }
 
 export const updateGameRequest = () => {
   return {
     type: UPDATE_GAME.REQUEST,
-  }
-}
+  };
+};
 
-export const updateGameSuccess = (result) => {
+export const updateGameSuccess = result => {
   return {
     type: UPDATE_GAME.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const updateGameFailure = (error) => {
+export const updateGameFailure = error => {
   return {
     type: UPDATE_GAME.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function removeGame(game) {
   return api({
@@ -101,25 +101,25 @@ export function removeGame(game) {
     request: removeGameRequest,
     success: removeGameSuccess,
     failure: removeGameFailure,
-  })
+  });
 }
 
 export const removeGameRequest = () => {
   return {
     type: REMOVE_GAME.REQUEST,
-  }
-}
+  };
+};
 
-export const removeGameSuccess = (result) => {
+export const removeGameSuccess = result => {
   return {
     type: REMOVE_GAME.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const removeGameFailure = (error) => {
+export const removeGameFailure = error => {
   return {
     type: REMOVE_GAME.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};

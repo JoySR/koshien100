@@ -7,15 +7,14 @@ export default class ModalCard extends Component {
         <div className="card-cover" />
         <div className="single-card">
           <div className="card-header clearfix">
-            <h3 id="school-name"/>
-            <span id="school-prefecture"/>
-            <p id="school-count"/>
-            <span id="close"/>
+            <h3 id="school-name" />
+            <span id="school-prefecture" />
+            <p id="school-count" />
+            <span id="close" />
           </div>
-          <table id="card-content">
-          </table>
+          <table id="card-content" />
         </div>
       </div>
-    )
+    );
   }
 }

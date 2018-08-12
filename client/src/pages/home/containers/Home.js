@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import HomeComponent from '../components/HomeComponent';
 
 const mapStateToProps = (state, ownProps) => {
@@ -9,10 +9,8 @@ const mapStateToProps = (state, ownProps) => {
     prefecture: {list: prefectures},
   } = state;
   return {dates, currentDateId, games, schools, prefectures};
-}
+};
 
-const Home = connect(
-  mapStateToProps,
-)(HomeComponent);
+const Home = connect(mapStateToProps)(HomeComponent);
 
 export default Home;

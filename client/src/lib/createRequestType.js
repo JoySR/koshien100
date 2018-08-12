@@ -3,5 +3,5 @@ export default function createRequestTypes(base) {
     REQUEST: `${base}_REQUEST`,
     SUCCESS: `${base}_SUCCESS`,
     FAILURE: `${base}_FAILURE`,
-  }
+  };
 }

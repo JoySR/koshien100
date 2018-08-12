@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
-import {addSchool, fetchSchools, removeSchool, updateSchool} from '../../../actions/schoolAction'
-import {fetchPrefecture} from '../../../actions/prefectureAction'
-import {decodeGameIds, encodeGameIds} from '../../../lib/converter'
+import {
+  addSchool,
+  fetchSchools,
+  removeSchool,
+  updateSchool,
+} from '../../../actions/schoolAction';
+import {fetchPrefecture} from '../../../actions/prefectureAction';
+import {decodeGameIds, encodeGameIds} from '../../../lib/converter';
 
 export default class SchoolBoard extends Component {
   constructor(props) {
@@ -19,24 +24,25 @@ export default class SchoolBoard extends Component {
       loseCount: 0,
       best: 1,
       games: '',
-    }
+    };
   }
   componentDidMount() {
     const {onAsync} = this.props;
-    onAsync(fetchSchools())
+    onAsync(fetchSchools());
     onAsync(fetchPrefecture()).then(() => {
       const {prefectures = []} = this.props;
       this.setState({
-        prefectureId: prefectures.length > 0 ? prefectures[0].prefecture_id : '',
+        prefectureId:
+          prefectures.length > 0 ? prefectures[0].prefecture_id : '',
       });
-    })
+    });
   }
 
   onChange = (item, event) => {
     this.setState({
-      [item]: event.target.value
-    })
-  }
+      [item]: event.target.value,
+    });
+  };
 
   onSubmit = () => {
     const {
@@ -52,39 +58,41 @@ export default class SchoolBoard extends Component {
       loseCount,
       best,
       games,
-      isEditing
+      isEditing,
     } = this.state;
     const {onAsync, prefectures} = this.props;
-    const func = isEditing ? updateSchool({
-      school: {
-        id,
-        school_id: schoolId,
-        prefecture_id: prefectureId,
-        name: name,
-        short_name: shortName,
-        is_continual: isContinual,
-        last_count: lastCount,
-        total_count: totalCount,
-        win_count: winCount,
-        lose_count: loseCount,
-        best_result: best,
-        games: encodeGameIds(games),
-      }
-    }) : addSchool({
-      school: {
-        school_id: schoolId,
-        prefecture_id: prefectureId,
-        name: name,
-        short_name: shortName,
-        is_continual: isContinual,
-        last_count: lastCount,
-        total_count: totalCount,
-        win_count: winCount,
-        lose_count: loseCount,
-        best_result: best,
-        games: encodeGameIds(games),
-      }
-    })
+    const func = isEditing
+      ? updateSchool({
+          school: {
+            id,
+            school_id: schoolId,
+            prefecture_id: prefectureId,
+            name: name,
+            short_name: shortName,
+            is_continual: isContinual,
+            last_count: lastCount,
+            total_count: totalCount,
+            win_count: winCount,
+            lose_count: loseCount,
+            best_result: best,
+            games: encodeGameIds(games),
+          },
+        })
+      : addSchool({
+          school: {
+            school_id: schoolId,
+            prefecture_id: prefectureId,
+            name: name,
+            short_name: shortName,
+            is_continual: isContinual,
+            last_count: lastCount,
+            total_count: totalCount,
+            win_count: winCount,
+            lose_count: loseCount,
+            best_result: best,
+            games: encodeGameIds(games),
+          },
+        });
     onAsync(func).then(() => {
       this.setState({
         schoolId: '',
@@ -100,11 +108,11 @@ export default class SchoolBoard extends Component {
         games: '',
         isEditing: false,
       });
-      onAsync(fetchSchools())
-    })
-  }
+      onAsync(fetchSchools());
+    });
+  };
 
-  onEdit = (school) => {
+  onEdit = school => {
     const {
       id,
       school_id,
@@ -117,7 +125,7 @@ export default class SchoolBoard extends Component {
       win_count,
       lose_count,
       best_result,
-      games
+      games,
     } = school;
     this.setState({
       isEditing: true,
@@ -134,18 +142,20 @@ export default class SchoolBoard extends Component {
       best: best_result,
       games,
     });
-  }
+  };
 
-  onDelete = (id) => {
+  onDelete = id => {
     const {onAsync} = this.props;
-    onAsync(removeSchool({
-      school: {
-        id
-      }
-    })).then(() => {
-      onAsync(fetchSchools())
-    })
-  }
+    onAsync(
+      removeSchool({
+        school: {
+          id,
+        },
+      })
+    ).then(() => {
+      onAsync(fetchSchools());
+    });
+  };
 
   renderSchools = () => {
     const {schools = [], prefectures = []} = this.props;
@@ -163,13 +173,21 @@ export default class SchoolBoard extends Component {
         win_count,
         lose_count,
         best_result,
-        games
+        games,
       } = school;
       return (
         <tr key={id}>
           <td>{id}</td>
           <td>{school_id}</td>
-          <td>{prefectures.filter(prefecture => {return prefecture.prefecture_id === prefecture_id}).length ? prefectures.filter(prefecture => {return prefecture.prefecture_id === prefecture_id})[0].name : ''}</td>
+          <td>
+            {prefectures.filter(prefecture => {
+              return prefecture.prefecture_id === prefecture_id;
+            }).length
+              ? prefectures.filter(prefecture => {
+                  return prefecture.prefecture_id === prefecture_id;
+                })[0].name
+              : ''}
+          </td>
           <td>{name}</td>
           <td>{short_name}</td>
           <td>{is_continual}</td>
@@ -184,9 +202,9 @@ export default class SchoolBoard extends Component {
             <span onClick={() => this.onDelete(id)}>Delete</span>
           </td>
         </tr>
-      )
-    })
-  }
+      );
+    });
+  };
 
   render() {
     const {
@@ -201,65 +219,103 @@ export default class SchoolBoard extends Component {
       loseCount,
       best,
       games,
-      isEditing
+      isEditing,
     } = this.state;
 
     const {prefectures = []} = this.props;
 
     return (
-      <main role="main" className="SchoolBoard col-md-9 ml-sm-auto col-lg-10 px-4">
+      <main
+        role="main"
+        className="SchoolBoard col-md-9 ml-sm-auto col-lg-10 px-4"
+      >
         <h2>Schools</h2>
         <div className="Add-School">
           <h3>{isEditing ? 'Edit School' : 'Add School'}</h3>
           <ul>
             <li>
               <label>School Id: </label>
-              <input value={schoolId} onChange={(event) => this.onChange('schoolId', event)} />
+              <input
+                value={schoolId}
+                onChange={event => this.onChange('schoolId', event)}
+              />
             </li>
             <li>
               <label>Prefecture Name: </label>
-              <select value={prefectureId} onChange={(event) => this.onChange('prefectureId', event)}>
+              <select
+                value={prefectureId}
+                onChange={event => this.onChange('prefectureId', event)}
+              >
                 {prefectures.map(prefecture => {
                   return (
-                    <option value={prefecture.prefecture_id} key={prefecture.id}>{prefecture.name}</option>
-                  )
+                    <option
+                      value={prefecture.prefecture_id}
+                      key={prefecture.id}
+                    >
+                      {prefecture.name}
+                    </option>
+                  );
                 })}
               </select>
             </li>
             <li>
               <label>School Name: </label>
-              <input value={name} onChange={(event) => this.onChange('name', event)} />
+              <input
+                value={name}
+                onChange={event => this.onChange('name', event)}
+              />
             </li>
             <li>
               <label>Short Name: </label>
-              <input value={shortName} onChange={(event) => this.onChange('shortName', event)} />
+              <input
+                value={shortName}
+                onChange={event => this.onChange('shortName', event)}
+              />
             </li>
             <li>
               <label>Is Continual: </label>
-              <select value={isContinual} onChange={(event) => this.onChange('isContinual', event)}>
+              <select
+                value={isContinual}
+                onChange={event => this.onChange('isContinual', event)}
+              >
                 <option value={1}>Continual</option>
                 <option value={0}>Not Continual</option>
               </select>
             </li>
             <li>
               <label>Last Count: </label>
-              <input value={lastCount} onChange={(event) => this.onChange('lastCount', event)} />
+              <input
+                value={lastCount}
+                onChange={event => this.onChange('lastCount', event)}
+              />
             </li>
             <li>
               <label>Total Count: </label>
-              <input value={totalCount} onChange={(event) => this.onChange('totalCount', event)} />
+              <input
+                value={totalCount}
+                onChange={event => this.onChange('totalCount', event)}
+              />
             </li>
             <li>
               <label>Win Count: </label>
-              <input value={winCount} onChange={(event) => this.onChange('winCount', event)} />
+              <input
+                value={winCount}
+                onChange={event => this.onChange('winCount', event)}
+              />
             </li>
             <li>
               <label>Lose Count: </label>
-              <input value={loseCount} onChange={(event) => this.onChange('loseCount', event)} />
+              <input
+                value={loseCount}
+                onChange={event => this.onChange('loseCount', event)}
+              />
             </li>
             <li>
               <label>Best Result: </label>
-              <select value={best} onChange={(event) => this.onChange('best', event)}>
+              <select
+                value={best}
+                onChange={event => this.onChange('best', event)}
+              >
                 <option value={1}>一回戦</option>
                 <option value={2}>二回戦</option>
                 <option value={3}>三回戦</option>
@@ -270,7 +326,10 @@ export default class SchoolBoard extends Component {
             </li>
             <li>
               <label>Games: </label>
-              <textarea value={games} onChange={(event) => this.onChange('games', event)} />
+              <textarea
+                value={games}
+                onChange={event => this.onChange('games', event)}
+              />
             </li>
           </ul>
           <button onClick={() => this.onSubmit('school')}>OK</button>
@@ -280,29 +339,27 @@ export default class SchoolBoard extends Component {
           <div className="table-responsive">
             <table className="table table-striped table-sm">
               <thead>
-              <tr>
-                <th>ID</th>
-                <th>School Id</th>
-                <th>Prefecture Name</th>
-                <th>School Name</th>
-                <th>Short Name</th>
-                <th>Continual?</th>
-                <th>Last Count</th>
-                <th>Total Count</th>
-                <th>Win Count</th>
-                <th>Lose Count</th>
-                <th>Best Result</th>
-                <th>Games</th>
-                <th>Options</th>
-              </tr>
+                <tr>
+                  <th>ID</th>
+                  <th>School Id</th>
+                  <th>Prefecture Name</th>
+                  <th>School Name</th>
+                  <th>Short Name</th>
+                  <th>Continual?</th>
+                  <th>Last Count</th>
+                  <th>Total Count</th>
+                  <th>Win Count</th>
+                  <th>Lose Count</th>
+                  <th>Best Result</th>
+                  <th>Games</th>
+                  <th>Options</th>
+                </tr>
               </thead>
-              <tbody>
-              {this.renderSchools()}
-              </tbody>
+              <tbody>{this.renderSchools()}</tbody>
             </table>
           </div>
         </div>
       </main>
-    )
+    );
   }
 }

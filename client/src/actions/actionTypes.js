@@ -1,4 +1,4 @@
-import createRequestTypes from '../lib/createRequestType'
+import createRequestTypes from '../lib/createRequestType';
 
 export const ADD_AREA = createRequestTypes('ADD_AREA');
 export const FETCH_AREA = createRequestTypes('FETCH_AREA');

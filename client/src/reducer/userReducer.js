@@ -1,11 +1,11 @@
-import {REGISTER, LOG_IN, LOG_OUT} from '../actions/actionTypes'
-import {getToken} from '../lib/token'
+import {REGISTER, LOG_IN, LOG_OUT} from '../actions/actionTypes';
+import {getToken} from '../lib/token';
 
 const token = getToken();
 
 const userInitialState = {token};
 
-const userReducer = (state=userInitialState, action) => {
+const userReducer = (state = userInitialState, action) => {
   switch (action.type) {
     case REGISTER:
       return {
@@ -15,15 +15,15 @@ const userReducer = (state=userInitialState, action) => {
       return {
         ...state,
         token: action.payload.token,
-      }
+      };
     case LOG_OUT:
       return {
         ...state,
         token: '',
-      }
+      };
     default:
       return state;
   }
-}
+};
 
-export default userReducer
+export default userReducer;

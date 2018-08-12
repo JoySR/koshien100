@@ -20,7 +20,7 @@
 
 .time-table li:hover {
   background: #1e40dd;
-  transition: background .20s ease;
+  transition: background 0.2s ease;
 }
 
 .time-table li.active,

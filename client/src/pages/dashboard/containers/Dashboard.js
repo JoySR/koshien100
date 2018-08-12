@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import DashboardComponent from '../components/DashboardComponent';
 
 const mapStateToProps = (state, props) => {
@@ -8,7 +8,7 @@ const mapStateToProps = (state, props) => {
     date: {list: dates},
     school: {list: schools},
     game: {list: games},
-  } = state
+  } = state;
   return {
     newAreaId,
     areas,
@@ -16,11 +16,9 @@ const mapStateToProps = (state, props) => {
     dates,
     schools,
     games,
-  }
-}
+  };
+};
 
-const Dashboard = connect(
-  mapStateToProps
-)(DashboardComponent);
+const Dashboard = connect(mapStateToProps)(DashboardComponent);
 
 export default Dashboard;

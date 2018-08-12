@@ -1,5 +1,10 @@
-import {ADD_PREFECTURE, FETCH_PREFECTURE, REMOVE_PREFECTURE, UPDATE_PREFECTURE} from './actionTypes'
-import api from '../lib/api'
+import {
+  ADD_PREFECTURE,
+  FETCH_PREFECTURE,
+  REMOVE_PREFECTURE,
+  UPDATE_PREFECTURE,
+} from './actionTypes';
+import api from '../lib/api';
 
 export function addPrefecture(prefecture) {
   return api({
@@ -9,28 +14,28 @@ export function addPrefecture(prefecture) {
     request: addPrefectureRequest,
     success: addPrefectureSuccess,
     failure: addPrefectureFailure,
-  })
+  });
 }
 
 export const addPrefectureRequest = () => {
   return {
     type: ADD_PREFECTURE.REQUEST,
-  }
-}
+  };
+};
 
-export const addPrefectureSuccess = (result) => {
+export const addPrefectureSuccess = result => {
   return {
     type: ADD_PREFECTURE.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const addPrefectureFailure = (error) => {
+export const addPrefectureFailure = error => {
   return {
     type: ADD_PREFECTURE.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function fetchPrefecture() {
   return api({
@@ -39,28 +44,28 @@ export function fetchPrefecture() {
     request: fetchPrefectureRequest,
     success: fetchPrefectureSuccess,
     failure: fetchPrefectureFailure,
-  })
+  });
 }
 
 export const fetchPrefectureRequest = () => {
   return {
     type: FETCH_PREFECTURE.REQUEST,
-  }
-}
+  };
+};
 
-export const fetchPrefectureSuccess = (result) => {
+export const fetchPrefectureSuccess = result => {
   return {
     type: FETCH_PREFECTURE.SUCCESS,
-    payload: { prefectures: result.prefectures }
-  }
-}
+    payload: {prefectures: result.prefectures},
+  };
+};
 
-export const fetchPrefectureFailure = (error) => {
+export const fetchPrefectureFailure = error => {
   return {
     type: FETCH_PREFECTURE.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function updatePrefecture(prefecture) {
   return api({
@@ -70,28 +75,28 @@ export function updatePrefecture(prefecture) {
     request: updatePrefectureRequest,
     success: updatePrefectureSuccess,
     failure: updatePrefectureFailure,
-  })
+  });
 }
 
 export const updatePrefectureRequest = () => {
   return {
     type: UPDATE_PREFECTURE.REQUEST,
-  }
-}
+  };
+};
 
-export const updatePrefectureSuccess = (result) => {
+export const updatePrefectureSuccess = result => {
   return {
     type: UPDATE_PREFECTURE.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const updatePrefectureFailure = (error) => {
+export const updatePrefectureFailure = error => {
   return {
     type: UPDATE_PREFECTURE.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function removePrefecture(prefecture) {
   return api({
@@ -101,25 +106,25 @@ export function removePrefecture(prefecture) {
     request: removePrefectureRequest,
     success: removePrefectureSuccess,
     failure: removePrefectureFailure,
-  })
+  });
 }
 
 export const removePrefectureRequest = () => {
   return {
     type: REMOVE_PREFECTURE.REQUEST,
-  }
-}
+  };
+};
 
-export const removePrefectureSuccess = (result) => {
+export const removePrefectureSuccess = result => {
   return {
     type: REMOVE_PREFECTURE.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const removePrefectureFailure = (error) => {
+export const removePrefectureFailure = error => {
   return {
     type: REMOVE_PREFECTURE.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};

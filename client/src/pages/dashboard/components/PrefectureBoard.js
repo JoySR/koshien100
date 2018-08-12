@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
-import {addPrefecture, fetchPrefecture, removePrefecture, updatePrefecture} from '../../../actions/prefectureAction'
-import {fetchArea} from '../../../actions/areaAction'
+import {
+  addPrefecture,
+  fetchPrefecture,
+  removePrefecture,
+  updatePrefecture,
+} from '../../../actions/prefectureAction';
+import {fetchArea} from '../../../actions/areaAction';
 
 export default class PrefectureBoard extends Component {
   constructor(props) {
@@ -10,45 +15,54 @@ export default class PrefectureBoard extends Component {
       prefectureId: '',
       areaId: '',
       prefectureName: '',
-      prefectureCode: ''
-    }
+      prefectureCode: '',
+    };
   }
   componentDidMount() {
-    const {onAsync} = this.props
-    onAsync(fetchPrefecture())
+    const {onAsync} = this.props;
+    onAsync(fetchPrefecture());
     onAsync(fetchArea()).then(() => {
       const {areas = []} = this.props;
       this.setState({
         areaId: areas.length > 0 ? areas[0].id : '',
       });
-    })
+    });
   }
 
   onChange = (item, event) => {
     this.setState({
-      [item]: event.target.value
-    })
-  }
+      [item]: event.target.value,
+    });
+  };
 
   onSubmit = () => {
-    const {id, prefectureId, areaId, prefectureName, prefectureCode, isEditing} = this.state;
+    const {
+      id,
+      prefectureId,
+      areaId,
+      prefectureName,
+      prefectureCode,
+      isEditing,
+    } = this.state;
     const {onAsync, areas} = this.props;
-    const func = isEditing ? updatePrefecture({
-      prefecture: {
-        id,
-        prefecture_id: prefectureId,
-        name: prefectureName,
-        area_id: areaId,
-        code: prefectureCode,
-      }
-    }) : addPrefecture({
-      prefecture: {
-        prefecture_id: prefectureId,
-        name: prefectureName,
-        area_id: areaId,
-        code: prefectureCode,
-      }
-    })
+    const func = isEditing
+      ? updatePrefecture({
+          prefecture: {
+            id,
+            prefecture_id: prefectureId,
+            name: prefectureName,
+            area_id: areaId,
+            code: prefectureCode,
+          },
+        })
+      : addPrefecture({
+          prefecture: {
+            prefecture_id: prefectureId,
+            name: prefectureName,
+            area_id: areaId,
+            code: prefectureCode,
+          },
+        });
     onAsync(func).then(() => {
       this.setState({
         prefectureId: '',
@@ -57,11 +71,11 @@ export default class PrefectureBoard extends Component {
         prefectureCode: '',
         isEditing: false,
       });
-      onAsync(fetchPrefecture())
-    })
-  }
+      onAsync(fetchPrefecture());
+    });
+  };
 
-  onEdit = (prefecture) => {
+  onEdit = prefecture => {
     const {id, prefecture_id, area_id, name, code} = prefecture;
     this.setState({
       isEditing: true,
@@ -69,20 +83,22 @@ export default class PrefectureBoard extends Component {
       prefectureId: prefecture_id,
       areaId: area_id,
       prefectureName: name,
-      prefectureCode: code
+      prefectureCode: code,
     });
-  }
+  };
 
-  onDelete = (id) => {
+  onDelete = id => {
     const {onAsync} = this.props;
-    onAsync(removePrefecture({
-      prefecture: {
-        id
-      }
-    })).then(() => {
-      onAsync(fetchPrefecture())
-    })
-  }
+    onAsync(
+      removePrefecture({
+        prefecture: {
+          id,
+        },
+      })
+    ).then(() => {
+      onAsync(fetchPrefecture());
+    });
+  };
 
   renderPrefectures = () => {
     const {prefectures = [], areas = []} = this.props;
@@ -94,47 +110,75 @@ export default class PrefectureBoard extends Component {
           <td>{id}</td>
           <td>{prefecture_id}</td>
           <td>{name}</td>
-          <td>{areas.length && areas.filter(area => {return area.area_id === area_id})[0].name}</td>
+          <td>
+            {areas.length &&
+              areas.filter(area => {
+                return area.area_id === area_id;
+              })[0].name}
+          </td>
           <td>{code}</td>
           <td>
             <span onClick={() => this.onEdit(prefecture)}>Edit</span>
             <span onClick={() => this.onDelete(id)}>Delete</span>
           </td>
         </tr>
-      )
-    })
-  }
+      );
+    });
+  };
 
   render() {
-    const {prefectureId, areaId, prefectureName, prefectureCode, isEditing} = this.state;
+    const {
+      prefectureId,
+      areaId,
+      prefectureName,
+      prefectureCode,
+      isEditing,
+    } = this.state;
     const {areas = []} = this.props;
     return (
-      <main role="main" className="PrefectureBoard col-md-9 ml-sm-auto col-lg-10 px-4">
+      <main
+        role="main"
+        className="PrefectureBoard col-md-9 ml-sm-auto col-lg-10 px-4"
+      >
         <h2>Prefectures</h2>
         <div className="Add-Prefecture">
           <h3>{isEditing ? 'Edit Prefecture' : 'Add Prefecture'}</h3>
           <ul>
             <li>
               <label>Prefecture Id: </label>
-              <input value={prefectureId} onChange={(event) => this.onChange('prefectureId', event)} />
+              <input
+                value={prefectureId}
+                onChange={event => this.onChange('prefectureId', event)}
+              />
             </li>
             <li>
               <label>Prefecture Name: </label>
-              <input value={prefectureName} onChange={(event) => this.onChange('prefectureName', event)} />
+              <input
+                value={prefectureName}
+                onChange={event => this.onChange('prefectureName', event)}
+              />
             </li>
             <li>
               <label>Area Name: </label>
-              <select value={areaId} onChange={(event) => this.onChange('areaId', event)}>
+              <select
+                value={areaId}
+                onChange={event => this.onChange('areaId', event)}
+              >
                 {areas.map(area => {
                   return (
-                    <option value={area.area_id} key={area.id}>{area.name}</option>
-                  )
+                    <option value={area.area_id} key={area.id}>
+                      {area.name}
+                    </option>
+                  );
                 })}
               </select>
             </li>
             <li>
               <label>Prefecture Code: </label>
-              <input value={prefectureCode} onChange={(event) => this.onChange('prefectureCode', event)} />
+              <input
+                value={prefectureCode}
+                onChange={event => this.onChange('prefectureCode', event)}
+              />
             </li>
           </ul>
           <button onClick={() => this.onSubmit('prefecture')}>OK</button>
@@ -144,22 +188,20 @@ export default class PrefectureBoard extends Component {
           <div className="table-responsive">
             <table className="table table-striped table-sm">
               <thead>
-              <tr>
-                <th>ID</th>
-                <th>Prefecture Id</th>
-                <th>Prefecture Name</th>
-                <th>Area Name</th>
-                <th>Prefecture Code</th>
-                <th>Options</th>
-              </tr>
+                <tr>
+                  <th>ID</th>
+                  <th>Prefecture Id</th>
+                  <th>Prefecture Name</th>
+                  <th>Area Name</th>
+                  <th>Prefecture Code</th>
+                  <th>Options</th>
+                </tr>
               </thead>
-              <tbody>
-              {this.renderPrefectures()}
-              </tbody>
+              <tbody>{this.renderPrefectures()}</tbody>
             </table>
           </div>
         </div>
       </main>
-    )
+    );
   }
 }

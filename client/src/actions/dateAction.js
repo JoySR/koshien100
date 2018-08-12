@@ -1,5 +1,11 @@
-import {ADD_DATE, FETCH_DATES, REMOVE_DATE, UPDATE_DATE, SET_CURRENT_DATE} from './actionTypes'
-import api from '../lib/api'
+import {
+  ADD_DATE,
+  FETCH_DATES,
+  REMOVE_DATE,
+  UPDATE_DATE,
+  SET_CURRENT_DATE,
+} from './actionTypes';
+import api from '../lib/api';
 
 export function addDate(date) {
   return api({
@@ -9,28 +15,28 @@ export function addDate(date) {
     request: addDateRequest,
     success: addDateSuccess,
     failure: addDateFailure,
-  })
+  });
 }
 
 export const addDateRequest = () => {
   return {
     type: ADD_DATE.REQUEST,
-  }
-}
+  };
+};
 
-export const addDateSuccess = (result) => {
+export const addDateSuccess = result => {
   return {
     type: ADD_DATE.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const addDateFailure = (error) => {
+export const addDateFailure = error => {
   return {
     type: ADD_DATE.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function fetchDates() {
   return api({
@@ -39,28 +45,28 @@ export function fetchDates() {
     request: fetchDatesRequest,
     success: fetchDatesSuccess,
     failure: fetchDatesFailure,
-  })
+  });
 }
 
 export const fetchDatesRequest = () => {
   return {
     type: FETCH_DATES.REQUEST,
-  }
-}
+  };
+};
 
-export const fetchDatesSuccess = (result) => {
+export const fetchDatesSuccess = result => {
   return {
     type: FETCH_DATES.SUCCESS,
-    payload: { dates: result.dates }
-  }
-}
+    payload: {dates: result.dates},
+  };
+};
 
-export const fetchDatesFailure = (error) => {
+export const fetchDatesFailure = error => {
   return {
     type: FETCH_DATES.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function updateDate(date) {
   return api({
@@ -70,28 +76,28 @@ export function updateDate(date) {
     request: updateDateRequest,
     success: updateDateSuccess,
     failure: updateDateFailure,
-  })
+  });
 }
 
 export const updateDateRequest = () => {
   return {
     type: UPDATE_DATE.REQUEST,
-  }
-}
+  };
+};
 
-export const updateDateSuccess = (result) => {
+export const updateDateSuccess = result => {
   return {
     type: UPDATE_DATE.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const updateDateFailure = (error) => {
+export const updateDateFailure = error => {
   return {
     type: UPDATE_DATE.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function removeDate(date) {
   return api({
@@ -101,32 +107,32 @@ export function removeDate(date) {
     request: removeDateRequest,
     success: removeDateSuccess,
     failure: removeDateFailure,
-  })
+  });
 }
 
 export const removeDateRequest = () => {
   return {
     type: REMOVE_DATE.REQUEST,
-  }
-}
+  };
+};
 
-export const removeDateSuccess = (result) => {
+export const removeDateSuccess = result => {
   return {
     type: REMOVE_DATE.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const removeDateFailure = (error) => {
+export const removeDateFailure = error => {
   return {
     type: REMOVE_DATE.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
-export const setCurrentDate = (dateId) => {
+export const setCurrentDate = dateId => {
   return {
     type: SET_CURRENT_DATE,
-    payload: { dateId }
-  }
-}
+    payload: {dateId},
+  };
+};

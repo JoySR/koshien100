@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import MatchCard from './MatchCard'
+import MatchCard from './MatchCard';
 import './MatchDay.css';
-import {fetchGames} from '../../../actions/gameAction'
-import {fetchSchools} from '../../../actions/schoolAction'
-import {fetchPrefecture} from '../../../actions/prefectureAction'
+import {fetchGames} from '../../../actions/gameAction';
+import {fetchSchools} from '../../../actions/schoolAction';
+import {fetchPrefecture} from '../../../actions/prefectureAction';
 
 export default class MatchDay extends Component {
   componentDidMount() {
@@ -12,19 +12,27 @@ export default class MatchDay extends Component {
       setInterval(() => onAsync(fetchGames()), 1000 * 60);
     });
     onAsync(fetchSchools());
-    onAsync(fetchPrefecture())
+    onAsync(fetchPrefecture());
   }
 
   render() {
-    const {currentDateId, onShowSchool, games = [], schools = [], prefectures = []} = this.props;
-    const currentGames = games.length ? games.filter(game => {
-      const gameId = `${game.game_id}`;
-      return gameId && gameId.includes(`${currentDateId}`)
-    }) : [];
+    const {
+      currentDateId,
+      onShowSchool,
+      games = [],
+      schools = [],
+      prefectures = [],
+    } = this.props;
+    const currentGames = games.length
+      ? games.filter(game => {
+          const gameId = `${game.game_id}`;
+          return gameId && gameId.includes(`${currentDateId}`);
+        })
+      : [];
 
     return (
       <div className="match-day">
-        {currentGames.map((game) => {
+        {currentGames.map(game => {
           return (
             <MatchCard
               key={game.id}
@@ -34,7 +42,7 @@ export default class MatchDay extends Component {
               prefectures={prefectures}
               currentDateId={currentDateId}
             />
-          )
+          );
         })}
       </div>
     );

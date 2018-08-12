@@ -7,10 +7,10 @@ import {
   dateToDateId,
   decodeScores,
   scoresToTotalScore,
-  timestampToDate
-} from '../../../lib/converter'
+  timestampToDate,
+} from '../../../lib/converter';
 
-import './MatchCard.css'
+import './MatchCard.css';
 
 export default class MatchCard extends Component {
   constructor(props) {
@@ -19,10 +19,10 @@ export default class MatchCard extends Component {
     this.state = {
       shouldShowDetail: false,
       isCurrentSelectionToday: true,
-    }
+    };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const {game, currentDateId} = this.props;
     const gameTime = +game.time.split(':')[0];
     const currentDate = new Date();
@@ -30,29 +30,29 @@ export default class MatchCard extends Component {
 
     const diff = currentTime - gameTime;
 
-    const isCurrentSelectionToday = currentDateId === dateToDateId(timestampToDate(currentDate.getTime()));
+    const isCurrentSelectionToday =
+      currentDateId === dateToDateId(timestampToDate(currentDate.getTime()));
 
     if (diff >= -1 && diff <= 4 && isCurrentSelectionToday) {
       this.setState({
         shouldShowDetail: true,
         isCurrentSelectionToday,
-      })
+      });
     }
-
   }
 
   toggleShowDetail = () => {
-    const {shouldShowDetail} = this.state
+    const {shouldShowDetail} = this.state;
 
     this.setState({
-      shouldShowDetail: !shouldShowDetail
+      shouldShowDetail: !shouldShowDetail,
     });
-  }
+  };
 
   render() {
     const {game, schools = [], prefectures = [], onShowSchool} = this.props;
     const matchData = camelizeKeys(game);
-    const {shouldShowDetail, isCurrentSelectionToday} = this.state
+    const {shouldShowDetail, isCurrentSelectionToday} = this.state;
     const {
       gameId,
       firstId,
@@ -65,9 +65,11 @@ export default class MatchCard extends Component {
       videoId,
     } = matchData;
 
-    const first = schools.length > 0 && schools.filter(school => {
-      return school.school_id === firstId;
-    })[0];
+    const first =
+      schools.length > 0 &&
+      schools.filter(school => {
+        return school.school_id === firstId;
+      })[0];
 
     const firstName = first && first.name;
 
@@ -75,17 +77,21 @@ export default class MatchCard extends Component {
       return school.school_id === thirdId;
     })[0];
 
-    const firstPrefecture = first && dataIdToDataValue({
-      id: first.prefecture_id,
-      fromKey: 'prefecture_id',
-      dataList: prefectures,
-    });
+    const firstPrefecture =
+      first &&
+      dataIdToDataValue({
+        id: first.prefecture_id,
+        fromKey: 'prefecture_id',
+        dataList: prefectures,
+      });
 
-    const thirdPrefecture = third && dataIdToDataValue({
-      id: third.prefecture_id,
-      fromKey: 'prefecture_id',
-      dataList: prefectures,
-    })
+    const thirdPrefecture =
+      third &&
+      dataIdToDataValue({
+        id: third.prefecture_id,
+        fromKey: 'prefecture_id',
+        dataList: prefectures,
+      });
 
     const thirdName = third && third.name;
 
@@ -96,15 +102,15 @@ export default class MatchCard extends Component {
       first: {
         name: firstName,
         scores: decodeScores(firstScores),
-        finalScore: firstFinalScore
+        finalScore: firstFinalScore,
       },
       third: {
         name: thirdName,
         scores: decodeScores(thirdScores),
-        finalScore: thirdFinalScore
+        finalScore: thirdFinalScore,
       },
       isFirstHome,
-    }
+    };
 
     return (
       <div className="match-card" id={gameId}>
@@ -112,9 +118,7 @@ export default class MatchCard extends Component {
           <div className="info clearfix">
             <div className="round-wrap">
               <i className="fa fa-bullhorn" />
-              <span className="round">
-                {rounds[round]}
-              </span>
+              <span className="round">{rounds[round]}</span>
             </div>
             <div className="time-wrap">
               <i className="fa fa-clock-o" />
@@ -126,17 +130,29 @@ export default class MatchCard extends Component {
           </div>
           {first ? (
             <div className="scores">
-              <p className="first" onClick={() => {onShowSchool(firstId)}}>
+              <p
+                className="first"
+                onClick={() => {
+                  onShowSchool(firstId);
+                }}
+              >
                 <span className="prefecture">({firstPrefecture})</span>
                 <span className="name">{firstName}</span>
                 <span className="final-score">{firstFinalScore}</span>
               </p>
               <span className="vs">-</span>
-              {third ? (<p className="third" onClick={() => {onShowSchool(thirdId)}}>
-                <span className="final-score">{thirdFinalScore}</span>
-                <span className="name">{thirdName}</span>
-                <span className="prefecture">({thirdPrefecture})</span>
-              </p>) : (
+              {third ? (
+                <p
+                  className="third"
+                  onClick={() => {
+                    onShowSchool(thirdId);
+                  }}
+                >
+                  <span className="final-score">{thirdFinalScore}</span>
+                  <span className="name">{thirdName}</span>
+                  <span className="prefecture">({thirdPrefecture})</span>
+                </p>
+              ) : (
                 <p className="third">
                   <span>相手カード未定</span>
                 </p>
@@ -148,28 +164,33 @@ export default class MatchCard extends Component {
             </div>
           )}
         </div>
-        {shouldShowDetail ? <ScoreTable scoreTable={scoreTable}/> : null}
-        {shouldShowDetail ? <div className="after-game hide">
-          <a
-            className="news"
-            href={`https://vk.sportsbull.jp/koshien/text_sokuhou/${gameId}.html`}
-          >
-            <i className="fa fa-link" />速報
-          </a>
-          <a
-            className="video"
-            href={`https://vk.sportsbull.jp/koshien/articles/${videoId}.html`}
-          >
-            <i className="fa fa-video-camera" />ビデオ
-          </a>
-        </div> : null}
-        {(isCurrentSelectionToday || firstFinalScore !== '-') ? (
+        {shouldShowDetail ? <ScoreTable scoreTable={scoreTable} /> : null}
+        {shouldShowDetail ? (
+          <div className="after-game hide">
+            <a
+              className="news"
+              href={`https://vk.sportsbull.jp/koshien/text_sokuhou/${gameId}.html`}
+            >
+              <i className="fa fa-link" />
+              速報
+            </a>
+            <a
+              className="video"
+              href={`https://vk.sportsbull.jp/koshien/articles/${videoId}.html`}
+            >
+              <i className="fa fa-video-camera" />
+              ビデオ
+            </a>
+          </div>
+        ) : null}
+        {isCurrentSelectionToday || firstFinalScore !== '-' ? (
           <div className="show-more" onClick={this.toggleShowDetail}>
             詳細
-            {shouldShowDetail ?
-              <span className="triangle-to-top" /> :
+            {shouldShowDetail ? (
+              <span className="triangle-to-top" />
+            ) : (
               <span className="triangle-to-bottom" />
-            }
+            )}
           </div>
         ) : null}
       </div>

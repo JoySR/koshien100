@@ -1,5 +1,5 @@
-import {ADD_AREA, FETCH_AREA, REMOVE_AREA, UPDATE_AREA} from './actionTypes'
-import api from '../lib/api'
+import {ADD_AREA, FETCH_AREA, REMOVE_AREA, UPDATE_AREA} from './actionTypes';
+import api from '../lib/api';
 
 export function addArea(area) {
   return api({
@@ -9,28 +9,28 @@ export function addArea(area) {
     request: addAreaRequest,
     success: addAreaSuccess,
     failure: addAreaFailure,
-  })
+  });
 }
 
 export const addAreaRequest = () => {
   return {
     type: ADD_AREA.REQUEST,
-  }
-}
+  };
+};
 
-export const addAreaSuccess = (result) => {
+export const addAreaSuccess = result => {
   return {
     type: ADD_AREA.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const addAreaFailure = (error) => {
+export const addAreaFailure = error => {
   return {
     type: ADD_AREA.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function fetchArea() {
   return api({
@@ -39,28 +39,28 @@ export function fetchArea() {
     request: fetchAreaRequest,
     success: fetchAreaSuccess,
     failure: fetchAreaFailure,
-  })
+  });
 }
 
 export const fetchAreaRequest = () => {
   return {
     type: FETCH_AREA.REQUEST,
-  }
-}
+  };
+};
 
-export const fetchAreaSuccess = (result) => {
+export const fetchAreaSuccess = result => {
   return {
     type: FETCH_AREA.SUCCESS,
-    payload: { areas: result.areas }
-  }
-}
+    payload: {areas: result.areas},
+  };
+};
 
-export const fetchAreaFailure = (error) => {
+export const fetchAreaFailure = error => {
   return {
     type: FETCH_AREA.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function updateArea(area) {
   return api({
@@ -70,28 +70,28 @@ export function updateArea(area) {
     request: updateAreaRequest,
     success: updateAreaSuccess,
     failure: updateAreaFailure,
-  })
+  });
 }
 
 export const updateAreaRequest = () => {
   return {
     type: UPDATE_AREA.REQUEST,
-  }
-}
+  };
+};
 
-export const updateAreaSuccess = (result) => {
+export const updateAreaSuccess = result => {
   return {
     type: UPDATE_AREA.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const updateAreaFailure = (error) => {
+export const updateAreaFailure = error => {
   return {
     type: UPDATE_AREA.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};
 
 export function removeArea(area) {
   return api({
@@ -101,25 +101,25 @@ export function removeArea(area) {
     request: removeAreaRequest,
     success: removeAreaSuccess,
     failure: removeAreaFailure,
-  })
+  });
 }
 
 export const removeAreaRequest = () => {
   return {
     type: REMOVE_AREA.REQUEST,
-  }
-}
+  };
+};
 
-export const removeAreaSuccess = (result) => {
+export const removeAreaSuccess = result => {
   return {
     type: REMOVE_AREA.SUCCESS,
-    payload: { id: result.id }
-  }
-}
+    payload: {id: result.id},
+  };
+};
 
-export const removeAreaFailure = (error) => {
+export const removeAreaFailure = error => {
   return {
     type: REMOVE_AREA.FAILURE,
-    payload: { error }
-  }
-}
+    payload: {error},
+  };
+};

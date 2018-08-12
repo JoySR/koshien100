@@ -10,7 +10,7 @@ export function register(user) {
     request: registerRequest,
     success: registerSuccess,
     failure: registerFailure,
-  })
+  });
 }
 
 export const registerRequest = () => {

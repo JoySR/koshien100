@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Header from './Header';
 // import Footer from './Footer';
 import TimeTable from './TimeTable';
 import MatchDay from './MatchDay';
 import Map from './Map';
-import SchoolCard from './SchoolCard'
+import SchoolCard from './SchoolCard';
 
 import './Home.css';
 
@@ -14,18 +14,19 @@ class HomeComponent extends Component {
 
     this.state = {
       currentSchool: undefined,
-    }
+    };
   }
 
-  onAsync = (func) => {
+  onAsync = func => {
     return new Promise((resolve, reject) => {
-      this.props.dispatch(func)
-        .then((res) => resolve(res))
-        .catch((err) => reject(err));
+      this.props
+        .dispatch(func)
+        .then(res => resolve(res))
+        .catch(err => reject(err));
     });
-  }
+  };
 
-  onShowSchool = (schoolId) => {
+  onShowSchool = schoolId => {
     const {schools} = this.props;
 
     const currentSchool = schools.filter(school => {
@@ -35,26 +36,29 @@ class HomeComponent extends Component {
     this.setState({
       currentSchool,
     });
-  }
+  };
 
   onCloseCard = () => {
     this.setState({
       currentSchool: null,
-    })
-  }
+    });
+  };
 
   render() {
-    const {dates, currentDateId, dispatch, games, schools, prefectures} = this.props;
+    const {
+      dates,
+      currentDateId,
+      dispatch,
+      games,
+      schools,
+      prefectures,
+    } = this.props;
     const {currentSchool} = this.state;
     return (
       <div className="Home-container">
         <Header />
         <div className="main">
-          <TimeTable
-            dispatch={dispatch}
-            onAsync={this.onAsync}
-            dates={dates}
-          />
+          <TimeTable dispatch={dispatch} onAsync={this.onAsync} dates={dates} />
           <MatchDay
             games={games}
             schools={schools}
@@ -65,6 +69,7 @@ class HomeComponent extends Component {
           />
           <Map
             schools={schools}
+            games={games}
             prefectures={prefectures}
             onShowSchool={this.onShowSchool}
           />
@@ -78,7 +83,7 @@ class HomeComponent extends Component {
         </div>
         {/*<Footer />*/}
       </div>
-    )
+    );
   }
 }
 

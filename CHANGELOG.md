@@ -2,6 +2,8 @@
 
 - **feat**:
   - add prettier.
+- **fix**:
+  - bootstrap style override custom style.
 
 ### 2018-08-11
 

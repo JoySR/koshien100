@@ -106,9 +106,13 @@ export default class AreaBoard extends Component {
           <td>{area_id}</td>
           <td>{name}</td>
           <td>{code}</td>
-          <td>
-            <span onClick={() => this.onEdit(area)}>Edit</span>
-            <span onClick={() => this.onDelete(id)}>Delete</span>
+          <td className="options">
+            <span onClick={() => this.onEdit(area)}>
+              <i className="fa fa-pencil-square-o" />
+            </span>
+            <span onClick={() => this.onDelete(id)}>
+              <i className="fa fa-trash-o" />
+            </span>
           </td>
         </tr>
       );
@@ -121,7 +125,7 @@ export default class AreaBoard extends Component {
     return (
       <main
         role="main"
-        className="AreaBoard col-md-9 ml-sm-auto col-lg-10 px-4"
+        className="Dashboard AreaBoard col-md-9 ml-sm-auto col-lg-10 px-4"
       >
         <h2>
           Areas

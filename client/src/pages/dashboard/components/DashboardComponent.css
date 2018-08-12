@@ -21,6 +21,12 @@
       text-align: left;
     }
   }
+
+  .Dashboard {
+    .options .fa {
+      margin: 0 6px;
+    }
+  }
 }
 
 .Dashboard-Modal {

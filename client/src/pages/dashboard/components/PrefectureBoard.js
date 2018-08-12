@@ -133,9 +133,13 @@ export default class PrefectureBoard extends Component {
               })[0].name}
           </td>
           <td>{code}</td>
-          <td>
-            <span onClick={() => this.onEdit(prefecture)}>Edit</span>
-            <span onClick={() => this.onDelete(id)}>Delete</span>
+          <td className="options">
+            <span onClick={() => this.onEdit(prefecture)}>
+              <i className="fa fa-pencil-square-o" />
+            </span>
+            <span onClick={() => this.onDelete(id)}>
+              <i className="fa fa-trash-o" />
+            </span>
           </td>
         </tr>
       );
@@ -155,7 +159,7 @@ export default class PrefectureBoard extends Component {
     return (
       <main
         role="main"
-        className="PrefectureBoard col-md-9 ml-sm-auto col-lg-10 px-4"
+        className="Dashboard PrefectureBoard col-md-9 ml-sm-auto col-lg-10 px-4"
       >
         <h2>
           Prefectures

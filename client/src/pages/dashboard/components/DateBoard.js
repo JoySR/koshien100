@@ -110,9 +110,13 @@ export default class DateBoard extends Component {
           <td>{date_id}</td>
           <td>{timestampToDate(game_date)}</td>
           <td>{status}</td>
-          <td>
-            <span onClick={() => this.onEdit(date)}>Edit</span>
-            <span onClick={() => this.onDelete(id)}>Delete</span>
+          <td className="options">
+            <span onClick={() => this.onEdit(date)}>
+              <i className="fa fa-pencil-square-o" />
+            </span>
+            <span onClick={() => this.onDelete(id)}>
+              <i className="fa fa-trash-o" />
+            </span>
           </td>
         </tr>
       );
@@ -124,7 +128,7 @@ export default class DateBoard extends Component {
     return (
       <main
         role="main"
-        className="DateBoard col-md-9 ml-sm-auto col-lg-10 px-4"
+        className="Dashboard DateBoard col-md-9 ml-sm-auto col-lg-10 px-4"
       >
         <h2>
           Dates

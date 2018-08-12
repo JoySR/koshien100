@@ -218,9 +218,13 @@ export default class GameBoard extends Component {
               : ''}
           </td>
           <td>{video_id.slice(0, 7)}</td>
-          <td>
-            <span onClick={() => this.onEdit(game)}>Edit</span>
-            <span onClick={() => this.onDelete(id)}>Delete</span>
+          <td className="options">
+            <span onClick={() => this.onEdit(game)}>
+              <i className="fa fa-pencil-square-o" />
+            </span>
+            <span onClick={() => this.onDelete(id)}>
+              <i className="fa fa-trash-o" />
+            </span>
           </td>
         </tr>
       );
@@ -245,7 +249,7 @@ export default class GameBoard extends Component {
     return (
       <main
         role="main"
-        className="GameBoard col-md-9 ml-sm-auto col-lg-10 px-4"
+        className="Dashboard GameBoard col-md-9 ml-sm-auto col-lg-10 px-4"
       >
         <h2>
           Games

@@ -203,9 +203,13 @@ export default class SchoolBoard extends Component {
           <td>{win_count}</td>
           <td>{lose_count}</td>
           <td>{best_result}</td>
-          <td>
-            <span onClick={() => this.onEdit(school)}>Edit</span>
-            <span onClick={() => this.onDelete(id)}>Delete</span>
+          <td className="options">
+            <span onClick={() => this.onEdit(school)}>
+              <i className="fa fa-pencil-square-o" />
+            </span>
+            <span onClick={() => this.onDelete(id)}>
+              <i className="fa fa-trash-o" />
+            </span>
           </td>
         </tr>
       );
@@ -233,7 +237,7 @@ export default class SchoolBoard extends Component {
     return (
       <main
         role="main"
-        className="SchoolBoard col-md-9 ml-sm-auto col-lg-10 px-4"
+        className="Dashboard SchoolBoard col-md-9 ml-sm-auto col-lg-10 px-4"
       >
         <h2>
           Schools

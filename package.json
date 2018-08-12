@@ -1,0 +1,23 @@
+{
+  "name": "koshien",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "7.1.2",
+    "prettier": "^1.14.2"
+  },
+  "scripts": {
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{js,jsx,json,css}": [
+        "prettier --single-quote --trailing-comma es5 --no-bracket-spacing --write"
+      ]
+    },
+    "ignore": [
+      "**/*.min.js"
+    ]
+  }
+}

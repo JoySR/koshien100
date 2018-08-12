@@ -1,142 +1,161 @@
 import Database from '../common/database';
-import {checkLoginStatus, normalizeUpdateData} from '../common/utility'
-import {schoolKeys} from '../config/constants'
+import {checkLoginStatus, normalizeUpdateData} from '../common/utility';
+import {schoolKeys} from '../config/constants';
 
 const Schools = {
   getSchools: (request, response, next) => {
-    Database.GetSchools().then(res => {
-      if (res) {
-        response.send(200, {
-          success: true,
-          message: 'GetSchools is OK.',
-          schools: res,
-        })
-      }
-    }).catch(err => {
-      response.send(500, err);
-    })
+    Database.GetSchools()
+      .then(res => {
+        if (res) {
+          response.send(200, {
+            success: true,
+            message: 'GetSchools is OK.',
+            schools: res,
+          });
+        }
+      })
+      .catch(err => {
+        response.send(500, err);
+      });
   },
 
   getSchool: (request, response, next) => {
     if (request.query) {
       const id = request.query.id;
-      Database.GetSchool(id).then(res => {
-        if (res) {
-          response.send(200, {
-            success: true,
-            message: 'GetSchool is OK.',
-            date: res,
-          })
-        }
-      }).catch(err => {
-        response.send(500, err);
-      })
+      Database.GetSchool(id)
+        .then(res => {
+          if (res) {
+            response.send(200, {
+              success: true,
+              message: 'GetSchool is OK.',
+              date: res,
+            });
+          }
+        })
+        .catch(err => {
+          response.send(500, err);
+        });
     }
   },
 
   addSchool: (request, response, next) => {
     if (request.body) {
       const token = request.body.token;
-      checkLoginStatus({token}).then(res => {
-        if (res.isLoggedIn) {
-          const school = request.body.school;
-          const schoolArr = Object.keys(school).map(key => school[key])
-          Database.AddSchool(schoolArr).then(res => {
-            if (res) {
-              response.send(200, {
-                success: true,
-                message: 'AddSchool is OK.',
-                id: res.insertId
+      checkLoginStatus({token})
+        .then(res => {
+          if (res.isLoggedIn) {
+            const school = request.body.school;
+            const schoolArr = Object.keys(school).map(key => school[key]);
+            Database.AddSchool(schoolArr)
+              .then(res => {
+                if (res) {
+                  response.send(200, {
+                    success: true,
+                    message: 'AddSchool is OK.',
+                    id: res.insertId,
+                  });
+                }
               })
-            }
-          }).catch(err => {
-            response.send(500, err);
-          })
-        } else {
-          response.send(200, {
-            success: false,
-            message: 'You are not logged in.'
-          })
-        }
-      }).catch(err => {
-        response.send(500, {
-          message: err,
+              .catch(err => {
+                response.send(500, err);
+              });
+          } else {
+            response.send(200, {
+              success: false,
+              message: 'You are not logged in.',
+            });
+          }
         })
-      })
+        .catch(err => {
+          response.send(500, {
+            message: err,
+          });
+        });
     }
   },
 
   editSchool: (request, response, next) => {
     if (request.body) {
       const token = request.body.token;
-      checkLoginStatus({token}).then(res => {
-        if (res.isLoggedIn) {
-          const school = request.body.school;
-          const id = school.id;
-          Database.GetSchool(id).then(res => {
-            if (res) {
-              const oldSchool = res[0];
-              return normalizeUpdateData({
-                oldData: oldSchool,
-                newData: school,
-                keyArr: schoolKeys
+      checkLoginStatus({token})
+        .then(res => {
+          if (res.isLoggedIn) {
+            const school = request.body.school;
+            const id = school.id;
+            Database.GetSchool(id)
+              .then(res => {
+                if (res) {
+                  const oldSchool = res[0];
+                  return normalizeUpdateData({
+                    oldData: oldSchool,
+                    newData: school,
+                    keyArr: schoolKeys,
+                  });
+                }
+              })
+              .then(dateArr => {
+                Database.UpdateSchool(id, dateArr)
+                  .then(res => {
+                    if (res) {
+                      response.send(200, {
+                        success: true,
+                        message: 'UpdateSchool is OK.',
+                      });
+                    }
+                  })
+                  .catch(err => {
+                    response.send(500, err);
+                  });
+              })
+              .catch(err => {
+                response.send(500, err);
               });
-            }
-          }).then((dateArr) => {
-            Database.UpdateSchool(id, dateArr).then(res => {
-              if (res) {
-                response.send(200, {
-                  success: true,
-                  message: 'UpdateSchool is OK.'
-                });
-              }
-            }).catch(err => {
-              response.send(500, err);
-            })
-          }).catch(err => {
-            response.send(500, err);
-          })
-        } else {
-          response.send(200, {
-            success: false,
-            message: 'You are not logged in.'
-          })
-        }
-      }).catch(err => {
-        response.send(500, {
-          message: err,
+          } else {
+            response.send(200, {
+              success: false,
+              message: 'You are not logged in.',
+            });
+          }
         })
-      })
+        .catch(err => {
+          response.send(500, {
+            message: err,
+          });
+        });
     }
   },
 
   removeSchool: (request, response, next) => {
     if (request.body) {
       const token = request.body.token;
-      checkLoginStatus({token}).then(res => {
-        if (res.isLoggedIn) {
-          const id = request.body.school.id;
-          Database.RemoveSchool(id).then(res => {
-            if (res) {
-              response.send(200, {
-                success: true,
-                message: 'RemoveSchool is OK.'
+      checkLoginStatus({token})
+        .then(res => {
+          if (res.isLoggedIn) {
+            const id = request.body.school.id;
+            Database.RemoveSchool(id)
+              .then(res => {
+                if (res) {
+                  response.send(200, {
+                    success: true,
+                    message: 'RemoveSchool is OK.',
+                  });
+                }
+              })
+              .catch(err => {
+                response.send(500, err);
               });
-            }
-          }).catch(err => {
-            response.send(500, err);
-          })
-        } else {
-          response.send(200, {
-            success: false,
-            message: 'You are not logged in.'
-          })
-        }
-      }).catch(err => {
-        response.send(500, {
-          message: err,
+          } else {
+            response.send(200, {
+              success: false,
+              message: 'You are not logged in.',
+            });
+          }
         })
-      })
+        .catch(err => {
+          response.send(500, {
+            message: err,
+          });
+        });
     }
   },
 };

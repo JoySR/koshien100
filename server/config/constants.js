@@ -1,14 +1,6 @@
-export const dateKeys = [
-  'date_id',
-  'game_date',
-  'status'
-];
+export const dateKeys = ['date_id', 'game_date', 'status'];
 
-export const areaKeys = [
-  'area_id',
-  'name',
-  'code'
-];
+export const areaKeys = ['area_id', 'name', 'code'];
 
 export const gameKeys = [
   'game_id',
@@ -20,15 +12,10 @@ export const gameKeys = [
   'third_id',
   'first_scores',
   'third_scores',
-  'video_id'
+  'video_id',
 ];
 
-export const prefectureKeys = [
-  'prefecture_id',
-  'name',
-  'code',
-  'area_id'
-];
+export const prefectureKeys = ['prefecture_id', 'name', 'code', 'area_id'];
 
 export const schoolKeys = [
   'school_id',
@@ -41,7 +28,5 @@ export const schoolKeys = [
   'win_count',
   'lose_count',
   'best_result',
-  'games'
+  'games',
 ];
-
-

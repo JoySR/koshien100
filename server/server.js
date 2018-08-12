@@ -5,12 +5,12 @@ const route = router.push;
 import bodyParser from 'body-parser';
 
 import BasicHandler from './handlers/basic';
-import Areas from './handlers/areas'
-import Dates from './handlers/dates'
-import Users from './handlers/users'
-import Prefectures from './handlers/prefectures'
-import Games from './handlers/games'
-import Schools from './handlers/schools'
+import Areas from './handlers/areas';
+import Dates from './handlers/dates';
+import Users from './handlers/users';
+import Prefectures from './handlers/prefectures';
+import Games from './handlers/games';
+import Schools from './handlers/schools';
 
 route('*', BasicHandler.headerHandler);
 route('OPTIONS', BasicHandler.optionsHandler);

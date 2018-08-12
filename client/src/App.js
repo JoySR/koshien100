@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {BrowserRouter} from 'react-router-dom';
-import createRoutes from './routes';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
+
+import createRoutes from './routes';
 
 class App extends Component {
   render() {

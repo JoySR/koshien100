@@ -25,14 +25,6 @@ export const dateToDateId = date => {
   return date.split('-').join('');
 };
 
-export const encodeGameIds = gameIds => {
-  return gameIds.split(',\n').join(',');
-};
-
-export const decodeGameIds = str => {
-  return str.split(',');
-};
-
 export const decodeScores = str => {
   return str.split(',');
 };

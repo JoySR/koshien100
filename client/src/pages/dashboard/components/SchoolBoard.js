@@ -6,7 +6,6 @@ import {
   updateSchool,
 } from '../../../actions/schoolAction';
 import {fetchPrefecture} from '../../../actions/prefectureAction';
-import {decodeGameIds, encodeGameIds} from '../../../lib/converter';
 
 export default class SchoolBoard extends Component {
   constructor(props) {
@@ -23,7 +22,6 @@ export default class SchoolBoard extends Component {
       winCount: 0,
       loseCount: 0,
       best: 1,
-      games: '',
     };
   }
   componentDidMount() {
@@ -57,7 +55,6 @@ export default class SchoolBoard extends Component {
       winCount,
       loseCount,
       best,
-      games,
       isEditing,
     } = this.state;
     const {onAsync, prefectures} = this.props;
@@ -75,7 +72,6 @@ export default class SchoolBoard extends Component {
             win_count: winCount,
             lose_count: loseCount,
             best_result: best,
-            games: encodeGameIds(games),
           },
         })
       : addSchool({
@@ -90,7 +86,6 @@ export default class SchoolBoard extends Component {
             win_count: winCount,
             lose_count: loseCount,
             best_result: best,
-            games: encodeGameIds(games),
           },
         });
     onAsync(func).then(() => {
@@ -105,7 +100,6 @@ export default class SchoolBoard extends Component {
         winCount: 0,
         loseCount: 0,
         best: 1,
-        games: '',
         isEditing: false,
       });
       onAsync(fetchSchools());
@@ -125,7 +119,6 @@ export default class SchoolBoard extends Component {
       win_count,
       lose_count,
       best_result,
-      games,
     } = school;
     this.setState({
       isEditing: true,
@@ -140,7 +133,6 @@ export default class SchoolBoard extends Component {
       winCount: win_count,
       loseCount: lose_count,
       best: best_result,
-      games,
     });
   };
 
@@ -173,7 +165,6 @@ export default class SchoolBoard extends Component {
         win_count,
         lose_count,
         best_result,
-        games,
       } = school;
       return (
         <tr key={id}>
@@ -196,7 +187,6 @@ export default class SchoolBoard extends Component {
           <td>{win_count}</td>
           <td>{lose_count}</td>
           <td>{best_result}</td>
-          <td>{decodeGameIds(games)}</td>
           <td>
             <span onClick={() => this.onEdit(school)}>Edit</span>
             <span onClick={() => this.onDelete(id)}>Delete</span>
@@ -218,7 +208,6 @@ export default class SchoolBoard extends Component {
       winCount,
       loseCount,
       best,
-      games,
       isEditing,
     } = this.state;
 
@@ -324,13 +313,6 @@ export default class SchoolBoard extends Component {
                 <option value={6}>決勝</option>
               </select>
             </li>
-            <li>
-              <label>Games: </label>
-              <textarea
-                value={games}
-                onChange={event => this.onChange('games', event)}
-              />
-            </li>
           </ul>
           <button onClick={() => this.onSubmit('school')}>OK</button>
         </div>
@@ -351,7 +333,6 @@ export default class SchoolBoard extends Component {
                   <th>Win Count</th>
                   <th>Lose Count</th>
                   <th>Best Result</th>
-                  <th>Games</th>
                   <th>Options</th>
                 </tr>
               </thead>

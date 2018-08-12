@@ -290,7 +290,7 @@ const Database = {
 
   AddSchool: school => {
     const sql =
-      'INSERT INTO schools (school_id, prefecture_id, name, short_name, is_continual, last_count, total_count, win_count, lose_count, best_result, games) VALUES (?)';
+      'INSERT INTO schools (school_id, prefecture_id, name, short_name, is_continual, last_count, total_count, win_count, lose_count, best_result) VALUES (?)';
     return new Promise((resolve, reject) => {
       pool.query(sql, [school], (err, rows, fields) => {
         if (err) reject(err);
@@ -301,7 +301,7 @@ const Database = {
 
   UpdateSchool: (id, school) => {
     const sql =
-      'UPDATE schools set school_id = ? , prefecture_id = ? , name = ? , short_name = ? , is_continual = ? , last_count = ?, total_count = ? , win_count = ? , lose_count = ? , best_result = ? , games = ? WHERE id = ' +
+      'UPDATE schools set school_id = ? , prefecture_id = ? , name = ? , short_name = ? , is_continual = ? , last_count = ?, total_count = ? , win_count = ? , lose_count = ? , best_result = ? WHERE id = ' +
       pool.escape(id);
     return new Promise((resolve, reject) => {
       pool.query(sql, school, (err, rows, fields) => {

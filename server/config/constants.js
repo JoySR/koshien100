@@ -27,5 +27,5 @@ export const schoolKeys = [
   'total_count',
   'win_count',
   'lose_count',
-  'best_result'
+  'best_result',
 ];

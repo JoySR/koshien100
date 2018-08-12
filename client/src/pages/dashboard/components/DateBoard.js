@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
 import {
+  Table,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from 'reactstrap';
+import {
   addDate,
   fetchDates,
   removeDate,
@@ -52,11 +60,7 @@ export default class DateBoard extends Component {
           },
         });
     onAsync(func).then(() => {
-      this.setState({
-        gameDate: '',
-        dateStatus: DATE_STATUS[0],
-        isEditing: false,
-      });
+      this.clearState();
       onAsync(fetchDates());
     });
   };
@@ -81,6 +85,14 @@ export default class DateBoard extends Component {
       })
     ).then(() => {
       onAsync(fetchDates());
+    });
+  };
+
+  clearState = () => {
+    this.setState({
+      gameDate: '',
+      dateStatus: DATE_STATUS[0],
+      isEditing: false,
     });
   };
 
@@ -112,51 +124,62 @@ export default class DateBoard extends Component {
         className="DateBoard col-md-9 ml-sm-auto col-lg-10 px-4"
       >
         <h2>Dates</h2>
-        <div className="Add-Date">
-          <h3>{isEditing ? 'Edit Date' : 'Add Date'}</h3>
-          <ul>
-            <li>
-              <label>Date: </label>
-              <input
-                value={gameDate}
-                onChange={event => this.onChange('gameDate', event)}
-              />
-            </li>
-            <li>
-              <label>Date Status: </label>
-              <select
-                value={dateStatus}
-                onChange={event => this.onChange('dateStatus', event)}
-              >
-                {DATE_STATUS.map(status => {
-                  return (
-                    <option value={status} key={status}>
-                      {status}
-                    </option>
-                  );
-                })}
-              </select>
-            </li>
-          </ul>
-          <button onClick={() => this.onSubmit('date')}>OK</button>
-        </div>
         <div className="Date-List">
-          <h3>Date List</h3>
-          <div className="table-responsive">
-            <table className="table table-striped table-sm">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Date Id</th>
-                  <th>Day</th>
-                  <th>Date Status</th>
-                  <th>Options</th>
-                </tr>
-              </thead>
-              <tbody>{this.renderDates()}</tbody>
-            </table>
-          </div>
+          <Table className="table table-striped table-sm" responsive={true}>
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date Id</th>
+              <th>Day</th>
+              <th>Date Status</th>
+              <th>Options</th>
+            </tr>
+            </thead>
+            <tbody>{this.renderDates()}</tbody>
+          </Table>
         </div>
+        <Modal
+          className="Dashboard-Modal DateBoard-Modal"
+          isOpen={gameDate !== ''}
+          autoFocus={true}
+          centered={true}
+        >
+          <ModalHeader>{isEditing ? 'Edit Date' : 'Add Date'}</ModalHeader>
+          <ModalBody>
+            <ul>
+              <li>
+                <label>Date: </label>
+                <input
+                  value={gameDate}
+                  onChange={event => this.onChange('gameDate', event)}
+                />
+              </li>
+              <li>
+                <label>Date Status: </label>
+                <select
+                  value={dateStatus}
+                  onChange={event => this.onChange('dateStatus', event)}
+                >
+                  {DATE_STATUS.map(status => {
+                    return (
+                      <option value={status} key={status}>
+                        {status}
+                      </option>
+                    );
+                  })}
+                </select>
+              </li>
+            </ul>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={() => this.onSubmit('date')}>
+              Submit
+            </Button>
+            <Button outline onClick={this.clearState}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </Modal>
       </main>
     );
   }

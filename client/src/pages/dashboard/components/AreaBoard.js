@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
 import {
+  Table,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from 'reactstrap';
+import {
   addArea,
   fetchArea,
   removeArea,
@@ -46,12 +54,7 @@ export default class AreaBoard extends Component {
           },
         });
     onAsync(func).then(() => {
-      this.setState({
-        areaId: '',
-        areaName: '',
-        areaCode: '',
-        isEditing: false,
-      });
+      this.clearState();
       onAsync(fetchArea());
     });
   };
@@ -77,6 +80,15 @@ export default class AreaBoard extends Component {
       })
     ).then(() => {
       onAsync(fetchArea());
+    });
+  };
+
+  clearState = () => {
+    this.setState({
+      areaId: '',
+      areaName: '',
+      areaCode: '',
+      isEditing: false,
     });
   };
 
@@ -109,49 +121,60 @@ export default class AreaBoard extends Component {
         className="AreaBoard col-md-9 ml-sm-auto col-lg-10 px-4"
       >
         <h2>Areas</h2>
-        <div className="Add-Area">
-          <h3>{isEditing ? 'Edit Area' : 'Add Area'}</h3>
-          <ul>
-            <li>
-              <label>Area Id: </label>
-              <input
-                value={areaId}
-                onChange={event => this.onChange('areaId', event)}
-              />
-            </li>
-            <li>
-              <label>Area Name: </label>
-              <input
-                value={areaName}
-                onChange={event => this.onChange('areaName', event)}
-              />
-            </li>
-            <li>
-              <label>Area Code: </label>
-              <input
-                value={areaCode}
-                onChange={event => this.onChange('areaCode', event)}
-              />
-            </li>
-          </ul>
-          <button onClick={() => this.onSubmit('area')}>OK</button>
-        </div>
         <div className="Area-List">
-          <h3>Area List</h3>
-          <div className="table-responsive">
-            <table className="table table-striped table-sm">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Area Id</th>
-                  <th>Area Name</th>
-                  <th>Area Code</th>
-                  <th>Options</th>
-                </tr>
-              </thead>
-              <tbody>{this.renderAreas()}</tbody>
-            </table>
-          </div>
+          <Table className="table table-striped table-sm" responsive={true}>
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Area Id</th>
+              <th>Area Name</th>
+              <th>Area Code</th>
+              <th>Options</th>
+            </tr>
+            </thead>
+            <tbody>{this.renderAreas()}</tbody>
+          </Table>
+          <Modal
+            className="Dashboard-Modal AreaBoard-Modal"
+            isOpen={areaId !== ''}
+            autoFocus={true}
+            centered={true}
+          >
+            <ModalHeader>{isEditing ? 'Edit Area' : 'Add Area'}</ModalHeader>
+            <ModalBody>
+              <ul>
+                <li>
+                  <label>Area Id: </label>
+                  <input
+                    value={areaId}
+                    onChange={event => this.onChange('areaId', event)}
+                  />
+                </li>
+                <li>
+                  <label>Area Name: </label>
+                  <input
+                    value={areaName}
+                    onChange={event => this.onChange('areaName', event)}
+                  />
+                </li>
+                <li>
+                  <label>Area Code: </label>
+                  <input
+                    value={areaCode}
+                    onChange={event => this.onChange('areaCode', event)}
+                  />
+                </li>
+              </ul>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={() => this.onSubmit('area')}>
+                Submit
+              </Button>
+              <Button outline onClick={this.clearState}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </Modal>
         </div>
       </main>
     );

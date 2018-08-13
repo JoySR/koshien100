@@ -32,7 +32,7 @@ class DashboardComponent extends Component {
   componentWillMount() {
     const token = getToken();
     if (!token) {
-      this.props.history.push('/login');
+      this.props.history.push('/?needLogin=1');
     }
   }
 
@@ -52,7 +52,7 @@ class DashboardComponent extends Component {
         token,
       })
     ).then(() => {
-      this.props.history.push('/home');
+      this.props.history.push('/');
     });
   };
 

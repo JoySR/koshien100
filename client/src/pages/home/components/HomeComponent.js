@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import Header from './Header';
-import Footer from './Footer';
+import Header from './Layout/Header';
+import Footer from './Layout/Footer';
 import TimeTable from './TimeTable';
 import MatchDay from './MatchDay';
 import Map from './Map';
 import SchoolCard from './SchoolCard';
+import Login from './Login';
+import Register from './Register';
 
 import './Home.css';
 
@@ -14,7 +16,22 @@ class HomeComponent extends Component {
 
     this.state = {
       currentSchool: undefined,
+      shouldShowLoginModal: false,
+      shouldShowRegisterModal: false,
     };
+  }
+
+  componentDidMount() {
+    const {query = {}} = this.props;
+    if (query['needLogin'] === '1') {
+      this.setState({
+        shouldShowLoginModal: true,
+      });
+    } else if (query['register'] === '1') {
+      this.setState({
+        shouldShowRegisterModal: true,
+      });
+    }
   }
 
   onAsync = func => {
@@ -44,6 +61,18 @@ class HomeComponent extends Component {
     });
   };
 
+  onCancelModal = () => {
+    this.setState(
+      {
+        shouldShowLoginModal: false,
+        shouldShowRegisterModal: false,
+      },
+      () => {
+        this.props.history.push('/');
+      }
+    );
+  };
+
   render() {
     const {
       dates,
@@ -53,7 +82,11 @@ class HomeComponent extends Component {
       schools,
       prefectures,
     } = this.props;
-    const {currentSchool} = this.state;
+    const {
+      currentSchool,
+      shouldShowLoginModal,
+      shouldShowRegisterModal,
+    } = this.state;
     return (
       <div className="Home-container">
         <Header />
@@ -82,6 +115,24 @@ class HomeComponent extends Component {
           />
         </div>
         <Footer />
+        {shouldShowLoginModal && (
+          <Login
+            onAsync={this.onAsync}
+            onLogin={() => {
+              this.props.history.push('/dashboard');
+            }}
+            onClose={this.onCancelModal}
+          />
+        )}
+        {shouldShowRegisterModal && (
+          <Register
+            onAsync={this.onAsync}
+            onRegister={() => {
+              this.props.history.push('/');
+            }}
+            onClose={this.onCancelModal}
+          />
+        )}
       </div>
     );
   }

@@ -13,7 +13,8 @@
   "lint-staged": {
     "linters": {
       "*.{js,jsx,json,css}": [
-        "prettier --single-quote --trailing-comma es5 --no-bracket-spacing --write"
+        "prettier --single-quote --trailing-comma es5 --no-bracket-spacing --write",
+        "git add"
       ]
     },
     "ignore": [

@@ -19,6 +19,7 @@ export const checkLoginStatus = ({token}) =>
         if (res[0] && isLoginValid(getTimeDiff(res[0].timestamp))) {
           resolve({isLoggedIn: true});
         } else {
+          Database.Logout(token);
           resolve({isLoggedIn: false});
         }
       })

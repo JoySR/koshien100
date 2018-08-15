@@ -42,14 +42,14 @@ export default class AreaBoard extends Component {
       ? updateArea({
           area: {
             id,
-            area_id: areaId,
+            areaId,
             name: areaName,
             code: areaCode,
           },
         })
       : addArea({
           area: {
-            area_id: areaId,
+            areaId,
             name: areaName,
             code: areaCode,
           },
@@ -61,12 +61,12 @@ export default class AreaBoard extends Component {
   };
 
   onEdit = area => {
-    const {id, area_id, name, code} = area;
+    const {id, areaId, name, code} = area;
     this.setState({
       shouldShowModal: true,
       isEditing: true,
       id,
-      areaId: area_id,
+      areaId,
       areaName: name,
       areaCode: code,
     });
@@ -99,11 +99,11 @@ export default class AreaBoard extends Component {
     const {areas = []} = this.props;
 
     return areas.map(area => {
-      const {id, area_id, name, code} = area;
+      const {id, areaId, name, code} = area;
       return (
         <tr key={id}>
           <td>{id}</td>
-          <td>{area_id}</td>
+          <td>{areaId}</td>
           <td>{name}</td>
           <td>{code}</td>
           <td className="options">

@@ -29,7 +29,7 @@ export default class SchoolBoard extends Component {
       totalCount: 0,
       winCount: 0,
       loseCount: 0,
-      best: 1,
+      bestResult: 1,
       shouldShowModal: false,
     };
   }
@@ -39,8 +39,7 @@ export default class SchoolBoard extends Component {
     onAsync(fetchPrefecture()).then(() => {
       const {prefectures = []} = this.props;
       this.setState({
-        prefectureId:
-          prefectures.length > 0 ? prefectures[0].prefecture_id : '',
+        prefectureId: prefectures.length > 0 ? prefectures[0].prefectureId : '',
       });
     });
   }
@@ -63,7 +62,7 @@ export default class SchoolBoard extends Component {
       totalCount,
       winCount,
       loseCount,
-      best,
+      bestResult,
       isEditing,
     } = this.state;
     const {onAsync} = this.props;
@@ -71,30 +70,30 @@ export default class SchoolBoard extends Component {
       ? updateSchool({
           school: {
             id,
-            school_id: schoolId,
-            prefecture_id: prefectureId,
-            name: name,
-            short_name: shortName,
-            is_continual: isContinual,
-            last_count: lastCount,
-            total_count: totalCount,
-            win_count: winCount,
-            lose_count: loseCount,
-            best_result: best,
+            schoolId,
+            prefectureId,
+            name,
+            shortName,
+            isContinual,
+            lastCount,
+            totalCount,
+            winCount,
+            loseCount,
+            bestResult,
           },
         })
       : addSchool({
           school: {
-            school_id: schoolId,
-            prefecture_id: prefectureId,
-            name: name,
-            short_name: shortName,
-            is_continual: isContinual,
-            last_count: lastCount,
-            total_count: totalCount,
-            win_count: winCount,
-            lose_count: loseCount,
-            best_result: best,
+            schoolId,
+            prefectureId,
+            name,
+            shortName,
+            isContinual,
+            lastCount,
+            totalCount,
+            winCount,
+            loseCount,
+            bestResult,
           },
         });
     onAsync(func).then(() => {
@@ -106,31 +105,31 @@ export default class SchoolBoard extends Component {
   onEdit = school => {
     const {
       id,
-      school_id,
-      prefecture_id,
+      schoolId,
+      prefectureId,
       name,
-      short_name,
-      is_continual,
-      last_count,
-      total_count,
-      win_count,
-      lose_count,
-      best_result,
+      shortName,
+      isContinual,
+      lastCount,
+      totalCount,
+      winCount,
+      loseCount,
+      bestResult,
     } = school;
     this.setState({
       shouldShowModal: true,
       isEditing: true,
       id,
-      schoolId: school_id,
-      prefectureId: prefecture_id,
+      schoolId,
+      prefectureId,
       name,
-      shortName: short_name,
-      isContinual: is_continual,
-      lastCount: last_count,
-      totalCount: total_count,
-      winCount: win_count,
-      loseCount: lose_count,
-      best: best_result,
+      shortName,
+      isContinual,
+      lastCount,
+      totalCount,
+      winCount,
+      loseCount,
+      bestResult,
     });
   };
 
@@ -151,7 +150,7 @@ export default class SchoolBoard extends Component {
     const {prefectures} = this.props;
     this.setState({
       schoolId: '',
-      prefectureId: prefectures[0].prefecture_id,
+      prefectureId: prefectures[0].prefectureId,
       name: '',
       shortName: '',
       isContinual: 0,
@@ -159,7 +158,7 @@ export default class SchoolBoard extends Component {
       totalCount: 0,
       winCount: 0,
       loseCount: 0,
-      best: 1,
+      bestResult: 1,
       isEditing: false,
       shouldShowModal: false,
     });
@@ -171,38 +170,38 @@ export default class SchoolBoard extends Component {
     return schools.map(school => {
       const {
         id,
-        school_id,
-        prefecture_id,
+        schoolId,
+        prefectureId,
         name,
-        short_name,
-        is_continual,
-        last_count,
-        total_count,
-        win_count,
-        lose_count,
-        best_result,
+        shortName,
+        isContinual,
+        lastCount,
+        totalCount,
+        winCount,
+        loseCount,
+        bestResult,
       } = school;
       return (
         <tr key={id}>
           <td>{id}</td>
-          <td>{school_id}</td>
+          <td>{schoolId}</td>
           <td>
             {prefectures.filter(prefecture => {
-              return prefecture.prefecture_id === prefecture_id;
+              return prefecture.prefectureId === prefectureId;
             }).length
               ? prefectures.filter(prefecture => {
-                  return prefecture.prefecture_id === prefecture_id;
+                  return prefecture.prefectureId === prefectureId;
                 })[0].name
               : ''}
           </td>
           <td>{name}</td>
-          <td>{short_name}</td>
-          <td>{is_continual}</td>
-          <td>{last_count}</td>
-          <td>{total_count}</td>
-          <td>{win_count}</td>
-          <td>{lose_count}</td>
-          <td>{best_result}</td>
+          <td>{shortName}</td>
+          <td>{isContinual}</td>
+          <td>{lastCount}</td>
+          <td>{totalCount}</td>
+          <td>{winCount}</td>
+          <td>{loseCount}</td>
+          <td>{bestResult}</td>
           <td className="options">
             <span onClick={() => this.onEdit(school)}>
               <i className="fa fa-pencil-square-o" />
@@ -227,7 +226,7 @@ export default class SchoolBoard extends Component {
       totalCount,
       winCount,
       loseCount,
-      best,
+      bestResult,
       shouldShowModal,
       isEditing,
     } = this.state;
@@ -297,7 +296,7 @@ export default class SchoolBoard extends Component {
                   {prefectures.map(prefecture => {
                     return (
                       <option
-                        value={prefecture.prefecture_id}
+                        value={prefecture.prefectureId}
                         key={prefecture.id}
                       >
                         {prefecture.name}
@@ -361,8 +360,8 @@ export default class SchoolBoard extends Component {
               <li>
                 <label>Best Result: </label>
                 <select
-                  value={best}
-                  onChange={event => this.onChange('best', event)}
+                  value={bestResult}
+                  onChange={event => this.onChange('bestResult', event)}
                 >
                   <option value={1}>一回戦</option>
                   <option value={2}>二回戦</option>

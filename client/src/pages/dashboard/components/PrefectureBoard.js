@@ -58,17 +58,17 @@ export default class PrefectureBoard extends Component {
       ? updatePrefecture({
           prefecture: {
             id,
-            prefecture_id: prefectureId,
+            prefectureId,
             name: prefectureName,
-            area_id: areaId,
+            areaId,
             code: prefectureCode,
           },
         })
       : addPrefecture({
           prefecture: {
-            prefecture_id: prefectureId,
+            prefectureId,
             name: prefectureName,
-            area_id: areaId,
+            areaId,
             code: prefectureCode,
           },
         });
@@ -79,13 +79,13 @@ export default class PrefectureBoard extends Component {
   };
 
   onEdit = prefecture => {
-    const {id, prefecture_id, area_id, name, code} = prefecture;
+    const {id, prefectureId, areaId, name, code} = prefecture;
     this.setState({
       shouldShowModal: true,
       isEditing: true,
       id,
-      prefectureId: prefecture_id,
-      areaId: area_id,
+      prefectureId,
+      areaId,
       prefectureName: name,
       prefectureCode: code,
     });
@@ -120,16 +120,16 @@ export default class PrefectureBoard extends Component {
     const {prefectures = [], areas = []} = this.props;
 
     return prefectures.map(prefecture => {
-      const {id, prefecture_id, area_id, name, code} = prefecture;
+      const {id, prefectureId, areaId, name, code} = prefecture;
       return (
         <tr key={id}>
           <td>{id}</td>
-          <td>{prefecture_id}</td>
+          <td>{prefectureId}</td>
           <td>{name}</td>
           <td>
             {areas.length &&
               areas.filter(area => {
-                return area.area_id === area_id;
+                return area.areaId === areaId;
               })[0].name}
           </td>
           <td>{code}</td>
@@ -221,7 +221,7 @@ export default class PrefectureBoard extends Component {
                 >
                   {areas.map(area => {
                     return (
-                      <option value={area.area_id} key={area.id}>
+                      <option value={area.areaId} key={area.id}>
                         {area.name}
                       </option>
                     );

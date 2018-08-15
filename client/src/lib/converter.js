@@ -48,7 +48,7 @@ export const gameIdToDateId = gameId => {
 export const schoolInGamesToGamesInSchool = (schoolId, games = []) => {
   if (games.length === 0) return [];
   return games.filter(game => {
-    return game.first_id === schoolId || game.third_id === schoolId;
+    return game.firstId === schoolId || game.thirdId === schoolId;
   });
 };
 

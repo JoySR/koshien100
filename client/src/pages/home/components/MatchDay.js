@@ -25,7 +25,7 @@ export default class MatchDay extends Component {
     } = this.props;
     const currentGames = games.length
       ? games.filter(game => {
-          const gameId = `${game.game_id}`;
+          const gameId = `${game.gameId}`;
           return gameId && gameId.includes(`${currentDateId}`);
         })
       : [];

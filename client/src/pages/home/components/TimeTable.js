@@ -26,14 +26,14 @@ export default class TimeTable extends Component {
     return timestampToDate(timestamp);
   };
 
-  setDate = date_id => {
+  setDate = dateId => {
     const {dispatch} = this.props;
 
     this.setState({
-      currentDate: date_id,
+      currentDate: dateId,
     });
 
-    dispatch(setCurrentDate(date_id));
+    dispatch(setCurrentDate(dateId));
   };
 
   renderTimeTable = () => {
@@ -44,15 +44,15 @@ export default class TimeTable extends Component {
       return (
         <li
           className={cx(day.status, {
-            active: +day.date_id === +currentDate,
+            active: +day.dateId === +currentDate,
           })}
           key={day.id}
-          onClick={() => this.setDate(day.date_id)}
+          onClick={() => this.setDate(day.dateId)}
         >
           <span className="date">
-            {timestampToDate(day.game_date).slice(-2)}
+            {timestampToDate(day.gameDate).slice(-2)}
           </span>
-          <span className="day">{timestampToWeekDay(day.game_date)}</span>
+          <span className="day">{timestampToWeekDay(day.gameDate)}</span>
         </li>
       );
     });

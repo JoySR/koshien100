@@ -48,15 +48,15 @@ export default class DateBoard extends Component {
       ? updateDate({
           date: {
             id,
-            date_id: dateToDateId(gameDate),
-            game_date: dateToTimestamp(gameDate),
+            dateId: dateToDateId(gameDate),
+            gameDate: dateToTimestamp(gameDate),
             status: dateStatus,
           },
         })
       : addDate({
           date: {
-            date_id: dateToDateId(gameDate),
-            game_date: dateToTimestamp(gameDate),
+            dateId: dateToDateId(gameDate),
+            gameDate: dateToTimestamp(gameDate),
             status: dateStatus,
           },
         });
@@ -67,12 +67,12 @@ export default class DateBoard extends Component {
   };
 
   onEdit = date => {
-    const {id, game_date, status} = date;
+    const {id, gameDate, status} = date;
     this.setState({
       shouldShowModal: true,
       isEditing: true,
       id,
-      gameDate: timestampToDate(game_date),
+      gameDate: timestampToDate(gameDate),
       dateStatus: status,
     });
   };
@@ -103,12 +103,12 @@ export default class DateBoard extends Component {
     const {dates = []} = this.props;
 
     return dates.map(date => {
-      const {id, date_id, game_date, status} = date;
+      const {id, dateId, gameDate, status} = date;
       return (
         <tr key={id}>
           <td>{id}</td>
-          <td>{date_id}</td>
-          <td>{timestampToDate(game_date)}</td>
+          <td>{dateId}</td>
+          <td>{timestampToDate(gameDate)}</td>
           <td>{status}</td>
           <td className="options">
             <span onClick={() => this.onEdit(date)}>

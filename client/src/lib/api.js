@@ -1,3 +1,4 @@
+import {camelizeKeys} from 'humps';
 import {API_URL} from '../common/constant';
 import {getToken} from './token';
 
@@ -39,6 +40,7 @@ const api = ({endPoint, method = 'POST', data, request, success, failure}) => {
     return fetch(`${API_URL}${endPoint}`, tmpData)
       .then(handleErrors)
       .then(res => res.json())
+      .then(json => camelizeKeys(json))
       .then(json => {
         dispatch(success(json));
         return json;

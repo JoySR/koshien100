@@ -11,51 +11,51 @@ import {rounds} from '../constants';
 export default class SchoolCard extends Component {
   renderGames = () => {
     const {school, games = [], schools = []} = this.props;
-    const {school_id} = school;
+    const {schoolId} = school;
 
-    const gamesOfSchool = schoolInGamesToGamesInSchool(school_id, games);
+    const gamesOfSchool = schoolInGamesToGamesInSchool(schoolId, games);
 
     return gamesOfSchool.map(game => {
       const {
-        game_id,
+        gameId,
         round,
-        date_id,
-        first_id,
-        first_scores,
-        third_scores,
-        third_id,
+        dateId,
+        firstId,
+        firstScores,
+        thirdScores,
+        thirdId,
       } = game;
 
       return (
-        <tr key={game_id}>
+        <tr key={gameId}>
           <td>
             <span className="round">{rounds[round]}</span>
-            <span className="date">({dateIdToMonthDay(date_id)})</span>
+            <span className="date">({dateIdToMonthDay(dateId)})</span>
           </td>
           <td>
             <span className="first-name">
               {dataIdToDataValue({
-                id: first_id,
+                id: firstId,
                 dataList: schools,
-                fromKey: 'school_id',
+                fromKey: 'schoolId',
               })}
             </span>
           </td>
           <td className="score">
             <span className="first-score">
-              {scoresToTotalScore(first_scores)}
+              {scoresToTotalScore(firstScores)}
             </span>
             <span className="vs">-</span>
             <span className="third-score">
-              {scoresToTotalScore(third_scores)}
+              {scoresToTotalScore(thirdScores)}
             </span>
           </td>
           <td>
             <span className="third-name">
               {dataIdToDataValue({
-                id: third_id,
+                id: thirdId,
                 dataList: schools,
-                fromKey: 'school_id',
+                fromKey: 'schoolId',
               })}
             </span>
           </td>
@@ -76,15 +76,15 @@ export default class SchoolCard extends Component {
       return null;
     }
 
-    const {is_continual, last_count, name, prefecture_id, total_count} = school;
+    const {isContinual, lastCount, name, prefectureId, totalCount} = school;
 
     // FIXME: 初出場？
 
     const prefecture =
       school &&
       dataIdToDataValue({
-        id: prefecture_id,
-        fromKey: 'prefecture_id',
+        id: prefectureId,
+        fromKey: 'prefectureId',
         dataList: prefectures,
       });
 
@@ -97,7 +97,7 @@ export default class SchoolCard extends Component {
               {name} <span id="school-prefecture">({prefecture})</span>
             </h3>
             <p id="school-count">
-              {last_count} 年{is_continual ? '連続' : 'ぶり'} {total_count} 回目
+              {lastCount} 年{isContinual ? '連続' : 'ぶり'} {totalCount} 回目
             </p>
             <span id="close" onClick={onCloseCard}>
               <i className="fa fa-close" />

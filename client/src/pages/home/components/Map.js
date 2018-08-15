@@ -16,11 +16,11 @@ export default class Map extends Component {
     const gamesOfSchool = schoolInGamesToGamesInSchool(schoolId, games);
 
     return gamesOfSchool.some(game => {
-      const {first_id, first_scores, third_scores} = game;
-      const firstFinalScore = scoresToTotalScore(first_scores);
-      const thirdFinalScore = scoresToTotalScore(third_scores);
+      const {firstId, firstScores, thirdScores} = game;
+      const firstFinalScore = scoresToTotalScore(firstScores);
+      const thirdFinalScore = scoresToTotalScore(thirdScores);
 
-      if (schoolId === first_id) {
+      if (schoolId === firstId) {
         return firstFinalScore < thirdFinalScore;
       }
       return firstFinalScore > thirdFinalScore;
@@ -33,8 +33,8 @@ export default class Map extends Component {
     const gamesOfSchool = schoolInGamesToGamesInSchool(schoolId, games);
 
     return gamesOfSchool.some(game => {
-      const {date_id} = game;
-      const date = dateIdToMonthDay(date_id, '-');
+      const {dateId} = game;
+      const date = dateIdToMonthDay(dateId, '-');
 
       return date === today;
     });
@@ -50,28 +50,28 @@ export default class Map extends Component {
           <div className="prefecture-block notes haitai">敗退</div>
           <div className="prefecture-block notes yusho">優勝</div>
           {schools.map(school => {
-            const {school_id, prefecture_id} = school;
+            const {schoolId, prefectureId} = school;
             const prefecture = dataIdToDataValue({
-              id: prefecture_id,
+              id: prefectureId,
               dataList: prefectures,
-              fromKey: 'prefecture_id',
+              fromKey: 'prefectureId',
             });
             const prefectureCode = dataIdToDataValue({
-              id: prefecture_id,
+              id: prefectureId,
               dataList: prefectures,
-              fromKey: 'prefecture_id',
+              fromKey: 'prefectureId',
               toKey: 'code',
             });
 
             return (
               <div
-                key={school_id}
+                key={schoolId}
                 className={cx('prefecture-block', `${prefectureCode}`, {
-                  today: this.isSchoolToday(school_id),
-                  haitai: this.isSchoolHaitai(school_id),
+                  today: this.isSchoolToday(schoolId),
+                  haitai: this.isSchoolHaitai(schoolId),
                 })}
                 onClick={() => {
-                  onShowSchool(school_id);
+                  onShowSchool(schoolId);
                 }}
               >
                 <div className="prefecture">{prefecture}</div>

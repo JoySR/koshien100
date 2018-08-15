@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {camelizeKeys} from 'humps';
 import {rounds} from '../constants';
 import ScoreTable from './ScoreTable';
 import {
@@ -51,7 +50,6 @@ export default class MatchCard extends Component {
 
   render() {
     const {game, schools = [], prefectures = [], onShowSchool} = this.props;
-    const matchData = camelizeKeys(game);
     const {shouldShowDetail, isCurrentSelectionToday} = this.state;
     const {
       gameId,
@@ -63,33 +61,33 @@ export default class MatchCard extends Component {
       round,
       time,
       videoId,
-    } = matchData;
+    } = game;
 
     const first =
       schools.length > 0 &&
       schools.filter(school => {
-        return school.school_id === firstId;
+        return school.schoolId === firstId;
       })[0];
 
     const firstName = first && first.name;
 
     const third = schools.filter(school => {
-      return school.school_id === thirdId;
+      return school.schoolId === thirdId;
     })[0];
 
     const firstPrefecture =
       first &&
       dataIdToDataValue({
-        id: first.prefecture_id,
-        fromKey: 'prefecture_id',
+        id: first.prefectureId,
+        fromKey: 'prefectureId',
         dataList: prefectures,
       });
 
     const thirdPrefecture =
       third &&
       dataIdToDataValue({
-        id: third.prefecture_id,
-        fromKey: 'prefecture_id',
+        id: third.prefectureId,
+        fromKey: 'prefectureId',
         dataList: prefectures,
       });
 

@@ -72,30 +72,30 @@ export default class GameBoard extends Component {
       ? updateGame({
           game: {
             id,
-            game_id: gameId,
-            date_id: dateId,
+            gameId,
+            dateId,
             round: round,
             time: time,
-            is_first_home: isFirstHome,
-            first_id: firstId,
-            third_id: thirdId,
-            first_scores: firstScores,
-            third_scores: thirdScores,
-            video_id: videoId,
+            isFirstHome,
+            firstId,
+            thirdId,
+            firstScores,
+            thirdScores,
+            videoId,
           },
         })
       : addGame({
           game: {
-            game_id: gameId,
-            date_id: gameIdToDateId(gameId),
+            gameId,
+            dateId: gameIdToDateId(gameId),
             round: round,
             time: time,
-            is_first_home: isFirstHome,
-            first_id: firstId,
-            third_id: thirdId,
-            first_scores: firstScores,
-            third_scores: thirdScores,
-            video_id: videoId,
+            isFirstHome,
+            firstId,
+            thirdId,
+            firstScores,
+            thirdScores,
+            videoId,
           },
         });
     onAsync(func).then(() => {
@@ -107,31 +107,31 @@ export default class GameBoard extends Component {
   onEdit = game => {
     const {
       id,
-      game_id,
-      date_id,
+      gameId,
+      dateId,
       round,
       time,
-      is_first_home,
-      first_id,
-      third_id,
-      first_scores,
-      third_scores,
-      video_id,
+      isFirstHome,
+      firstId,
+      thirdId,
+      firstScores,
+      thirdScores,
+      videoId,
     } = game;
     this.setState({
       shouldShowModal: true,
       isEditing: true,
       id,
-      gameId: game_id,
-      dateId: date_id,
+      gameId,
+      dateId,
       round,
       time: time,
-      isFirstHome: is_first_home,
-      firstId: first_id,
-      thirdId: third_id,
-      firstScores: first_scores,
-      thirdScores: third_scores,
-      videoId: video_id,
+      isFirstHome,
+      firstId,
+      thirdId,
+      firstScores,
+      thirdScores,
+      videoId,
     });
   };
 
@@ -171,27 +171,27 @@ export default class GameBoard extends Component {
     return games.map(game => {
       const {
         id,
-        game_id,
-        date_id,
+        gameId,
+        dateId,
         round,
         time,
-        first_id,
-        third_id,
-        first_scores,
-        third_scores,
-        video_id,
+        firstId,
+        thirdId,
+        firstScores,
+        thirdScores,
+        videoId,
       } = game;
       return (
         <tr key={id}>
-          <td>{game_id}</td>
+          <td>{gameId}</td>
           <td>
             {dates.filter(date => {
-              return date.date_id === date_id;
+              return date.dateId === dateId;
             }).length
               ? timestampToDate(
                   dates.filter(date => {
-                    return date.date_id === date_id;
-                  })[0].game_date
+                    return date.dateId === dateId;
+                  })[0].gameDate
                 )
               : ''}
           </td>
@@ -199,25 +199,25 @@ export default class GameBoard extends Component {
           <td>{time}</td>
           <td>
             {schools.filter(school => {
-              return school.school_id === first_id;
+              return school.schoolId === firstId;
             }).length
               ? schools.filter(school => {
-                  return school.school_id === first_id;
+                  return school.schoolId === firstId;
                 })[0].name
               : ''}
           </td>
-          <td>{scoresToTotalScore(first_scores)}</td>
-          <td>{scoresToTotalScore(third_scores)}</td>
+          <td>{scoresToTotalScore(firstScores)}</td>
+          <td>{scoresToTotalScore(thirdScores)}</td>
           <td>
             {schools.filter(school => {
-              return school.school_id === third_id;
+              return school.schoolId === thirdId;
             }).length
               ? schools.filter(school => {
-                  return school.school_id === third_id;
+                  return school.schoolId === thirdId;
                 })[0].name
               : ''}
           </td>
-          <td>{video_id.slice(0, 7)}</td>
+          <td>{videoId.slice(0, 7)}</td>
           <td className="options">
             <span onClick={() => this.onEdit(game)}>
               <i className="fa fa-pencil-square-o" />

@@ -47,7 +47,7 @@ class HomeComponent extends Component {
     const {schools} = this.props;
 
     const currentSchool = schools.filter(school => {
-      return school.school_id === schoolId;
+      return school.schoolId === schoolId;
     })[0];
 
     this.setState({

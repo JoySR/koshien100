@@ -1,14 +1,25 @@
 import {API_URL} from '../common/constant';
 import {getToken} from './token';
 
+const generateBody = (endPoint, data) => {
+  switch (endPoint) {
+    case '/register':
+      return data;
+    case '/login':
+      return {
+        timestamp: Date.now(),
+        ...data,
+      };
+    default:
+      return {
+        token: getToken(),
+        ...data,
+      };
+  }
+};
+
 const api = ({endPoint, method = 'POST', data, request, success, failure}) => {
-  const body =
-    endPoint === '/register'
-      ? {...data}
-      : {
-          token: getToken(),
-          ...data,
-        };
+  const body = generateBody(endPoint, data);
 
   const tmpData = {
     method,

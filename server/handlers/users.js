@@ -25,6 +25,7 @@ const Users = {
   login: (request, response, next) => {
     if (request.body) {
       const username = request.body.username;
+      const timestamp = request.body.timestamp;
       Database.Login(username)
         .then(res => {
           if (res) {
@@ -37,15 +38,17 @@ const Users = {
                 });
               } else {
                 const token = randomToken(16);
-                Database.CreateSession([username, token]).then(res => {
-                  if (res) {
-                    response.send(200, {
-                      success: true,
-                      message: 'Login OK.',
-                      token,
-                    });
+                Database.CreateSession([username, token, timestamp]).then(
+                  res => {
+                    if (res) {
+                      response.send(200, {
+                        success: true,
+                        message: 'Login OK.',
+                        token,
+                      });
+                    }
                   }
-                });
+                );
               }
             } else {
               response.send(500, {

@@ -36,7 +36,7 @@ const Database = {
   },
 
   CreateSession: user => {
-    const sql = `INSERT INTO sessions (username, token) VALUES (?)`;
+    const sql = `INSERT INTO sessions (username, token, timestamp) VALUES (?)`;
     return new Promise((resolve, reject) => {
       pool.query(sql, [user], (err, rows, fields) => {
         if (err) reject(err);

@@ -41,7 +41,7 @@ const Dates = {
                 response.send(500, err);
               });
           } else {
-            response.send(200, {
+            response.send(403, {
               success: false,
               message: 'You are not logged in.',
             });
@@ -92,7 +92,7 @@ const Dates = {
                 response.send(500, err);
               });
           } else {
-            response.send(200, {
+            response.send(403, {
               success: false,
               message: 'You are not logged in.',
             });
@@ -126,7 +126,7 @@ const Dates = {
                 response.send(500, err);
               });
           } else {
-            response.send(200, {
+            response.send(403, {
               success: false,
               message: 'You are not logged in.',
             });

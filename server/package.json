@@ -9,9 +9,10 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "mysql": "^2.13.0",
-    "nodemon": "^1.12.1",
     "node-babel": "^0.1.2",
     "node-router": "^0.1.5",
-    "random-token": "^0.0.8"
+    "nodemon": "^1.12.1",
+    "random-token": "^0.0.8",
+    "raven": "^2.6.3"
   }
 }

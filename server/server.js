@@ -3,6 +3,12 @@ import Router from 'node-router';
 const router = Router();
 const route = router.push;
 import bodyParser from 'body-parser';
+import Raven from 'raven';
+
+const DSN = 'https://2e636f01b96f4682a2de434736ef8627@sentry.io/1263501';
+Raven.config(DSN).install();
+
+global.Raven = Raven;
 
 import BasicHandler from './handlers/basic';
 import Areas from './handlers/areas';

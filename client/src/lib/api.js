@@ -45,7 +45,10 @@ const api = ({endPoint, method = 'POST', data, request, success, failure}) => {
         dispatch(success(json));
         return json;
       })
-      .catch(error => dispatch(failure(error)));
+      .catch(error => {
+        window.Raven.captureException(error);
+        return dispatch(failure(error));
+      });
   };
 };
 

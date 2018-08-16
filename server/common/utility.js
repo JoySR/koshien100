@@ -24,6 +24,7 @@ export const checkLoginStatus = ({token}) =>
         }
       })
       .catch(err => {
+        Raven.captureException(err);
         reject(err);
       });
   });

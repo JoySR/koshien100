@@ -1,3 +1,19 @@
+### 2018-08-16
+
+- **feat**:
+  - add sentry to track errors.
+
+### 2018-08-15
+
+- **feat**:
+  -  Add timestamp to validate login time.
+
+- **fix**:
+  - not logged in return 200 (now return 403).
+
+- **improve**:
+  - camelize keys of json data from server
+
 ### 2018-08-13
 
 - **improve**:

@@ -1,5 +1,6 @@
 export const dateKeys = ['date_id', 'game_date', 'status'];
 export const areaKeys = ['area_id', 'name', 'code'];
+
 export const gameKeys = [
   'game_id',
   'date_id',

@@ -43,23 +43,15 @@ export default class DateBoard extends Component {
 
   onSubmit = () => {
     const {id, gameDate, dateStatus, isEditing} = this.state;
+    const date = {
+      date_id: dateToDateId(gameDate),
+      game_date: dateToTimestamp(gameDate),
+      status: dateStatus,
+    };
     const {onAsync} = this.props;
     const func = isEditing
-      ? updateDate({
-          date: {
-            id,
-            dateId: dateToDateId(gameDate),
-            gameDate: dateToTimestamp(gameDate),
-            status: dateStatus,
-          },
-        })
-      : addDate({
-          date: {
-            dateId: dateToDateId(gameDate),
-            gameDate: dateToTimestamp(gameDate),
-            status: dateStatus,
-          },
-        });
+      ? updateDate({date: {id, ...date}})
+      : addDate({date});
     onAsync(func).then(() => {
       this.clearState();
       onAsync(fetchDates());

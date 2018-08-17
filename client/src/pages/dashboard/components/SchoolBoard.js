@@ -66,36 +66,21 @@ export default class SchoolBoard extends Component {
       isEditing,
     } = this.state;
     const {onAsync} = this.props;
+    const school = {
+      school_id: schoolId,
+      prefecture_id: prefectureId,
+      name,
+      short_name: shortName,
+      is_continual: isContinual,
+      last_count: lastCount,
+      totalCount: totalCount,
+      win_count: winCount,
+      lose_count: loseCount,
+      best_result: bestResult,
+    };
     const func = isEditing
-      ? updateSchool({
-          school: {
-            id,
-            schoolId,
-            prefectureId,
-            name,
-            shortName,
-            isContinual,
-            lastCount,
-            totalCount,
-            winCount,
-            loseCount,
-            bestResult,
-          },
-        })
-      : addSchool({
-          school: {
-            schoolId,
-            prefectureId,
-            name,
-            shortName,
-            isContinual,
-            lastCount,
-            totalCount,
-            winCount,
-            loseCount,
-            bestResult,
-          },
-        });
+      ? updateSchool({school: {id, ...school}})
+      : addSchool({school});
     onAsync(func).then(() => {
       this.clearState();
       onAsync(fetchSchools());

@@ -37,23 +37,15 @@ export default class AreaBoard extends Component {
 
   onSubmit = () => {
     const {id, areaId, areaName, areaCode, isEditing} = this.state;
+    const area = {
+      area_id: areaId,
+      name: areaName,
+      code: areaCode,
+    };
     const {onAsync} = this.props;
     const func = isEditing
-      ? updateArea({
-          area: {
-            id,
-            areaId,
-            name: areaName,
-            code: areaCode,
-          },
-        })
-      : addArea({
-          area: {
-            areaId,
-            name: areaName,
-            code: areaCode,
-          },
-        });
+      ? updateArea({area: {id, ...area}})
+      : addArea({area});
     onAsync(func).then(() => {
       this.clearState();
       onAsync(fetchArea());

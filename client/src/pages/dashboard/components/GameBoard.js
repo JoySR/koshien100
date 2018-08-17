@@ -67,37 +67,22 @@ export default class GameBoard extends Component {
       videoId,
       isEditing,
     } = this.state;
+    const game = {
+      game_id: gameId,
+      date_id: gameIdToDateId(gameId),
+      round,
+      time,
+      is_first_home: isFirstHome,
+      first_id: firstId,
+      third_id: thirdId,
+      first_scores: firstScores,
+      third_scores: thirdScores,
+      video_id: videoId,
+    };
     const {onAsync} = this.props;
     const func = isEditing
-      ? updateGame({
-          game: {
-            id,
-            gameId,
-            dateId,
-            round: round,
-            time: time,
-            isFirstHome,
-            firstId,
-            thirdId,
-            firstScores,
-            thirdScores,
-            videoId,
-          },
-        })
-      : addGame({
-          game: {
-            gameId,
-            dateId: gameIdToDateId(gameId),
-            round: round,
-            time: time,
-            isFirstHome,
-            firstId,
-            thirdId,
-            firstScores,
-            thirdScores,
-            videoId,
-          },
-        });
+      ? updateGame({game: {id, ...game}})
+      : addGame({game});
     onAsync(func).then(() => {
       this.clearState();
       onAsync(fetchGames());

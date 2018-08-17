@@ -54,24 +54,15 @@ export default class PrefectureBoard extends Component {
       isEditing,
     } = this.state;
     const {onAsync} = this.props;
+    const prefecture = {
+      prefecture_id: prefectureId,
+      name: prefectureName,
+      area_id: areaId,
+      code: prefectureCode,
+    };
     const func = isEditing
-      ? updatePrefecture({
-          prefecture: {
-            id,
-            prefectureId,
-            name: prefectureName,
-            areaId,
-            code: prefectureCode,
-          },
-        })
-      : addPrefecture({
-          prefecture: {
-            prefectureId,
-            name: prefectureName,
-            areaId,
-            code: prefectureCode,
-          },
-        });
+      ? updatePrefecture({prefecture: {id, ...prefecture}})
+      : addPrefecture({prefecture});
     onAsync(func).then(() => {
       this.clearState();
       onAsync(fetchPrefecture());

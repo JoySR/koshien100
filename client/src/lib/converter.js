@@ -41,7 +41,7 @@ export const scoresToTotalScore = (scores = []) => {
 };
 
 export const gameIdToDateId = gameId => {
-  const dateId = gameId.slice(0, 8);
+  const dateId = String(gameId).slice(0, 8);
   return +dateId;
 };
 

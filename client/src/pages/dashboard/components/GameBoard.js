@@ -56,7 +56,6 @@ export default class GameBoard extends Component {
     const {
       id,
       gameId,
-      dateId,
       round,
       time,
       isFirstHome,

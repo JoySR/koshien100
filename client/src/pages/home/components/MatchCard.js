@@ -126,18 +126,24 @@ export default class MatchCard extends Component {
               </span>
             </div>
           </div>
-          {first ? (
+          {first || third ? (
             <div className="scores">
-              <p
-                className="first"
-                onClick={() => {
-                  onShowSchool(firstId);
-                }}
-              >
-                <span className="prefecture">({firstPrefecture})</span>
-                <span className="name">{firstName}</span>
-                <span className="final-score">{firstFinalScore}</span>
-              </p>
+              {first ? (
+                <p
+                  className="first"
+                  onClick={() => {
+                    onShowSchool(firstId);
+                  }}
+                >
+                  <span className="prefecture">({firstPrefecture})</span>
+                  <span className="name">{firstName}</span>
+                  <span className="final-score">{firstFinalScore}</span>
+                </p>
+              ) : (
+                <p className="first">
+                  <span>相手カード未定</span>
+                </p>
+              )}
               <span className="vs">-</span>
               {third ? (
                 <p
